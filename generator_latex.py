@@ -6,46 +6,31 @@ import re
 
 def escape_latex(text):
     """
-    Robustly escapes special LaTeX characters while preserving Math Mode ($...$).
+    Simpler, more robust sanitizer based on your original local code.
+    It escapes key characters everywhere to prevent crashes.
     """
     if not text:
         return ""
     
-    # Map of special chars to their escaped versions
-    chars = {
-        '&': r'\&',
-        '%': r'\%',
-        '#': r'\#',
-        '_': r'\_',
-        '{': r'\{',
-        '}': r'\}',
-        '~': r'\textasciitilde{}',
-        '^': r'\textasciicircum{}',
-        '\\': r'\textbackslash{}'
-    }
+    # 1. Escape the "Crashers" (Characters that break compilation immediately)
+    # We use Regex negative lookbehind (?<!\\) to ensure we don't double-escape
+    text = re.sub(r'(?<!\\)&', r'\&', text)  # Fixes the "alignment tab" error
+    text = re.sub(r'(?<!\\)%', r'\%', text)  # Fixes comments disappearing
+    text = re.sub(r'(?<!\\)#', r'\#', text)  # Fixes macro errors
     
-    parts = text.split('$')
-    escaped_parts = []
+    # 2. Fix common AI markdown issues
+    # Convert bold **text** to \textbf{text}
+    text = re.sub(r'\*\*(.*?)\*\*', r'\\textbf{\1}', text)
     
-    for i, part in enumerate(parts):
-        if i % 2 == 0: 
-            # Normal Text -> Escape
-            for char, escaped in chars.items():
-                part = part.replace(char, escaped)
-            escaped_parts.append(part)
-        else:
-            # Math Mode -> Keep raw
-            escaped_parts.append(f"${part}$")
-            
-    return "".join(escaped_parts)
+    return text
 
 def get_smart_template(total_chars):
     """
-    Selects the perfect layout based on content density.
+    Returns the appropriate LaTeX header based on text length.
     """
-    print(f"Analyzing layout for {total_chars} chars...")
+    print(f"Selecting template for {total_chars} chars...")
     
-    # TIER 1: LIGHT (< 2500 chars) -> Large Font, 2 Cols
+    # TIER 1: Light Content -> Readable Font, 2 Columns
     if total_chars < 2500:
         return r"""
 \documentclass[10pt, landscape]{article}
@@ -56,10 +41,9 @@ def get_smart_template(total_chars):
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{enumitem}
-\usepackage{microtype}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{hyperref}
+\usepackage{microtype}
 
 \setlength{\parindent}{0pt}
 \setlist{nosep}
@@ -72,7 +56,7 @@ def get_smart_template(total_chars):
 \end{multicols*}
 \end{document}
 """
-    # TIER 2: MEDIUM (< 5000 chars) -> Medium Font, 3 Cols
+    # TIER 2: Medium Content -> Standard Font, 3 Columns
     elif total_chars < 5000:
         return r"""
 \documentclass[8pt, landscape]{extarticle}
@@ -83,10 +67,9 @@ def get_smart_template(total_chars):
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{enumitem}
-\usepackage{microtype}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{hyperref}
+\usepackage{microtype}
 
 \setlength{\parindent}{0pt}
 \setlist{nosep}
@@ -99,7 +82,7 @@ def get_smart_template(total_chars):
 \end{multicols*}
 \end{document}
 """
-    # TIER 3: HEAVY (> 5000 chars) -> Tiny Font, 3 Cols (High Density)
+    # TIER 3: Heavy Content -> Small Font, High Density
     else:
         return r"""
 \documentclass[6pt, landscape]{extarticle}
@@ -110,10 +93,9 @@ def get_smart_template(total_chars):
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{enumitem}
-\usepackage{microtype}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{hyperref}
+\usepackage{microtype}
 
 \setlength{\parindent}{0pt}
 \setlist{nosep}
@@ -143,15 +125,14 @@ def create_cheat_sheet(data, output_filename):
             create_error_pdf(output_filename, f"Engine Download Failed: {e}")
             return
 
-    # 2. Build LaTeX Body using Smart Layouts
+    # 2. Build LaTeX Body
     try:
-        # Calculate density
         total_chars = sum(len(s.get('content', '')) for s in data)
         latex_template = get_smart_template(total_chars)
         
         latex_body = ""
         for section in data:
-            # Use robust sanitizer
+            # Use the safer Regex sanitizer
             title = escape_latex(section.get('title', 'Section'))
             content = escape_latex(section.get('content', ''))
             latex_body += f"\\section*{{{title}}}\n{content}\n\n"
@@ -164,7 +145,8 @@ def create_cheat_sheet(data, output_filename):
             f.write(full_latex)
             
         # 4. Compile with Tectonic
-        print(f"Compiling with Tectonic (Size: {total_chars} chars)...")
+        # We add 'pass-tex-errors' to help debug if it fails, but Tectonic is generally robust
+        print(f"Compiling... ({total_chars} chars)")
         
         result = subprocess.run(
             [tectonic_path, tex_filename], 
@@ -176,28 +158,34 @@ def create_cheat_sheet(data, output_filename):
             shutil.move("cheatsheet.pdf", output_filename)
             print(f"Success! Saved to {output_filename}")
         else:
-            # If failed, log the error to the PDF so we can read it
+            # Log the error clearly
             error_log = result.stderr[-1000:] if result.stderr else "Unknown Error"
-            print(f"Tectonic Error Log: {error_log}")
+            print(f"Tectonic Error: {error_log}")
             raise Exception(f"LaTeX Error: {error_log}")
 
     except Exception as e:
         print(f"Generation Error: {e}")
+        # Create a simple fallback PDF with the error message
         create_error_pdf(output_filename, str(e))
 
 def create_error_pdf(filename, error_msg):
     from reportlab.pdfgen import canvas
     c = canvas.Canvas(filename)
+    c.setFont("Helvetica-Bold", 12)
     c.drawString(50, 800, "PDF Generation Failed")
+    c.setFont("Helvetica", 10)
     c.drawString(50, 780, "Error details:")
     
-    text = c.beginText(50, 760)
-    text.setFont("Helvetica", 8)
-    # Simple wrap
-    for line in error_msg.split('\n'):
+    text_obj = c.beginText(50, 760)
+    text_obj.setFont("Helvetica", 8)
+    
+    # Wrap text roughly
+    lines = error_msg.split('\n')
+    for line in lines:
         while len(line) > 100:
-            text.textLine(line[:100])
+            text_obj.textLine(line[:100])
             line = line[100:]
-        text.textLine(line)
-    c.drawText(text)
+        text_obj.textLine(line)
+        
+    c.drawText(text_obj)
     c.save()
