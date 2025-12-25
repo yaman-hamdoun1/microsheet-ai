@@ -1,7 +1,7 @@
 import os
 import time
 from dotenv import load_dotenv
-from google.generativeai as genai
+import google.generativeai as genai
 from google.genai import types
 
 load_dotenv()
