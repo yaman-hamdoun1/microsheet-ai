@@ -1,53 +1,37 @@
-import requests
-import re
-
-def escape_latex(text):
-    """
-    Escapes special LaTeX characters to prevent compilation crashes.
-    """
-    if not text:
-        return ""
-    
-    # 1. Escape basic special characters
-    # Note: We do NOT escape backslashes yet because they might be part of math
-    chars = {
-        '&': r'\&',
-        '%': r'\%',
-        '$': r'\$',  # We handle math dollars separately below
-        '#': r'\#',
-        '_': r'\_',
-        '{': r'\{',
-        '}': r'\}',
-        '~': r'\textasciitilde{}',
-        '^': r'\textasciicircum{}'
-    }
-    
-    # 2. Heuristic to detect Math Mode vs Normal Text
-    # If the text looks like a formula (surrounded by $...$), we leave it alone.
-    # Otherwise, we escape the characters.
-    
-    # Split by '$' to separate text from math
-    parts = text.split('$')
-    escaped_parts = []
-    
-    for i, part in enumerate(parts):
-        if i % 2 == 0: 
-            # This is NORMAL TEXT (even index) -> Escape it
-            for char, escaped in chars.items():
-                # Don't escape $ here, we split by it
-                if char != '$': 
-                    part = part.replace(char, escaped)
-            escaped_parts.append(part)
-        else:
-            # This is MATH MODE (odd index) -> Keep it raw
-            # But we might need to fix common AI math errors here if needed
-            escaped_parts.append(f"${part}$")
-            
-    return "".join(escaped_parts)
+import os
+import subprocess
+import shutil
+import stat
 
 def create_cheat_sheet(data, output_filename):
-    print("Generating LaTeX code with Sanitization...")
+    """
+    Generates PDF using local Tectonic engine on Render.
+    """
+    # 1. Setup Tectonic Path
+    # We store it in the current directory so we have permission to execute it
+    tectonic_path = os.path.abspath("tectonic")
+    
+    # 2. Check if engine is missing (It will be missing every time server wakes up)
+    if not os.path.exists(tectonic_path):
+        print("Tectonic not found. Downloading engine (this takes ~30s)...")
+        try:
+            # Download the Linux binary directly
+            # This is the official static binary for Linux (Render uses Linux)
+            url = "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.15.0/tectonic-0.15.0-x86_64-unknown-linux-musl.tar.gz"
+            subprocess.run(f"curl -L {url} | tar -xz", shell=True, check=True)
+            
+            # Make sure it is executable
+            st = os.stat(tectonic_path)
+            os.chmod(tectonic_path, st.st_mode | stat.S_IEXEC)
+            
+            print("Tectonic downloaded successfully.")
+        except Exception as e:
+            print(f"Failed to download Tectonic: {e}")
+            create_error_pdf(output_filename, f"Could not install LaTeX engine: {str(e)}")
+            return
 
+    # 3. Construct the LaTeX Content (SANITIZED)
+    # We still sanitize to be safe, even with local compilation
     latex_content = r"""
     \documentclass[10pt]{article}
     \usepackage[utf8]{inputenc}
@@ -59,7 +43,7 @@ def create_cheat_sheet(data, output_filename):
     \usepackage{titlesec}
     \usepackage{hyperref}
 
-    % Tighten spacing
+    % Compact spacing
     \setlength{\parindent}{0pt}
     \setlength{\parskip}{0pt}
     \titlespacing*{\section}{0pt}{2pt}{2pt}
@@ -68,51 +52,53 @@ def create_cheat_sheet(data, output_filename):
     \begin{document}
     \begin{multicols*}{3}
     \begin{center}
-        \textbf{\LARGE MicroSheet AI Summary}
+        \textbf{\LARGE MicroSheet AI}
     \end{center}
     \vspace{0.2cm}
     """
 
     for section in data:
-        title = section.get('title', 'Section').replace('_', ' ')
+        title = section.get('title', 'Section')
         content = section.get('content', '')
         
-        # SANITIZE INPUTS (The Critical Fix)
-        safe_title = escape_latex(title)
-        safe_content = escape_latex(content)
+        # Basic cleanup for LaTeX special chars
+        # We replace # with \#, & with \&, etc.
+        for char in ['#', '&', '%']:
+            title = title.replace(char, f"\\{char}")
+            content = content.replace(char, f"\\{char}")
         
-        latex_content += f"\\section*{{{safe_title}}}\n"
-        latex_content += f"{safe_content}\n\n"
+        latex_content += f"\\section*{{{title}}}\n"
+        latex_content += f"{content}\n\n"
 
-    latex_content += r"""
-    \end{multicols*}
-    \end{document}
-    """
+    latex_content += r"\end{multicols*} \end{document}"
 
-    # Send to LaTeXOnline API
-    url = "https://latexonline.cc/compile"
-    
+    # 4. Save .tex file
+    tex_filename = "temp.tex"
+    with open(tex_filename, "w") as f:
+        f.write(latex_content)
+
+    # 5. Compile
     try:
-        payload = {'text': latex_content}
-        response = requests.post(url, data=payload, timeout=45)
-
-        if response.status_code == 200:
-            with open(output_filename, 'wb') as f:
-                f.write(response.content)
+        print("Compiling PDF...")
+        # Run Tectonic
+        subprocess.run([tectonic_path, tex_filename], check=True)
+        
+        # Tectonic creates 'temp.pdf'. Rename it.
+        if os.path.exists("temp.pdf"):
+            shutil.move("temp.pdf", output_filename)
             print(f"Success! PDF saved to {output_filename}")
         else:
-            print(f"API Error {response.status_code}")
-            create_error_pdf(output_filename, "Syntax Error: " + response.text[:200])
-
+            raise Exception("PDF file was not created.")
+            
     except Exception as e:
-        print(f"Connection Error: {e}")
-        create_error_pdf(output_filename, str(e))
+        print(f"Compilation Error: {e}")
+        # Try to read the log if available
+        error_detail = str(e)
+        create_error_pdf(output_filename, f"LaTeX Compilation Failed: {error_detail}")
 
 def create_error_pdf(filename, error_msg):
-    # Minimal fallback using ReportLab just to show the error
     from reportlab.pdfgen import canvas
     c = canvas.Canvas(filename)
-    c.drawString(50, 800, "PDF Generation Failed")
-    c.drawString(50, 780, "Error details:")
-    c.drawString(50, 760, str(error_msg)[:100])
+    c.drawString(50, 800, "Error Generating PDF")
+    c.drawString(50, 780, str(error_msg)[:100]) # Truncate long errors
     c.save()
