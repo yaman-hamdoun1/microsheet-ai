@@ -1,121 +1,86 @@
+import requests
 import os
-import subprocess
-import re
 
-def sanitize_latex(text):
-    if not text: return ""
-    text = re.sub(r'(?<!\\)%', r'\%', text)
-    text = re.sub(r'(?<!\\)&', r'\&', text)
-    return text
+def create_cheat_sheet(data, output_filename):
+    """
+    Generates a PDF by sending LaTeX code to the LaTeXOnline API.
+    """
+    print("Generating LaTeX code...")
 
-def get_smart_template(total_chars):
-    print(f"Analyzing layout for {total_chars} chars...")
-    
-    # TIER 1: LIGHT (< 2500 chars)
-    if total_chars < 2500:
-        return r"""
-\documentclass[10pt, landscape]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[margin=1.2cm]{geometry}
-\usepackage{multicol}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{microtype}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\setlength{\parindent}{0pt}
-\setlist{nosep}
-\newcommand{\mysep}{\vspace{4pt}\hrule height 0.5pt \vspace{6pt}}
-\titleformat{\section}{\Large\bfseries\sffamily}{}{0em}{}[\mysep]
-\begin{document}
-\begin{multicols*}{2}
-% CONTENT_PLACEHOLDER
-\end{multicols*}
-\end{document}
-"""
-    # TIER 2: MEDIUM (< 5000 chars)
-    elif total_chars < 5000:
-        return r"""
-\documentclass[8pt, landscape]{extarticle}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[margin=0.8cm]{geometry}
-\usepackage{multicol}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{microtype}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\setlength{\parindent}{0pt}
-\setlist{nosep}
-\newcommand{\mysep}{\vspace{2pt}\hrule height 0.3pt \vspace{4pt}}
-\titleformat{\section}{\large\bfseries\sffamily}{}{0em}{}[\mysep]
-\begin{document}
-\begin{multicols*}{3}
-% CONTENT_PLACEHOLDER
-\end{multicols*}
-\end{document}
-"""
-    # TIER 3: HEAVY (> 5000 chars)
-    else:
-        return r"""
-\documentclass[6pt, landscape]{extarticle}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage[margin=0.4cm]{geometry}
-\usepackage{multicol}
-\usepackage{titlesec}
-\usepackage{enumitem}
-\usepackage{microtype}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\setlength{\parindent}{0pt}
-\setlist{nosep}
-\newcommand{\mysep}{\vspace{1pt}\hrule height 0.1pt \vspace{2pt}}
-\titleformat{\section}{\bfseries\scriptsize\uppercase}{}{0em}{}[\mysep]
-\begin{document}
-\tiny 
-\begin{multicols*}{3}
-% CONTENT_PLACEHOLDER
-\end{multicols*}
-\end{document}
-"""
+    # 1. Build the LaTeX String
+    # We use a 2-column layout with tiny margins to maximize space
+    latex_content = r"""
+    \documentclass[10pt]{article}
+    \usepackage[utf8]{inputenc}
+    \usepackage[landscape, margin=0.5in]{geometry}
+    \usepackage{multicol}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{enumitem}
+    \usepackage{titlesec}
 
-def create_cheat_sheet(data, filename="cheatsheet.pdf"):
-    print(f"Generating LaTeX PDF: {filename}...")
-    total_chars = sum(len(s.get('content', '')) for s in data)
-    latex_template = get_smart_template(total_chars)
-    
-    latex_body = ""
+    % Tighten spacing
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{0pt}
+    \titlespacing*{\section}{0pt}{2pt}{2pt}
+
+    \begin{document}
+    \begin{multicols*}{3} % 3 Columns for maximum density
+    \begin{center}
+        \textbf{\LARGE MicroSheet AI Summary}
+    \end{center}
+    \vspace{0.2cm}
+    """
+
     for section in data:
-        title = sanitize_latex(section.get('title', ''))
-        content = sanitize_latex(section.get('content', ''))
-        latex_body += f"\\section*{{{title}}}\n{content}\n\n"
+        title = section.get('title', 'Section').replace('_', ' ')
+        content = section.get('content', '')
         
-    full_latex = latex_template.replace("% CONTENT_PLACEHOLDER", latex_body)
-    
-    tex_filename = filename.replace(".pdf", ".tex")
-    with open(tex_filename, "w", encoding="utf-8") as f:
-        f.write(full_latex)
+        # Add Section Title
+        latex_content += f"\\section*{{{title}}}\n"
         
-    # --- THE FIX IS HERE ---
-    output_dir = os.path.dirname(filename)
-    if not output_dir: output_dir = "." 
+        # Add Content (Ensure line breaks are handled)
+        latex_content += f"{content}\n\n"
+
+    # Close document
+    latex_content += r"""
+    \end{multicols*}
+    \end{document}
+    """
+
+    # 2. Send to LaTeXOnline API
+    print("Sending to API for compilation...")
+    url = "https://latexonline.cc/compile"
     
     try:
-        subprocess.run(
-            ["pdflatex", "-interaction=nonstopmode", f"-output-directory={output_dir}", tex_filename], 
-            check=True,
-            stdout=subprocess.DEVNULL
-        )
-        print("Success! LaTeX compiled.")
+        # We send the LaTeX string as a file named 'main.tex'
+        payload = {
+            'text': latex_content
+        }
         
-    except subprocess.CalledProcessError:
-        print("Error: LaTeX compilation failed.")
-        log_file = tex_filename.replace(".tex", ".log")
-        if os.path.exists(log_file):
-            os.system(f'tail -n 20 {log_file}')
+        # Set a timeout of 30 seconds
+        response = requests.post(url, data=payload, timeout=30)
+
+        if response.status_code == 200:
+            # 3. Save the PDF
+            with open(output_filename, 'wb') as f:
+                f.write(response.content)
+            print(f"Success! PDF saved to {output_filename}")
+        else:
+            print(f"API Error: {response.status_code}")
+            print(response.text)
+            # Create a dummy file so the server doesn't crash on download
+            create_error_pdf(output_filename, "API Compilation Failed")
+
+    except Exception as e:
+        print(f"Connection Error: {e}")
+        create_error_pdf(output_filename, str(e))
+
+def create_error_pdf(filename, error_msg):
+    """Fallback: Creates a simple text file if API fails, so user gets SOMETHING."""
+    from reportlab.pdfgen import canvas
+    c = canvas.Canvas(filename)
+    c.drawString(100, 800, "PDF Generation Error")
+    c.drawString(100, 780, "The LaTeX API could not compile your document.")
+    c.drawString(100, 760, f"Error: {error_msg}")
+    c.save()

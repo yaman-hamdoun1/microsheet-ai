@@ -5,3 +5,4 @@ pypdf
 pdfplumber
 google-genai
 python-dotenv
+requests
