@@ -2,5 +2,6 @@ Flask
 gunicorn
 werkzeug
 pypdf
+pdfplumber
 google-generativeai
 python-dotenv
