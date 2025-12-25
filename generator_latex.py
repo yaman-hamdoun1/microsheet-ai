@@ -1,14 +1,53 @@
 import requests
-import os
+import re
+
+def escape_latex(text):
+    """
+    Escapes special LaTeX characters to prevent compilation crashes.
+    """
+    if not text:
+        return ""
+    
+    # 1. Escape basic special characters
+    # Note: We do NOT escape backslashes yet because they might be part of math
+    chars = {
+        '&': r'\&',
+        '%': r'\%',
+        '$': r'\$',  # We handle math dollars separately below
+        '#': r'\#',
+        '_': r'\_',
+        '{': r'\{',
+        '}': r'\}',
+        '~': r'\textasciitilde{}',
+        '^': r'\textasciicircum{}'
+    }
+    
+    # 2. Heuristic to detect Math Mode vs Normal Text
+    # If the text looks like a formula (surrounded by $...$), we leave it alone.
+    # Otherwise, we escape the characters.
+    
+    # Split by '$' to separate text from math
+    parts = text.split('$')
+    escaped_parts = []
+    
+    for i, part in enumerate(parts):
+        if i % 2 == 0: 
+            # This is NORMAL TEXT (even index) -> Escape it
+            for char, escaped in chars.items():
+                # Don't escape $ here, we split by it
+                if char != '$': 
+                    part = part.replace(char, escaped)
+            escaped_parts.append(part)
+        else:
+            # This is MATH MODE (odd index) -> Keep it raw
+            # But we might need to fix common AI math errors here if needed
+            escaped_parts.append(f"${part}$")
+            
+    return "".join(escaped_parts)
 
 def create_cheat_sheet(data, output_filename):
-    """
-    Generates a PDF by sending LaTeX code to the LaTeXOnline API.
-    """
-    print("Generating LaTeX code...")
+    print("Generating LaTeX code with Sanitization...")
 
-    # 1. Build the LaTeX String
-    # We use a 2-column layout with tiny margins to maximize space
     latex_content = r"""
     \documentclass[10pt]{article}
     \usepackage[utf8]{inputenc}
@@ -18,14 +57,16 @@ def create_cheat_sheet(data, output_filename):
     \usepackage{amssymb}
     \usepackage{enumitem}
     \usepackage{titlesec}
+    \usepackage{hyperref}
 
     % Tighten spacing
     \setlength{\parindent}{0pt}
     \setlength{\parskip}{0pt}
     \titlespacing*{\section}{0pt}{2pt}{2pt}
+    \setlist[itemize]{noitemsep, topsep=0pt, leftmargin=*}
 
     \begin{document}
-    \begin{multicols*}{3} % 3 Columns for maximum density
+    \begin{multicols*}{3}
     \begin{center}
         \textbf{\LARGE MicroSheet AI Summary}
     \end{center}
@@ -36,51 +77,42 @@ def create_cheat_sheet(data, output_filename):
         title = section.get('title', 'Section').replace('_', ' ')
         content = section.get('content', '')
         
-        # Add Section Title
-        latex_content += f"\\section*{{{title}}}\n"
+        # SANITIZE INPUTS (The Critical Fix)
+        safe_title = escape_latex(title)
+        safe_content = escape_latex(content)
         
-        # Add Content (Ensure line breaks are handled)
-        latex_content += f"{content}\n\n"
+        latex_content += f"\\section*{{{safe_title}}}\n"
+        latex_content += f"{safe_content}\n\n"
 
-    # Close document
     latex_content += r"""
     \end{multicols*}
     \end{document}
     """
 
-    # 2. Send to LaTeXOnline API
-    print("Sending to API for compilation...")
+    # Send to LaTeXOnline API
     url = "https://latexonline.cc/compile"
     
     try:
-        # We send the LaTeX string as a file named 'main.tex'
-        payload = {
-            'text': latex_content
-        }
-        
-        # Set a timeout of 30 seconds
-        response = requests.post(url, data=payload, timeout=30)
+        payload = {'text': latex_content}
+        response = requests.post(url, data=payload, timeout=45)
 
         if response.status_code == 200:
-            # 3. Save the PDF
             with open(output_filename, 'wb') as f:
                 f.write(response.content)
             print(f"Success! PDF saved to {output_filename}")
         else:
-            print(f"API Error: {response.status_code}")
-            print(response.text)
-            # Create a dummy file so the server doesn't crash on download
-            create_error_pdf(output_filename, "API Compilation Failed")
+            print(f"API Error {response.status_code}")
+            create_error_pdf(output_filename, "Syntax Error: " + response.text[:200])
 
     except Exception as e:
         print(f"Connection Error: {e}")
         create_error_pdf(output_filename, str(e))
 
 def create_error_pdf(filename, error_msg):
-    """Fallback: Creates a simple text file if API fails, so user gets SOMETHING."""
+    # Minimal fallback using ReportLab just to show the error
     from reportlab.pdfgen import canvas
     c = canvas.Canvas(filename)
-    c.drawString(100, 800, "PDF Generation Error")
-    c.drawString(100, 780, "The LaTeX API could not compile your document.")
-    c.drawString(100, 760, f"Error: {error_msg}")
+    c.drawString(50, 800, "PDF Generation Failed")
+    c.drawString(50, 780, "Error details:")
+    c.drawString(50, 760, str(error_msg)[:100])
     c.save()
