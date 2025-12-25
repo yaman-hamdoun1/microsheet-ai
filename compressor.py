@@ -1,7 +1,7 @@
 import os
 import time
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 from google.genai import types
 
 load_dotenv()
@@ -11,14 +11,17 @@ def compress_text(raw_text):
     ROBUST MODE: Uses Raw Text parsing instead of JSON.
     This prevents 'Invalid \escape' errors caused by LaTeX backslashes.
     """
-    api_key = os.getenv("GOOGLE_API_KEY")
+    # Check for either variable name to be safe
+    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    
     if not api_key:
-        print("Error: GOOGLE_API_KEY not found.")
+        print("Error: API_KEY not found.")
         return mock_compress()
 
     client = genai.Client(api_key=api_key.strip())
     
-    # Use the stable model
+    # Start with 1.5-flash as it is the most reliable standard model.
+    # If you specifically want 2.0-flash, you can change this string.
     model_name = "gemini-2.5-flash"
 
     # Send a safe amount of text
@@ -35,7 +38,7 @@ def compress_text(raw_text):
                 model=model_name,
                 contents=f"Summarize this into a cheat sheet.\n\n{safe_text}",
                 config=types.GenerateContentConfig(
-                system_instruction=(
+                    system_instruction=(
                         "You are an expert Engineering Tutor creating a High-Density Cheat Sheet. "
                         "Your goal is to compress knowledge into the smallest possible space while retaining 100% of the mathematical and logical rigor.\n"
                         "STRICT RULES:\n"
@@ -57,6 +60,11 @@ def compress_text(raw_text):
             
             # Manual Parsing (Invincible against JSON errors)
             sections = []
+            
+            if not response.text:
+                print("AI returned empty text.")
+                continue
+
             raw_response = response.text
             
             # Split by the section separator
@@ -88,17 +96,19 @@ def compress_text(raw_text):
 
         except Exception as e:
             error_msg = str(e)
+            print(f"AI Error (Attempt {attempt+1}): {error_msg}")
+            
             if "429" in error_msg or "RESOURCE_EXHAUSTED" in error_msg:
                 wait_time = 20 
                 print(f"Rate limit hit. Waiting {wait_time}s...")
                 time.sleep(wait_time)
                 continue 
             elif "404" in error_msg:
-                print("Model not found. Switching to 'gemini-2.5-flash'...")
-                model_name = "gemini-2.5-flash"
+                # Fallback if the specific model version isn't found
+                print(f"Model {model_name} not found. Trying 'gemini-2.5-pro'...")
+                model_name = "gemini-2.5-pro"
                 continue
             else:
-                print(f"AI Critical Error: {e}")
                 break
 
     print(">>> AI failed. Using Backup. <<<")
