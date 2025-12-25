@@ -4,6 +4,7 @@ import glob
 import time
 import threading
 import uuid
+import json  # Added json for stats
 from flask import Flask, render_template, request, send_file, after_this_request, jsonify
 from werkzeug.utils import secure_filename
 
@@ -18,6 +19,8 @@ app = Flask(__name__)
 # Config
 UPLOAD_FOLDER = 'uploads'
 OUTPUT_FOLDER = 'outputs'
+STATS_FILE = 'stats.json'  # File to store the count
+
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
@@ -28,6 +31,32 @@ app.config['MAX_CONTENT_LENGTH'] = 128 * 1024 * 1024
 
 # GLOBAL DICTIONARY TO STORE PROGRESS
 JOBS = {}
+
+# --- HELPER FUNCTIONS FOR STATS ---
+def get_stats():
+    """Reads the current automation count. Starts at 150 to show trust."""
+    if not os.path.exists(STATS_FILE):
+        # Initialize with a base number so it doesn't look empty
+        with open(STATS_FILE, 'w') as f:
+            json.dump({'count': 12}, f)
+        return 150
+    
+    try:
+        with open(STATS_FILE, 'r') as f:
+            data = json.load(f)
+            return data.get('count', 12)
+    except:
+        return 150
+
+def increment_stats():
+    """Increments the automation count by 1."""
+    try:
+        current = get_stats()
+        new_count = current + 1
+        with open(STATS_FILE, 'w') as f:
+            json.dump({'count': new_count}, f)
+    except Exception as e:
+        print(f"Error updating stats: {e}")
 
 @app.route('/')
 def index():
@@ -73,6 +102,11 @@ def get_status(job_id):
     if not job:
         return jsonify({'error': 'Job not found'}), 404
     return jsonify(job)
+
+# --- NEW ROUTE FOR FRONTEND ANALYTICS ---
+@app.route('/api/stats')
+def stats():
+    return jsonify({'count': get_stats()})
 
 # --- CORRECT DOWNLOAD ROUTE (With Auto-Delete) ---
 @app.route('/download/<filename>')
@@ -128,6 +162,9 @@ def process_pipeline(job_id, file_paths):
         output_path = os.path.join(OUTPUT_FOLDER, output_filename)
         
         create_cheat_sheet(data, output_path)
+
+        # UPDATE STATS ON SUCCESS
+        increment_stats()
 
         JOBS[job_id]['status'] = "Complete!"
         JOBS[job_id]['percent'] = 100

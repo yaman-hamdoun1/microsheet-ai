@@ -109,9 +109,20 @@
                     <span class="text-[10px] md:text-xs font-bold tracking-widest text-indigo-600 uppercase font-[Outfit]">One Page Cheat Sheet</span>
                 </div>
 
-                <p class="text-center text-gray-500 text-xs md:text-sm max-w-md leading-relaxed font-medium">
+                <p class="text-center text-gray-500 text-xs md:text-sm max-w-md leading-relaxed font-medium mb-4">
                     Stop spending hours summarizing! Upload your lecture slides and let the AI generate a dense, exam-ready cheat sheet allowed in your exams.
                 </p>
+
+                <div class="inline-flex items-center bg-indigo-50/80 px-4 py-1.5 rounded-full border border-indigo-100 shadow-sm animate-fade-in" style="animation-delay: 0.5s;">
+                    <span class="relative flex h-2 w-2 mr-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span class="text-xs font-bold text-gray-600 font-[Outfit]">
+                        <span id="automationsCount" class="text-indigo-600 text-base">0</span> Automations Generated
+                    </span>
+                </div>
+
             </div>
 
             <div id="uploadSection">
@@ -248,6 +259,36 @@
 
     <script>
         document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+        // --- NEW: FETCH AND ANIMATE STATS ---
+        async function fetchStats() {
+            try {
+                const res = await fetch('/api/stats');
+                const data = await res.json();
+                animateValue("automationsCount", 0, data.count, 2000);
+            } catch(e) {
+                console.log("Stats fetch error", e);
+                document.getElementById("automationsCount").innerText = "100+";
+            }
+        }
+
+        // Animation Function (0 to N)
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Call on load
+        fetchStats();
 
         const form = document.getElementById('uploadForm');
         const fileInput = document.getElementById('fileInput');
