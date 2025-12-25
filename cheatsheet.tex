@@ -1,0 +1,206 @@
+
+\documentclass[6pt, landscape]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.4cm, top=0.4cm, bottom=0.4cm]{geometry} % Extreme margins
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{microtype}
+
+% Visual Separator
+\newcommand{\mysep}{\vspace{1pt}\hrule height 0.1pt \vspace{2pt}}
+
+% Spacing
+\setlength{\parindent}{0pt}
+\setlist{nosep}
+\setlength{\columnsep}{0.3cm}
+
+% Tiny Titles
+\titleformat{\section}{\bfseries\scriptsize\uppercase}{}{0em}{}[\mysep]
+\titlespacing*{\section}{0pt}{1pt}{1pt}
+
+\begin{document}
+\tiny 
+\begin{multicols*}{3}
+\section*{Grundlagen: Sprachen und Grammatiken}
+\begin{itemize}
+    \item \textbf{Alphabet}: Endliche, nichtleere Menge $\Sigma$. Elemente heißen Zeichen/Symbole.
+    \item \textbf{Wort}: Folge von Symbolen aus $\Sigma$.
+    \item \textbf{Leeres Wort}: $\varepsilon$. $|\varepsilon|=0$.
+    \item $\Sigma^*$: Menge aller Wörter über $\Sigma$.
+    \item $\Sigma^+$: Menge aller nicht-leeren Wörter über $\Sigma$, d.h. $\Sigma^+ = \Sigma^* \setminus \{\varepsilon\}$.
+    \item \textbf{Sprache}: Teilmenge von $\Sigma^*$.
+    \item \textbf{Grammatik}: $G=(V,\Sigma,P,S)$, wobei:
+    \begin{itemize}
+        \item $V$: Endliche Menge der Variablen.
+        \item $\Sigma$: Terminalalphabet, $V \cap \Sigma = \emptyset$.
+        \item $P$: Endliche Menge der Produktionen, $P \subseteq (V \cup \Sigma)^+ \times (V \cup \Sigma)^*$.
+        \item $S \in V$: Startvariable.
+    \end{itemize}
+    \item \textbf{Ableitungsschritt}: $u \Rightarrow_G v \iff u=xyz, v=xy'z$ mit $(y,y') \in P$.
+    \item \textbf{Ableitung}: $u \Rightarrow_G^* v \iff u=v$ oder $u \Rightarrow_G w_1 \Rightarrow_G \dots \Rightarrow_G w_k \Rightarrow_G v$.
+    \item \textbf{Von $G$ erzeugte Sprache}: $L(G) = \{w \in \Sigma^* \mid S \Rightarrow_G^* w\}$.
+\end{itemize}
+
+\section*{Chomsky-Hierarchie}
+\begin{itemize}
+    \item \textbf{Typ 0 (Phrase-Struktur-Grammatik)}: Keine Einschränkungen an $P$.
+    \item \textbf{Typ 1 (Kontextsensitiv)}: Für alle $(u \to v) \in P$ gilt $|u| \le |v|$.
+    \item \textbf{Typ 2 (Kontextfrei)}: Für alle $(u \to v) \in P$ gilt $u \in V$ (d.h., $u$ ist eine einzelne Variable).
+    \item \textbf{Typ 3 (Regulär)}: Für alle $(u \to v) \in P$ gilt:
+    \begin{itemize}
+        \item $u \in V$.
+        \item $v \in \Sigma$ oder $v \in \Sigma V$.
+    \end{itemize}
+    \item \textbf{Sonderfall $\varepsilon$-Regel}: Für Typ 1, 2, 3 ist $S \to \varepsilon$ erlaubt. Falls $S \to \varepsilon \in P$, darf $S$ auf der rechten Seite keiner Produktion vorkommen.
+    \item \textbf{Sprache vom Typ $i$}: $L \subseteq \Sigma^*$ ist vom Typ $i \iff \exists$ Grammatik $G$ vom Typ $i$ mit $L=L(G)$.
+    \item \textbf{Wortproblem für Typ-1-Sprachen}: Entscheidbar.
+\end{itemize}
+
+\section*{Reguläre (Typ-3-) Sprachen}
+\begin{itemize}
+    \item \textbf{Deterministischer endlicher Automat (DEA)}: $M=(Z,\Sigma,\delta,z_0,E)$, wobei:
+    \begin{itemize}
+        \item $Z$: Endliche Zustandsmenge.
+        \item $\Sigma$: Eingabealphabet, $Z \cap \Sigma = \emptyset$.
+        \item $\delta: Z \times \Sigma \to Z$: Überführungsfunktion.
+        \item $z_0 \in Z$: Startzustand.
+        \item $E \subseteq Z$: Menge der Endzustände.
+    \end{itemize}
+    \item \textbf{Erweiterte Überführungsfunktion $\hat{\delta}: Z \times \Sigma^* \to Z$ (für DEA)}:
+    \begin{itemize}
+        \item $\hat{\delta}(z,\varepsilon) = z$
+        \item $\hat{\delta}(z,ax) = \hat{\delta}(\delta(z,a),x)$ für $a \in \Sigma, x \in \Sigma^*$
+    \end{itemize}
+    \item \textbf{Von DEA $M$ akzeptierte Sprache}: $L(M) = \{x \in \Sigma^* \mid \hat{\delta}(z_0,x) \in E\}$.
+    \item \textbf{Nichtdeterministischer endlicher Automat (NEA)}: $M=(Z,\Sigma,\delta,z_0,E)$, wobei $\delta: Z \times \Sigma \to \mathcal{P}(Z)$.
+    \item \textbf{Erweiterte Überführungsfunktion $\hat{\delta}: \mathcal{P}(Z) \times \Sigma^* \to \mathcal{P}(Z)$ (für NEA)}:
+    \begin{itemize}
+        \item $\hat{\delta}(Z',\varepsilon) = Z'$
+        \item $\hat{\delta}(Z',ax) = \hat{\delta}(\bigcup_{z \in Z'} \delta(z,a),x)$ für $a \in \Sigma, x \in \Sigma^*$
+    \end{itemize}
+    \item \textbf{Von NEA $M$ akzeptierte Sprache}: $L(M) = \{x \in \Sigma^* \mid \hat{\delta}(\{z_0\},x) \cap E \neq \emptyset\}$.
+    \item \textbf{Äquivalenz NEA $\leftrightarrow$ DEA}: Zu jedem NEA $M$ existiert ein DEA $M'$ mit $L(M)=L(M')$.
+    \item \textbf{Äquivalenz Typ-3-Grammatik $\leftrightarrow$ DEA}: Sprache $L \subseteq \Sigma^*$ ist Typ 3 $\iff \exists$ DEA $M$ mit $L=L(M)$.
+    \item \textbf{Pumping-Lemma (uvw-Theorem) für reguläre Sprachen}:
+    \begin{itemize}
+        \item $(L \text{ regulär}) \implies (\exists n \in \mathbb{N})(\forall x \in L, |x| \ge n)(\exists u,v,w \in \Sigma^*)[x=uvw \land |v| \ge 1 \land |uv| \le n \land (\forall i \ge 0: uv^iw \in L)]$.
+        \item \textbf{Anwendung}: Contraposition: Ist die rechte Seite falsch, ist $L$ nicht regulär.
+    \end{itemize}
+\end{itemize}
+
+\section*{Kontextfreie (Typ-2-) Sprachen}
+\begin{itemize}
+    \item \textbf{Nichtdeterministischer Kellerautomat (NKA/PDA)}: $M=(Z,\Sigma,\Gamma,\delta,z_0,\#,E)$, wobei:
+    \begin{itemize}
+        \item $Z$: Endliche Zustandsmenge.
+        \item $\Sigma$: Eingabealphabet.
+        \item $\Gamma$: Kelleralphabet.
+        \item $\delta: Z \times (\Sigma \cup \{\varepsilon\}) \times \Gamma \to \mathcal{P}(Z \times \Gamma^*)$: Überführungsfunktion (endlich).
+        \item $z_0 \in Z$: Startzustand.
+        \item $\# \in \Gamma$: Unterstes Kellersymbol.
+        \item $E \subseteq Z$: Menge der Endzustände.
+    \end{itemize}
+    \item \textbf{Arbeitsweise NKA}:
+    \begin{itemize}
+        \item Start: $z_0$, Eingabeanfang, Keller enthält nur $\#$.
+        \item Übergang $(z,a,A) \to (z',B_1\dots B_k)$: Ist M in $z$, liest $a$ (oder $\varepsilon$), und $A$ oberstes Kellersymbol $\implies$ M geht nach $z'$, $A$ wird durch $B_1\dots B_k$ ersetzt ($B_1$ wird oberstes Symbol), Eingabekopf nach rechts.
+    \end{itemize}
+    \item \textbf{Von NKA $M$ akzeptierte Sprache}: $L(M) = \{w \in \Sigma^* \mid M \text{ akzeptiert } w \text{ (d.h. erreicht Endzustand nach vollst. Eingabe)}\}$.
+    \item \textbf{Äquivalenz NKA $\leftrightarrow$ Kontextfreie Sprache}: Eine Sprache $L$ ist kontextfrei $\iff \exists$ NKA $M$ mit $L=L(M)$.
+    \item \textbf{Pumping-Lemma (uvwxy-Theorem) für kontextfreie Sprachen}:
+    \begin{itemize}
+        \item $(L \text{ kontextfrei}) \implies (\exists n \in \mathbb{N})(\forall z \in L, |z| \ge n)(\exists u,v,w,x,y \in \Sigma^*)[z=uvwxy \land |vx| \ge 1 \land |vwx| \le n \land (\forall i \ge 0: uv^iwx^iy \in L)]$.
+        \item \textbf{Anwendung}: Contraposition: Ist die rechte Seite falsch, ist $L$ nicht kontextfrei.
+    \end{itemize}
+\end{itemize}
+
+\section*{Turing-Maschinen (Typ-0-Sprachen)}
+\begin{itemize}
+    \item \textbf{Turingmaschine (TM)}: $M=(Z,\Sigma,\Gamma,\delta,z_0,\square,E)$, wobei:
+    \begin{itemize}
+        \item $Z$: Zustandsmenge.
+        \item $\Sigma$: Eingabealphabet.
+        \item $\Gamma \supset \Sigma$: Arbeitsalphabet (Bandalphabet), mit $\square \notin \Sigma$.
+        \item $\delta$: Übergangsfunktion.
+        \item $z_0 \in Z$: Startzustand.
+        \item $\square \in \Gamma \setminus \Sigma$: Leerzeichen (Blank).
+        \item $E \subseteq Z$: Endzustände.
+    \end{itemize}
+    \item \textbf{Deterministische TM (DTM)}: $\delta: Z \times \Gamma \to Z \times \Gamma \times \{L,N,R\}$ (Bewegungsrichtungen: Links, Neutral, Rechts).
+    \item \textbf{Nichtdeterministische TM (NTM)}: $\delta: Z \times \Gamma \to \mathcal{P}(Z \times \Gamma \times \{L,N,R\})$.
+    \item \textbf{Arbeitsweise TM}:
+    \begin{itemize}
+        \item Start: $z_0$, Kopf auf 1. Zeichen der Eingabe $w$, Band sonst mit $\square$.
+        \item Übergang $\delta(z,a)=(z',b,X)$: In Zustand $z$, liest $a \implies$ nach $z'$, schreibt $b$, bewegt Kopf $X$.
+        \item Ende: M hält, sobald ein Zustand aus $E$ erreicht wird.
+    \end{itemize}
+    \item \textbf{Konfiguration}: Wort $uzv$, wobei $u,v \in \Gamma^*$ (Bandinhalt, $z$ ist Zustand, Kopf auf 1. Zeichen von $v$).
+    \item \textbf{Startkonfiguration bei Eingabe $w$}: $z_0w$.
+    \item \textbf{Übergangsrelation $\vdash_M$}: Beschreibt einen Schritt zwischen Konfigurationen.
+    \item \textbf{Von TM $M$ akzeptierte Sprache}: $L(M) = \{w \in \Sigma^* \mid z_0w \vdash_M^* uzv \text{ für ein } z \in E \text{ und } u,v \in \Gamma^*\}$.
+    \item \textbf{Äquivalenzen für Typ-0-Sprachen ($A \subseteq \Sigma^*$)}: Die folgenden Aussagen sind äquivalent:
+    \begin{itemize}
+        \item $A$ ist vom Typ 0.
+        \item $A = L(M)$ für eine Turingmaschine $M$.
+        \item $A$ ist semi-entscheidbar.
+        \item $A$ ist rekursiv-aufzählbar.
+        \item $A$ ist Wertebereich einer totalen berechenbaren Funktion oder $A = \emptyset$.
+        \item $A$ ist Wertebereich einer (eventuell partiellen) berechenbaren Funktion.
+        \item $A$ ist Definitionsbereich einer berechenbaren Funktion.
+        \item $\exists$ entscheidbare Sprache $B$ sodass $A = \{x \in \Sigma^* \mid \exists y: \langle x,y \rangle \in B\}$.
+    \end{itemize}
+    \item \textbf{Korollar}: Typ-1-Sprachen sind echte Teilmenge der Typ-0-Sprachen.
+\end{itemize}
+
+\section*{Unentscheidbare Probleme}
+\begin{itemize}
+    \item \textbf{Gödelisierung}: Kodierung von Turing-Maschinen durch Binärwörter $w \in \{0,1\}^*$.
+    \item $M_w$: Die Turingmaschine, die durch $w$ kodiert wird. Falls $w$ keine gültige Gödelisierung ist, sei $M_w$ eine festgehaltene TM.
+    \item \textbf{Spezielles Halteproblem ($K$)}: $K = \{w \in \{0,1\}^* \mid M_w \text{ hält bei Eingabe } w\}$.
+    \item \textbf{Allgemeines Halteproblem ($H$)}: $H = \{w\#x \mid M_w \text{ hält bei Eingabe } x\}$.
+    \item \textbf{Eigenschaften von $K, H$}:
+    \begin{itemize}
+        \item $K$ und $H$ sind rekursiv-aufzählbar.
+        \item $K$ ist nicht entscheidbar.
+        \item $H$ ist nicht entscheidbar.
+    \end{itemize}
+    \item \textbf{Halteproblem auf leerem Band ($H_0$)}: $H_0 = \{w \mid M_w \text{ angesetzt auf leerem Band hält}\}$.
+    \item \textbf{Eigenschaft von $H_0$}: $H_0$ ist nicht entscheidbar ($H \le H_0$).
+\end{itemize}
+
+\section*{Satz von Rice}
+\begin{itemize}
+    \item Sei $R$ die Klasse aller berechenbaren Funktionen.
+    \item Sei $S \subseteq R$ mit $S \neq \emptyset$ und $S \neq R$.
+    \item Sei $C(S) = \{w \mid \text{die von } M_w \text{ berechnete Funktion ist aus } S\}$.
+    \item \textbf{Satz von Rice}: $C(S)$ ist nicht entscheidbar.
+    \item \textbf{Korollare (Anwendungen)}: Die folgenden Sprachen sind nicht entscheidbar:
+    \begin{itemize}
+        \item $\{w \mid M_w \text{ berechnet eine totale Funktion}\}$.
+        \item $\{w \mid M_w \text{ berechnet eine monotone Funktion}\}$.
+        \item $\{w \mid M_w \text{ berechnet eine konstante Funktion}\}$.
+        \item $\{w \mid M_w \text{ berechnet die Funktion } f(x)=x+1\}$.
+    \end{itemize}
+\end{itemize}
+
+\section*{Diagonalisierung und Berechenbarkeit}
+\begin{itemize}
+    \item \textbf{Diagonalisierung (Konzept)}: Konstruktion eines Elementes, das sich von jedem Element einer (abzählbaren) Aufzählung unterscheidet (mindestens an einer Stelle).
+    \item \textbf{Anwendung $\mathbb{R}$}: Reelle Zahlen in $[0,1]$ sind überabzählbar (Cantor's Diagonalargument).
+    \item \textbf{Anwendung Berechenbare Funktionen}: Es gibt Funktionen $q: \mathbb{N} \to \mathbb{N}$, die nicht berechenbar sind. (Konstruktion einer Diagonalfunktion $q_{diag}(n)$, die sich von jeder $n$-ten berechenbaren Funktion $q_n$ an Stelle $n$ unterscheidet).
+    \item \textbf{Anwendung Sprachen}: Es gibt Sprachen, die nicht rekursiv-aufzählbar sind ($L_{diag}$).
+    \item \textbf{LOOP-Programme / WHILE-Programme}:
+    \begin{itemize}
+        \item Es gibt eine totale, WHILE-berechenbare Funktion, die nicht LOOP-berechenbar ist (z.B. Ackermann-Funktion).
+        \item Beweisidee: Diagonalisierung über alle LOOP-Programme.
+    \end{itemize}
+\end{itemize}
+
+
+\end{multicols*}
+\end{document}

@@ -1,0 +1,6458 @@
+
+--- SOURCE: 10_Folien_und_Notizen_06.01.25.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Unentscheidbare Probleme
+114
+Erkennen von Endlosschleifen:
+Das Halteproblem ist die Sprache
+H = { M,x | M hält bei Eingabe x}.
+〈 〉
+115
+Gödelisierung
+Gödelisierung = Kodierung von Turing-Maschinen durch
+Binärwörter
+Sei w {0,1} . Dann ist
+∗
+∈
+M, falls w Gödelisierung von M
+M :=
+w
+4 M, sonst (d.h. w ist keine gültige Gödelisierung),
+wobei M ei"ne festgehaltene Turingmaschine ist.
+"
+116
+Definition
+Das spezielle Halteproblem ist die Sprache
+K = {w {0,1} ∗ | M w hält bei Eingabe w}.
+∈
+Das (allgemeine) Halteproblem ist die Sprache
+H = {w#x | M hält bei Eingabe x}.
+w
+117
+Beobachtung
+K und H sind rekursiv-aufzählbar.
+118
+Satz
+K ist nicht entscheidbar.
+119
+Korollar
+K ist nicht rekursiv-aufzählbar.
+120
+Satz
+H ist nicht entscheidbar.
+121
+
+--- SOURCE: 11_Folien_und_Notizen_13.01.25.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Zusammenfassung
+Sei A eine Sprache. Aus den bisherigen Resultaten ergibt sich,
+dass die folgenden Aussagen äquivalent sind:
+1. A ist vom Typ 0.
+2. A = L(M) für eine Turingmaschine M.
+3. A ist semi-entscheidbar.
+4. A ist rekursiv-aufzählbar.
+5. A ist Wertebereich einer totalen berechenbaren Funktion
+oder A = .
+∅
+6. A ist Wertebereich einer (eventuell partiellen)
+berechenbaren Funktion.
+7. A ist Definitionsbereich einer berechenbaren Funktion.
+8. Es gibt eine entscheidbare Sprache B sodass
+A = {x Σ | y : x,y B}.
+∗
+∈ ∃ 〈 〉 ∈
+124
+Satz
+Eine Sprache A Σ ist rekursiv-aufzählbar gdw. es eine
+∗
+⊆
+berechenbare Funktion f: N Σ ∗ gibt, sodass
+A = {f(0),f(1),f(2),...}.
+→
+122
+Satz
+Eine Sprache A Σ ist rekursiv-aufzählbar gdw. es eine
+∗
+⊆
+entscheidbare Sprache B gibt, sodass
+A = {x Σ | y : x,y B}.
+∗
+∈ ∃ 〈 〉 ∈
+123
+Korollar
+Die Klasse der Typ-1-Sprachen ist eine echte Teilmenge der
+Klasse der Typ-0-Sprachen.
+125
+
+--- SOURCE: 12_Folien_und_Notizen_20.1.25.pdf ---
+Zusammenfassung
+Sei A eine Sprache. Aus den bisherigen Resultaten ergibt sich,
+dass die folgenden Aussagen äquivalent sind:
+1. A ist vom Typ 0.
+2. A = L(M) für eine Turingmaschine M.
+3. A ist semi-entscheidbar.
+4. A ist rekursiv-aufzählbar.
+5. A ist Wertebereich einer totalen berechenbaren Funktion
+oder A = .
+∅
+6. A ist Wertebereich einer (eventuell partiellen)
+berechenbaren Funktion.
+7. A ist Definitionsbereich einer berechenbaren Funktion.
+8. Es gibt eine entscheidbare Sprache B sodass
+A = {x Σ | y : x,y B}.
+∗
+∈ ∃ 〈 〉 ∈
+124
+18.2
+14 164hr Repetitorium
+-
+.
+E- 001
+offene
+Uhr
+11 13
+19.2
+- Fragestunde
+.
+Seminarraum
+1-501
+11A
+Appelstr
+.
+/
+Weitere Anliegen
+Tutor
+innen
+: :
+ausführliche Fragen
+↳
+alternativ
+Sprechstunde
+: :
+Mail
+an holzapfd@Hi.uni-hannoveu.de
+Korollar
+Die Klasse der Typ-1-Sprachen ist eine echte Teilmenge der
+Klasse der Typ-0-Sprachen.
+Beweis : K (oder H) ist semi - entscheidbar ,
+also vom Typ °
+.
+entscheidbar
+K ist nicht
+.
+sind entscheidbar
+Alte Typ 1 Sprachen .
+Also K ist nicht vom Typ 1
+: .
+""ᵈ"E÷
+gibt Sprachen die nicht von Typ ◦ sind -
+beschrieben
+also nicht von einer Grammatik
+werden können
+.
+Ü Typ ◦
+Beweis : [ , Ä en , ts d c e h n e n idbar wä (cid:15482) re K en v t o s n cheidbar §
+(cid:15482)Ü semi
+-
+125
+Chomsky
+-
+Hierarchie
+:*
+R
+R Menge der berechenbaren
+-
+Fhtn
+R
+S ≤
+⑧
+G
+• Eingabe f ER
+*
+{0,13
+w c-
+TM die
+C- Gödel nummer einer
+S
+berechnet) ,
+f
+Frage f ES
+•
+g
+Funktion
+Gehört die die
+von
+berechnet
+Mir wird S?
+zu
+( (s )
+=
+{
+w
+/
+Mir
+berechnet eine Funktion}
+S
+aus
+satzvonkice.se
+=/ R s ≠ ∅ (cid:15482)Enotbsicgheesidungs
+,
+problem
+unentscheidbar
+*
+: : : ::: :*
+funktion:ale Eigenschaft
+von
+Tuning
+-
+...
+..
+Satz von Rice
+Sei die Klasse aller berechenbaren Funktionen. Sei
+R S ⊆ R
+mit = und = . Dann ist die Sprache
+S ∕ ∅ S ∕ R
+C( ) = {w | die von M berechnete Funktion ist aus }
+w
+S S
+nicht entscheidbar.
+126
+Definition
+Das Halteproblem auf leerem Band ist die Sprache
+H = {w | M angesetzt auf leerem Band hält}.
+0 w
+'ü
+¥
+127
+Sonderfall Eingabe
+Achtung
+:
+Satz nicht von dergeforderten
+Form W#× weggelassen
+H ist nicht entscheidbar.
+Beweis 0 '
+w
+wir zeigen H ≤ Ho "
+Gesucht : f mit w#✗ EH (cid:15483) ftw #x ) c- Ho
+Mu hält auf × M gar#(cid:15482) hält auf e
+'
+ist
+w Eingabe
+2-
+Gödelnummer
+folgendeTM : Falls 2- = [ ( Band leer) und
+Schreibe × auf das Band
+simulieren Mw auf ×
+Falls
+2- ≠{
+stoppe
+w #✗ c- HE> Mir hält auf ✗ <(cid:15482) Mi hält auf { (cid:15483) w ' c- Ho
+H ist nicht entscheidbar f ist total und berechenbar
+,
+(s Sonderfall)
+Ho ist nicht entscheidbar .
+(cid:15482)
+☐
+128
+Satz
+Sei die Klasse aller berechenbaren Funktionen. Sei
+R S ⊆ R
+mit = und = . Die Sprache C( ) sei definiert als
+S ∕ ∅ S ∕ R S
+C( ) = {w | die von M berechnete Funktion ist aus }.
+w
+S S
+Dann gilt:
+K C( ) oder K C( )
+≤ S ≤ S
+Ho Äo
+µ ≤ Ho
+129
+Beweise
+:
+Fallunterscheidungen
+Fakt n ¢ S
+) Mit
+Sei S ( ex das =/∅ Sei die TM die berechnet
+g c- . . g .
+Ziel : Ho ≤ ( CS) also we Ho (cid:15483) fcn) c- ( CS )
+,
+f definiert ^ '
+M Eingabe
+die TM : ×
+Timeline Mw auf E
+Falls Simulation stoppt dann simuliere
+,
+µ • ( x )
+welche Flut wird Ü ' berechnet ?
+von
+Falls wc- Ho dann wird berechnet S
+, g g c-
+Falls wat Ho dann wird SL berechnet 1 ¢-5
+,
+W c- Ho (cid:15482) fcw) c- ( CS)
+d- Ho (cid:15482) for ) ¢ c. ( s)
+w
+Also Ho ≤ CCS )
+:
+FAI SL ES
+:
+MG
+) sei die TM die
+sei ¢ S ( da S =/ R g
+ex
+g . berechnet
+.
+HT
+Ziel : ≤ ( (s ) also
+,
+Ho (cid:15483) ftw ) ¢ ( Cs)
+in c-
+definiert
+u
+f
+M Eigne ×
+Tm :
+simuliere Mw auf
+c
+Falls Simulation dann
+stoppt simuliere
+,
+Mg auf ×
+Ä
+Welche
+FHL wird von berechnet ?
+Falls Ho dann wird berechnet
+w c- , g .
+Falls WEI Ho dann wird berechnet
+~
+, .
+wett (cid:15482) Ho (cid:15482) gcw)
+d-
+(
+Cs)
+w c-
+Äo (cid:15482) ¢ Ho (cid:15482) fcw ) c- ( Cs)
+w c- w
+HT
+Also ≤
+( (s )
+☐
+Exkurs / Wiederholung Unterschied Eingabe Reduhhönsfhl/ Eingabe Maschine
+:
+Reduhtionsfhtf ( )
+z
+IK { w / Mir hält auf } )
+= w
+Eingabe ×
+{ W ' 2- = " w ist Gödelisierung
+f )
+(z
+=
+Sonst
+0
+'
+w = o 1 1 → Mir
+0
+. . '
+. . . . .
+(cid:15482)
+dann
+Korollar (Satz von Rice)
+Sei die Klasse aller berechenbaren Funktionen. Sei
+R S ⊆ R
+mit = und = . Dann ist die Sprache
+S ∕ ∅ S ∕ R
+C( ) = {w | die von M berechnete Funktion ist aus }
+w
+S S
+nicht entscheidbar.
+130
+Anwendung des Salz Rice
+von :
+Menge S definiert werden
+muss
+und
+zeigen dass
+, S ≠ ∅ und S ≠ R
+S ER
+Dann
+nach Satz Rice ( ( s ) nicht
+von
+entscheidbar
+Korollar Berechenbarkeit der Fht ist
+dadurch gegeben , dass „ Man g b e e fo re rd ch e n rt et w...ir " d
+Die folgenden Sprachen sind nicht entscheidbar:
+◮ {w | M w berechnet eine totale Funktion}
+„Das gegebene Programm stürzt nicht ab.“
+◮ {w | M w berechnet eine monotone Funktion}
+◮ {w | M w berechnet eine konstante Funktion}
+◮ {w | M w berechnet die Funktion f(x) = x+1}
+„Das gegebene Programm erfüllt eine gegebene
+Spezifikation“
+(hier im Beispiel: „Das gegebene Programm berechnet die
+Nachfolgerfunktion“).
+131
+
+--- SOURCE: 13_Notizen.pdf ---
+Diagonalisieren
+gegeben Menge M > { Mama m Ms }
+, ? ! , - - - - ,
+derer Elemente durch Werte von Attributen
+ao.ae az as
+, , , . . .
+do an dz 9 - . -
+]
+Mo • Mao Mar moi moi " uff Effekt :
+az
+. . _
+Mr Maio 0 neue 0 Maz 0 me } M MI MI MIMI
+,
+Mz Melo Mz mein Mais
+, wobei nützenden Wert
+,
+Ms Msco man Mit Mais
+ungleich lhjejlit
+: .
+. tnuitrscheidet sicheren jedem
+.
+:
+.
+Attributs
+neuen alarchcvotdes
+Ziel uichtzuMgkeonhsotrrutiearneTngdeagsebeudw@ertederAttribute.e
+Elegant
+,
+.tn/evoutHributwortm,diesichunjedrZeiheiucbrTa6eKe
+Stelle unterscheidet
+mindestens einer
+an
+Bessie Cheers Canto )
+:
+Soft Rn [ ] ist überabzählbar ( d. h nicht abzählbar)
+: 0in
+.
+.
+BEI : Anberaumen
+IR
+n
+[Oil]
+=
+{
+m my Mz ms
+}
+, . , , , _. _
+Es gibt mehr reelle Zahlen = { mei) IIECN ? wobei
+„
+natürliche Zahlen "
+IN IR
+als m: →
+.
+Dezimalentwicklung
+-
+mo = 0 nee ! % ma - - -
+, ,
+,
+um = 0 who men mac Mas - - der Zahl Mo ( unendlich )
+,
+ich sind bislang
+In
+Mz = O ) Mao Ma , Mag . . . ,
+Definiere
+-
+↳
+= 0 also Wege % 2%2
+,
+- -
+,
+dodndzds
+# = my = 0,2 5 O O - - in = 0 , .- -
+,
+=D 3 3 3 3 - 1,8dB
+5- auf , wobei du { MaEO
+=
+,
+sonst
+0 9 9 9 9 a
+1 = weg = ,
+,
+( d. h du # )
+made
+Bek F. leisten #
+: a. an
+.
+.
+Am = hm dann dk # made 4 MEIN Coin] \ { Moin }
+,
+, , . . .
+Sei IN IN die einstellige Funktion über IN die der
+qn : → , von
+Turingmaschine Mn berechnet wird
+.
+tuuit
+Gödelisierung Cbzenbin)
+n
+berechenbare
+soff Es gibt nicht Funktion :D → DU
+q
+.
+Beweis
+:
+bereich
+Det
+-
+← . -
+IN
+3
+O 1 2 . . -
+Ko 9063 Cole) Edi) 9C?) Definiere queiefobt ,
+detist
+falls euch
+4 97 4 44 913) qck) { 1
+> ,
+"d. Chaos
+Er %) 971) Gk) Eds) (
+O sonst
+% GT ,
+Es Gas es
+Candle) # edle)
+-
+. . .
+:
+/ 9 n
+ander Also Es gibt kein kev
+:
+" wd-drt-ht.li
+• g) ist
+zugetraut
+mit
+der landet E- ein g-
+stelle j
+, ceilj ) . entscheidbar
+falls
+=P K ist nicht .
+Komet
+Ciu) ,
+keutseheidbww.ae
+Falls ,
+berechenbar
+Beweise dann wäre .
+soff Es gibt sprechen die weht rekursiv aufziehbar sind
+, .
+Beweis sei M„ das semi - Entscheidungsverfahren das von Tamil
+abrechnet
+Gödelisierung wird
+.
+Äffen
+° 1 2 3.
+Mo t T T l
+T L T Definiere Sprache Ldwiefobt :
+Mi T
+-
+t
+Me d d t Mdbeieinsabed
+held # TM
+Ms T T t t
+Cbonrdesdrteuwotes)
+-
+:
+nicht
+hält
+ß I f
+.
+"
+"
+hält "
+Gründen
+LdU)
+diesem # Ld -
+- µ ⇐ µ hält .
+,
+Entdeckungs
+)
+tschüs held KAUM
+Dann #
+algorithmen
+her
+09
+Ü Kistuiehtentsheidbar
+Kaja ist nicht und
+: v.a. .
+Ü
+Bei Ld > gr
+Soff Es gibt eine totale WHKE berechenbare Funktion die
+-
+,
+nicht Loop berechenbar ist T
+-
+.
+W
+WUHLE -6mg nicht LOOP bar aus → CN
+Bekannt wzr -
+: .
+- Erwähnt Ackermann Ehrt total WARE leer
+: - . , , - . ,
+zweistelliges oder nicht LOOP ka (ohne Beweis )
+- .
+Beweis seien Papa Pc Ps alle LOOP Programme in
+: -
+, , . . .
+qaasileaikogr Ordnung
+.
+.
+Seife usw die einstellige Loop Fkk die von !
+:
+-
+,
+berechnet
+wird
+.
+NEIGE
+° ^ 2 3 - - -
+wiefdst
+So fggfo ) toll ) Lok ) fol) . . - Def - f : IN → IN :
+£ Gb Iff Gu
+Slk)#
+0
+) ) fck)
+. - =
+Sonst
+fz
+fzlo C) ES £2
+) - ^
+)
+also fühlte
+↳ 73103 fühl fzlhf GG)
+-
+affine
+s-zqaftfwfurakeheaf.VE/
+.
+bei
+also ist f- nicht LOOP
+- .)
+vöv
+darf ist WHILE bes
+es
+- .
+
+--- SOURCE: 1_Folien_und_Notizen_21.10.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Bitte scannen!
+URL: https://pingo.coactum.de/events/739935
+2
+Organisatorisches
+◮ Vorlesung Mo 10.15h hier in E001, Aufzeichnung in
+Stud.IP (aus WS20/21) werden eine Woche vor Vorlesung
+bereitgestellt
+◮ Materialien in Stud.IP: Skript, Folien
+◮ Übungen in Kleingruppen mit max. 25 TN, Beginn: heute!
+◮ Hausübungen werden dreimal im Semester verteilt;
+vermutlich Mitte Nov., Mitte Dez., Ende Jan.;
+Bearbeitungszeit 2 Wochen;
+elektr. Abgabe (PDF) in Gruppen (1-4 TN)
+◮ Studienleistung: 60% der Punkte der Hausübungen
+bitte E-Mail an Vivian Holzapfel
+◮ Prüfungsleistung: Klausur, 120 min,
+geplanter Termin: 24.02.24, 14h;
+für Lehramtsstudiengänge: mündl. Prüfung, Termin n. V.
+3
+Übungskonzept
+◮ Tutorien in Gruppen (max. 25 TN)
+◮ Vorbereitung: Vorlesung (ev.Aufzeichnung), Skript
+◮ Keine Wiederholung des Vorlesungsinhaltes in der Übung!
+◮ Aufgaben werden in der Übung gerechnet
+◮ Kleingruppen erarbeiten Lösungen
+◮ Lösungen werden in Gesamtgruppe besprochen
+4
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Problem Aufgabe
+Algorithmisches ! :
+Eingabedaten Aufgabe Ausgebedaten
+-> - >
+(2 B Sortier)
+- .
+mathematisch
+:
+Funktionswert
+f
+Eingete - -
+(Funkhoh) Bild
+curbila
+Definintusberich M f M -> N Wertebereich N
+:
+chlässige Eingaben)
+Eingabe A Ausgabe
+-> ->
+Formale Sprachen math Präzisierung der Darstellung
+:
+,
+Ein-/Ausgabe
+von
+Sprachen und Grammatiken
+3
+Alphabete, Zeichen und Symbole
+Ein Alphabet ist eine endliche, nichtleere Menge. Die Elemente
+eines Alphabets heißen auch Zeichen oder Symbole.
+Wie üblich: Ist M eine Menge, so bezeichnet |M| die Anzahl der
+Elemente von M.
+Beispiele
+:
+A
+Find= Sabi .. AiB , 4-a , ,-- , B i x , / , y .- 3
+10 13
+Zibin= 1
+12binl = 2
+4
+Wörter und Sprachen
+Sei Σ ein Alphabet.
+Ein Wort über Σ ist eine Folge von Symbolen aus Σ.
+Ein Wort entsteht also durch Hintereinanderschreiben
+(Konkatenation) von Symbolen aus Σ.
+Mit ε wird das leere Wort bezeichnet.
+Wörter über
+- Ein : 10010
+- Zubd : abba (3+1)A4
+5
+Wörter und Sprachen
+Die Menge aller Wörter über dem Alphabet Σ bezeichnen wir
+mit Σ . Eine Sprache über Σ ist eine Menge von Wörtern über
+∗
+Σ, also eine Teilmenge von Σ .
+∗
+= Mens de Binärwöre
+= [2 , 0 , 1 , 00 , 01 , 10 , 11 , 000 , 201 , 010 , 011 , -I
+quasilexikographische Ordnny"
+entsprechen
+der Binauwört die geraden Zahlen
+Meye ,
+↳ er = 40 , 00 , 100 , 11923 Zin
+über
+Zubd"
+synthousekte Java-Programme
+Lava =
+6
+Konkatenation
+◮ Operation auf Wörtern: Konkatenation bzw.
+Hintereinanderschreiben
+◮ Schreibweise: u v oder kurz uv für Konkatenation der
+◦
+Wörter u und v
+◮ Für ein Wort w und n N ist wn die Konkatenation
+∈
+wn = w w w
+◦ ◦···◦
+n−mal
+◮ Wir definieren: w0 = ε.
+! "# $
+abba o baab abbabaab
+=
+7
+Länge
+◮ Die Länge eines Wortes w ist die Anzahl der Symbole in w.
+Schreibweise: |w|
+◮ |ε| = 0.
+◮ Es ist |wn| = n|w|.
+Iwlk
+Schreibweise: Σ+ = Σ \{ε} IM/
+∗
+Im/
+8
+Problem
+Aborithmisches
+:
+Alphabete
+*
+* (2 0 :
+f z 1 ,
+:
+Programmiersprach Java
+:
+Ja
+falls w synd horn Jora-Programm
+w -> Parser - > , - .
+↳
+A sonst
+nein
+,
+Zubch
+It 101 s
+-
+-
+:
+Entscheidungsge
+fllWeLearn
+Go
+far)
+=
+12 * 1 S E .
+= 0 . a
+.
+* whendlich
+L ist i A
+. , .
+?
+Problem Wie kann 1 auf endliche Weise beschrieben werden
+:
+-
+Beschribny
+endl Leave
+& h
+p:
+.
+Syntaxdiagramme
+derch Text oder
+Molichkeit
+:
+*
+/Entscheidungsalonihmus für L-2
+Parser
+-
+w-
+A
+Grammatiken
+-
+Syntax der Aussagenlogik: Beispiel für EBNF
+φ ::= p | 0 | 1 | ¬φ | (φ∧φ) | (φ∨φ) | (φ φ) | (φ φ),
+wobei p eine aussagenlogische Variable ist→, also ↔
+p {p ,p ,p ,...}.
+1 2 3
+∈
+9
+mit
+ein Gemmatik
+für
+Bep :
+. EXP
+arithm Ausdrück
+4EL 47
+L (3 +1) *
+=
+.
+-
+mit opeater to A !
+- , , (3 +1) A L
+A
+übe n r at Zahlen
+. (3x1) *4
+Ze
+(G)
+& <EXP) - LEN) <OP) LEXP) (n) Lops -> +
+(Ep )
+->
+(EXP)) (2) Lops - - (7)
+A
+Cop> -> (8)
+(NAM) (3)
+(E) ->
+<ops /
+-> G)
+<PIG) (4)
+LNAT ->
+<DIG)
+->
+0 (10)
+< NAT- <DIG) (NAT) (5)
+>
+LDIED
+Esp für Ableitung + 1
+, : i
+<D122
+-L
+LEXP)
+> LEXI COPL LEXP)
+i
+X
+-
+LEXPS * LEXP>
+D12 -9
+- ↳ (s)
+(3) i z=2
+= V = n A LNAT)
+-Y
+(4) V
+LDIGX
+* = LEP) *
+S = W ↳ 4
+(14)
+LEXP * 4 (EXP3] * 13H) AY
+** =
+Definition
+Eine Grammatik ist ein 4-Tupel G = (V,Σ,P,S), wobei:
+◮ V ist eine endliche Menge, die so genannte Menge der
+Variablen
+◮ Σ ist ein Alphabet, das so genannte Terminalalphabet, mit
+V Σ =
+∩ ∅
+◮ P ist die endliche Menge der Produktionen,
+P (V Σ)+ (V Σ)
+∗
+⊆ ∪ × ∪
+◮ S V ist die so genannte Startvariable
+∈
+10
+Definition
+Sei G = (V,Σ,P,S) eine Grammatik und seien u,v (V Σ) .
+∗
+∈ ∪
+Wir definieren eine Relation wie folgt:
+G
+◮ u G v, falls u,v zerlegt werden können in Teilwörter
+u = xyz und v = xy z m ⇒ it x,z (V Σ) und y y ist
+′ ∗ ′
+- ∈ ∪
+Re⇒gel in P.
+„u geht unter (Anwendung einer Regel in) G unm→ittelbar
+über in v“
+◮ u ∗G v, falls u = v oder es Wörter w 1 ,...,w k
+∈
+(V
+∪
+Σ) ∗
+gibt mit u = w , w w für i = 1,2....,k−1 und
+1 i G i+1
+v =⇒w .
+k
+Wir lassen den Index⇒G weg, falls dieser eindeutig ist.
+Die von G erzeugte Sprache ist L(G) = {w Σ | S w}.
+∈
+∗ ∗G
+Eine Ableitung von w L(G) in k Schritten ist eine Folge
+∈
+(w ,w ,...,w ) mit w = S, w = w und w w⇒ für
+0 1 k 0 k i G i+1
+i = 0,1,...,k−1.
+11
+⇒
+
+--- SOURCE: 2_Folien_und_Notizen_28.10.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Bitte scannen!
+URL: https://pingo.coactum.de/events/739935
+2
+Definition
+Eine Grammatik ist ein 4-Tupel G = (V,Σ,P,S), wobei:
+◮ V ist eine endliche Menge, die so genannte Menge der
+Variablen
+◮ Σ ist ein Alphabet, das so genannte Terminalalphabet, mit
+V Σ =
+∩ ∅
+◮ P ist die endliche Menge der Produktionen,
+P (V Σ)+ (V Σ)
+∗
+⊆ ∪ × ∪
+◮ S V ist die so genannte Startvariable
+∈
+10
+Definition
+Sei G = (V,Σ,P,S) eine Grammatik und seien u,v (V Σ) .
+∗
+∈ ∪
+Wir definieren eine Relation wie folgt:
+G
+◮ u G v, falls u,v zerlegt werden können in Teilwörter
+u = xyz und v = xy z m ⇒ it x,z (V Σ) und y y ist
+′ ∗ ′
+∈ ∪
+Re⇒gel in P.
+„u geht unter (Anwendung einer Regel in) G unm→ittelbar
+über in v“
+◮ u ∗G v, falls u = v oder es Wörter w 1 ,...,w k
+∈
+(V
+∪
+Σ) ∗
+gibt mit u = w , w w für i = 1,2....,k−1 und
+1 i G i+1
+v =⇒w .
+k
+Wir lassen den Index⇒G weg, falls dieser eindeutig ist.
+Die von G erzeugte Sprache ist L(G) = {w Σ | S w}.
+∈
+∗ ∗G
+Eine Ableitung von w L(G) in k Schritten ist eine Folge
+∈
+(w ,w ,...,w ) mit w = S, w = w und w w⇒ für
+0 1 k 0 k i G i+1
+i = 0,1,...,k−1.
+11
+⇒
+Die Chomsky-Hierarchie
+12
+Noam Chomsky
+7. Dez. 1928, Philadelphia 1957: Syntactic Structures
+∗
+13
+Definition
+◮ Jede Grammatik ist vom Typ 0 (d.h. keine
+Einschränkungen).
+◮ Eine Grammatik ist vom Typ 1 (oder: kontextsensitiv),
+falls für alle ihre Regeln u v gilt: |u| |v|.
+≤
+◮ Eine Typ-1-Grammatik ist vom Typ 2 (oder: kontextfrei),
+falls für alle ihre Regeln u → v gilt, dass u eine einzelne
+Variable ist (d.h. u V).
+∈
+→
+◮ Eine Typ-2-Grammatik ist vom Typ 3 (oder: regulär), falls
+für alle ihre Regeln u v gilt, dass v ein einzelnes
+Terminalzeichen ist (v Σ) oder v aus einem
+∈
+Terminalzeichen gefolg→t von einer Variablen besteht.
+14
+Zurück zur Syntax der Aussagenlogik
+EBNF:
+φ ::= p | 0 | 1 | ¬φ | (φ∧φ) | (φ∨φ) | (φ φ) | (φ φ),
+wobei p eine aussagenlogische Variable ist,
+also p {p ,p ,p ,...}. → ↔
+1 2 3
+∈
+Typ-2-Grammatik:
+S V | C | ¬S | (S∧S) | (S∨S) | (S S) | (S S)
+V p | p | p | ...
+1 2 3
+C→ 0 | 1 → ↔
+→
+Problem: unendliches Alphabet!
+→
+15
+Zurück zur Syntax der Aussagenlogik
+Lösung:
+Für p schreiben wir: pIi.
+i
+G = (Σ ,{S,V,C},P,S), wobei
+AL
+Σ = {p,I,0,1,∧,∨,¬, , ,(,)}
+AL
+S V | C | ¬S | (S∧S) | (S∨S) | (S S) | (S S)
+→ ↔
+P = V p | VI
+( +
+) C→ 0 | 1 → ↔ ,
+→
+* -
+Die syntaktisch korrekten Wörter (also die aussagenlogischen
+→
+Formeln) kann man nun z.B. wie folgt erzeugen:
+S ¬S ¬(S∧S) ¬(VI∧VI) ¬(VI∧VII)
+¬(pI∧pII) ¬(p ∧p )
+1 2
+≃
+⇒ ⇒ ⇒ ⇒
+16
+⇒
+Spezialfall des leeren Wortes
+Bei einer Grammatik G = (V,Σ,P,S) vom Typ 1, 2 oder 3 ist
+unabhängig von den oben genannten Restriktionen die Regel
+S ε zugelassen.
+Ist aber S ε P, so darf es keine Regel in P geben, in der S
+∈
+au→f der rechten Seite vorkommt.
+→
+17
+Eine Sprache L Σ heißt vom Typ 0 (Typ 1, Typ 2, Typ 3),
+∗
+⊆
+falls es eine Typ-0-Grammatik (Typ-1-Grammatik,
+Typ-2-Grammatik, Typ-3-Grammatik) G gibt mit L = L(G).
+18
+Satz
+Das Wortproblem für Typ-1-Sprachen ist „entscheidbar“ , d.h.
+es gibt einen Algorithmus, der bei Eingabe einer
+kontextsensitiven Grammatik G = (V,Σ,P,S) und eines Wortes
+w Σ nach endlicher Zeit mit der Ausgabe „w L(G)“ oder
+∗
+∈ ∈
+„w / L(G)“ anhält.
+∈
+19
+
+--- SOURCE: 3_Folien_und_Notizen_04.11.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Bitte scannen!
+URL: https://pingo.coactum.de/events/739935
+2
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Reguläre Sprachen
+20
+Definition
+Ein (deterministischer) endlicher Automat (kurz: DEA) ist ein
+5-Tupel
+M = (Z,Σ,δ,z ,E),
+0
+wobei für die einzelnen Komponenten gilt:
+◮ Z ist eine endliche Menge, die so genannte Zustandsmenge
+◮ Σ ist ein Alphabet, das so genannte Eingabealphabet,
+Z Σ =
+∩ ∅
+◮ δ: Z Σ Z ist die so genannte Überführungsfunktion
+×
+◮ z 0 Z ist der so genannte Startzustand
+∈
+→
+◮ E Z ist die Menge der so genannten Endzustände
+⊆
+21
+Definition
+Sei M = (Z,Σ,δ,z ,E) ein DEA. Die erweiterte
+0
+Überführungsfunktion δ^ : Z Σ Z ist (induktiv) definiert
+∗
+×
+wie folgt:
+δ^(z,ε) = z für alle z Z →
+∈
+δ^(z,ax) = δ^(δ(z,a),x) für alle z Z, a Σ und x Σ
+∗
+∈ ∈ ∈
+Die von M akzeptierte Sprache ist
+L(M) = {x Σ | δ^(z ,x) E}.
+∗ 0
+∈ ∈
+22
+Definition
+Ein nichtdeterministischer endlicher Automat (kurz: NEA) ist
+ein 5-Tupel
+M = (Z,Σ,δ,z ,E),
+0
+wobei für die einzelnen Komponenten gilt:
+◮ Z, Σ, z 0 und E sind wie bei deterministischen endlichen
+Automaten definiert
+◮ Für die Überführungsfunktion gilt: δ: Z Σ (Z).
+× P
+(Z) ist die Potenzmenge von Z. Für z Z und a Σ ist
+P ∈ ∈
+also δ(z,a) eine Menge von möglichen Folgez→uständen
+23
+Definition
+Wir definieren δ^: (Z) Σ (Z) wie folgt:
+∗
+P × P
+δ^(Z ,ε) = Z für alle Z Z
+′ ′ ′
+⊆
+δ^(Z ,ax) = δ^(δ(z,a),→x) für alle Z Z, a Σ und x Σ .
+′ z ∈ Z ′ ′ ⊆ ∈ ∈ ∗
+!
+Die von M akzeptierte Sprache ist
+L(M) = {x Σ | δ^({z },x) E = }.
+∗ 0
+∈ ∩ ∕ ∅
+24
+Satz
+Zu jedem NEA M existiert ein DEA M mit L(M) = L(M ).
+′ ′
+25
+
+--- SOURCE: 4_Folien_und_Notizen_11.11.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Satz
+Zu jedem NEA M existiert ein DEA M mit L(M) = L(M ).
+′ ′
+25
+Satz
+Sei L Σ eine Sprache. Es gibt einen DEA M mit L = L(M)
+∗
+⊆
+gdw. es eine reguläre Grammatik G mit L = L(G) gibt.
+26
+Satz
+Sei L Σ eine Sprache. Es gibt einen DEA M mit L = L(M)
+∗
+⊆
+gdw. es eine reguläre Grammatik G mit L = L(G) gibt.
+26
+Satz (Pumping-Lemma, uvw-Theorem)
+Sei L eine reguläre Sprache. Dann gibt es eine Zahl n, sodass
+sich alle Wörter x L mit |x| n zerlegen lassen in x = uvw,
+∈ ≥
+sodass folgende Eigenschaften gelten:
+1. |v| 1
+≥
+2. |uv| n
+≤
+3. Für alle i 0 gilt: uviw L.
+≥ ∈
+27
+Logische Struktur der Aussage des Pumping-Lemmas:
+(L regulär) ( n)( x L,|x| n)( u,v,w),
+∃ ∀ ∈ ≥ ∃
+[x = uvw und (1)–(3) gelten]
+⇒
+Aussage(!)
+! "# $
+Nach dem Pumping-Lemma gilt: „L regulär (!)“.
+Die Umkehrung (d.h. „(!) L regulär“) gilt im Allgemeinen
+nicht! ⇒
+Aber: (!) gilt nicht L nic⇒ht regulär. In dieser Form wird das
+Pumping-Lemma meistens verwendet.
+⇒
+28
+
+--- SOURCE: 5_Folien_und_Notizen_18.11.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Kontextfreie Sprachen
+29
+Definition
+Ein (nichtdeterministischer) Kellerautomat (NKA, Pushdown
+Automaton (PDA)) ist ein 7-Tupel
+M = (Z,Σ,Γ,δ,z ,#,E),
+0
+wobei für die einzelnen Komponenten gilt:
+◮ Z ist die endliche Menge der Zustände
+◮ Σ ist das Eingabealphabet
+◮ Γ ist das Kelleralphabet
+◮ δ: Z Σ Γ (Z Γ ∗ ) ist die Überführungsfunktion. Es
+× × P ×
+gilt: δ(z,a,A) ist endlich für alle z Z, a Σ und A Γ
+∈ ∈ ∈
+◮ z 0 Z ist der → Startzustand
+∈
+◮ # Γ ist das unterste Kellersymbol
+∈
+◮ E Z ist die Menge der Endzustände
+⊆
+30
+Erläuterung der Arbeitsweise
+Startkonfiguration:
+M befindet sich am Anfang im Zustand z . Der Eingabekopf
+0
+steht auf dem ersten Zeichen der Eingabe. Der Keller enthält
+lediglich das Symbol #.
+Zustandsübergang:
+δ(z,a,A) (z ,B ,...,B ) bedeutet:
+′ 1 k
+∋
+Ist M im Zustand z, liest das Eingabezeichen a und ist A das
+oberste Kellersymbol, so kann M in den Zustand z übergehen
+′
+und das Kellersymbol A durch die Symbole B ,...,B (B wird
+1 k 1
+oberstes Kellersymbol) ersetzen. Der Eingabekopf wandert eine
+Position nach rechts.
+(z,z Z, a Σ, A,B ,...,B Γ.)
+′ 1 k
+∈ ∈ ∈
+31
+Erläuterung der Arbeitsweise
+Ende der Rechnung:
+◮ Eingabe ganz gelesen
+◮ oder keine Einträge in δ passen zur aktuellen Situation,
+d.h. M stürzt ab, beispielsweise dadurch, dass der Keller
+geleert wurde.
+Akzeptierte Sprache:
+Ein Eingabewort wird akzeptiert, falls ein Zustand aus E
+angenommen wird, nachdem die Eingabe ganz gelesen wurde.
+Genauer: Falls es eine Folge von nichtdeterministischen
+Wahlmöglichkeiten gibt, sodass M einen Endzustand annimmt,
+nachdem die Eingabe ganz gelesen wurde.
+L(M) = {w Σ ∗ | M akzeptiert w}
+∈ 32
+Beispiel 1: L = {anb n | n 1}
+≥
+L = L(M) für den NKA
+M = ({z ,z ,z },{a,b},{#,A,A},δ,z ,{z }),
+0 1 2 0 2
+wobei δ wie folgt definiert ist:
+z a# z A (1)
+0 0
+z aA z AA (2)
+0 0
+z aA →z AA (3)
+0 0
+→
+z bA→ z ε (4)
+0 1
+z bA z ε (5)
+0 2
+→
+z bA → z ε (6)
+1 1
+z bA z ε (7)
+1 2
+→
+→
+33
+Beispiel 1a: L = {anb n | n 1}
+≥
+w = aaabbb
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z aaabbb # (1)
+0
+z aabbb A (2)
+0
+z abbb AA (3)
+0
+z bbb AAA (4)
+0
+z bb AA (6)
+1
+z b A (7)
+1
+z ε ε
+2
+Damit gilt also aaabbb L(M).
+∈
+34
+Beispiel 1b: L = {anb n | n 1}
+≥
+w = aaabb
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z aaabb # (1),(2),(3)
+0
+z bb AAA (4)
+0
+z b AA (6)
+1
+z ε A
+1
+An dieser Stelle ist die Eingabe ganz gelesen und kein
+Endzustand erreicht worden, also gilt: aaabb / L(M).
+∈
+35
+Beispiel 1c: L = {anb n | n 1}
+≥
+w = abb
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z abb # (1)
+0
+z bb A (5)
+0
+z b ε
+2
+An dieser Stelle ist kein weiterer Befehl möglich und die
+Eingabe ist noch nicht vollständig gelesen worden, also gilt:
+abb / L(M).
+∈
+36
+Beispiel 2: L = {w$wR | w {a,b}+}
+∈
+L = L(M) für den NKA
+M = ({z ,z ,z },{a,b,$},{#,A,B,A,B},δ,z ,{z }),
+0 1 2 0 2
+wobei δ wie folgt definiert ist:
+z 0a# z 0A z 0aA z 0AA z 0aA z 0AA z 0aB z 0AB z 0aB z 0AB
+z 0b# z 0B z 0bA z 0BA z 0bA z 0BA z 0bB z 0BB z 0bB z 0BB
+→ z 0$A→z 1A z 0$A→z 1A z 0$B→z 1B z 0$B→z 1B
+→ z 1aA →z 2 ε z 1aA →z 1 ε → →
+→ → z 1bB→ z 2 ε z 1bB→ z 1 ε
+→ →
+→ →
+37
+Beispiel 2a: L = {w$wR | w {a,b}+}
+∈
+w = ab$ba
+Zustand Rest der Eingabe Kellerinhalt
+z ab$ba #
+0
+z b$ba A
+0
+z $ba BA
+0
+z ba BA
+1
+z a A
+1
+z ε ε
+2
+Also ist ab$ba L(M).
+∈
+38
+Beispiel 2b: L = {w$wR | w {a,b}+}
+∈
+w = ab$bb
+Zustand Rest der Eingabe Kellerinhalt
+z ab$bb #
+0
+z b$bb A
+0
+z $bb BA
+0
+z bb BA
+1
+z b A
+1
+keine weitere Bewegung möglich
+Also ist ab$bb / L(M).
+∈
+39
+Satz
+Eine Sprache L ist kontextfrei gdw. es einen NKA M gibt mit
+L = L(M).
+40
+Satz (Pumping-Lemma (uvwxy-Theorem))
+Sei L eine kontextfreie Sprache. Dann gibt es eine Zahl n,
+sodass sich alle Wörter z L mit |z| n zerlegen lassen in
+∈ ≥
+z = uvwxy, sodass folgende Eigenschaften erfüllt sind:
+1. |vx| 1
+≥
+2. |vwx| n
+≤
+3. Für alle i 0 gilt: uviwxiy L
+≥ ∈
+41
+Logische Struktur der Aussage des Pumping-Lemmas:
+(L kontextfrei) ( n N)( z L,|z| n)( u,v,w,x,y),
+∃ ∈ ∀ ∈ ≥ ∃
+[z = uvwxy∧(1)–(3) gelten]
+⇒
+(!)
+! "# $
+Anwendung: Kontraposition des Satzes, also:
+(!) gilt nicht L ist nicht kontextfrei.
+⇒
+42
+Logische Struktur der Aussage des Pumping-Lemmas:
+(L kontextfrei) ( n N)( z L,|z| n)( u,v,w,x,y),
+∃ ∈ ∀ ∈ ≥ ∃
+[z = uvwxy∧(1)–(3) gelten]
+⇒
+(!)
+! "# $
+Anwendung: Kontraposition des Satzes, also:
+(!) gilt nicht L ist nicht kontextfrei.
+⇒
+42
+Logische Struktur der Aussage des Pumping-Lemmas:
+(L kontextfrei) ( n N)( z L,|z| n)( u,v,w,x,y),
+∃ ∈ ∀ ∈ ≥ ∃
+[z = uvwxy∧(1)–(3) gelten]
+⇒
+(!)
+! "# $
+Anwendung: Kontraposition des Satzes, also:
+(!) gilt nicht L ist nicht kontextfrei.
+⇒
+42
+
+--- SOURCE: 6_Folien_und_Notizen_25.11.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken DerintuitiveBerechenbarkeitsbegriff
+Die Chomsky-Hierarchie Berechenbarkeit durch Maschinen
+Reguläre (Typ-3-) Sprachen Turing-Berechenbarkeit
+Endliche Automaten Mehrband-Maschinen
+Nichtdeterministische endliche Zusammensetzung von
+Automaten Turingmaschinen
+Endliche Automaten und Berechenbarkeit in
+Typ-3-Grammatiken Programmiersprachen
+Das Pumping Lemma für Die Programmiersprache LOOP
+reguläre Sprachen Die Programmiersprache WHILE
+Kontextfreie (Typ-2-) Sprachen Die Church’sche These
+Kellerautomaten EntscheidbarkeitundAufzählbarkeit
+Das Pumping-Lemma für Unentscheidbare Probleme
+kontextfreie Sprachen Das Halteproblem
+Typ-1- und Typ-0-Sprachen Der Satz von Rice
+2
+Typ-1- und Typ-0-Sprachen
+40
+Alan Turing
+Geboren: 23. Juni 1912, Maida Vale
+Gestorben: 7. Juni 1954, Wilmslow, Vereinigtes Königreich
+41
+Maschinen
+Tuning
+-
+Konfiguration
+#yabetltilfsinfouiahseu ) :
+Schreib Lese Band
+µ : - -
+b. - - i
+- 2-i-E.be#3----. k ab bzxbc -1
+. - = . - . . .
+FFF Fach
+Leerszmbal YT
+endkontrolle a-
+µ
+mötzegrift * schreib Lese T - Alphabet der Band links neu
+wmuopf' aht - .Zu - staBanndslwlubndlkgpfltilfspeic.br
+auf unbegrenzten Z Kopf >
+kann beiden
+Richtungen bewegt
+Cbd Zugriff
+. , werden
+unbeschränkt)
+Größe
+Abhängig
+Geza
+von ) G) b) R )
+-
+Zustand
+aktuellem sowie
+- Zustzeeualicsts
+Zeichen auf Band Fälschen
+gelesenem
+-
+wechselt inzest .tl
+führt die TM M folgende Aktionen durch , so ,
+schreibt bauolbewgt Kopf
+wechselt in Zustand
+sie neuen
+- nach rechts
+dwcheiuueug
+- sie ersetzt das geleseneZeichen .
+- sie bewegt den Kopf nach
+links
+L
+-- -
+izineöüiloptbewgan,
+zxT-sILZXTXEL.HR )
+8 }
+:
+(D) / NTM
+TM
+Definition
+Eine Turingmaschine (TM) ist ein 7-Tupel
+M = (Z,Σ,Γ,δ,z
+0
+,□,E),
+wobei für die einzelnen Komponenten gilt:
+◮ Z ist die Menge der Zustände
+◮ Σ ist das Eingabealphabet
+◮ Γ Σ ist das Arbeitsalphabet
+⊃
+◮ z 0 Z ist der Startzustand
+∈
+◮ □ Γ \Σ ist das Leerzeichen bzw. Blank
+∈
+◮ E Z ist die Menge der Endzustände
+⊆
+◮ δ ist die Übergangsfunktion
+42
+Definition (Fortsetzung)
+Bei deterministischen Turingmaschinen (DTM, TM) gilt:
+δ: Z Γ Z Γ {L,N,R}
+× × ×
+Bei nichtdeterministischen Turingmaschinen (NTM) gilt:
+→
+δ: Z Γ (Z Γ {L,N,R})
+× P × ×
+→
+43
+Erläuterung der Arbeitsweise
+Startkonfiguration:
+M befindet sich am Anfang im Zustand z . Der Eingabekopf
+0
+steht auf dem ersten Zeichen der Eingabe. Alle Bandzellen
+außerhalb der Eingabe enthalten das Leersymbol.
+Zustandsübergang: (deterministischer Fall)
+δ(z,a) = (z ,b,X) bedeutet:
+′
+Ist M im Zustand z und liest das Eingabezeichen a, so geht M
+in den Zustand z über, ersetzt das Eingabezeichen durch b und
+′
+bewegt den Kopf gemäß X: R ≜ rechts, L ≜ links, N ≜ neutral
+(keine Kopfbewegung).
+(z,z Z, a,b Γ.)
+′
+∈ ∈
+Nichtdeterministische Maschine: mehrere mögliche analoge
+Übergänge.
+44
+Erläuterung der Arbeitsweise
+Ende der Rechnung:
+M hält, sobald ein Zustand aus E angenommen wird.
+Akzeptierte Sprache:
+Ein Eingabewort x wird akzeptiert, falls in der Rechnung von
+M auf x irgendwann ein Zustand aus E angenommen wird.
+L(M) = {w Σ ∗ | M akzeptiert w}
+∈
+45
+Definition
+Eine Konfiguration einer TM M = (Z,Σ,Γ,δ,z
+0
+,□,E) ist ein
+Wort k = uzv, wobei u,v Γ und z Z.
+∗
+∈ ∈
+Startkonfiguration von M bei Eingabe w: z 0 w. (UEE V=w)
+,
+Konfiguration einer TM M ( Momentaufnahme/vollst . Beschreibung) :
+Zustand Z
+- z e
+*
+- Baneliuhalt w = UV ET
+- Kopfposition : auf ersten Zeichen von ✓
+46
+'
+Kmk
+Definition
+M
+Sei M = (Z,Σ,Γ,δ,z
+0
+,□,E) eine TM. Wir definieren eine
+zweistellige Relation auf der Menge der Konfigurationen wie
+⊢M
+folgt für z Z\E:
+∈ K
+"ha
+1
+...a
+m
+zb
+1
+...b
+n
+⊢
+a ...a z cb ...b , falls δ(z,b ) = (z ,c,N), m 0, n 1
+1 m ′ 2 n 1 ′
+≥ ≥
+! a ...a cz b ...b , falls δ(z,b ) = (z ,c,R), m 0, n 2
+1 m ′ 2 n 1 ′
+' ≥ ≥
+( a 1 ...z ′ a m cb 2 ...b n , falls δ(z,b 1 ) = (z ′ ,c,L), m 1, n 1
+≥ ≥
+)
+IBÄIBZI
+k:-. - Olaf 1am Ibntw . - -
+-
+ET
+ni
+:
+* '
+z
+47
+Sonderfälle
+n = 1, Maschine läuft nach rechts:
+-
+a 1 ...a m zb 1 a 1 ...a m cz ′□, falls δ(z,b 1 ) = (z ′ ,c,R), m 0
+⊢ ≥
+Konfiguration wird
+m = 0, Maschine läuft nach links:
+- länger !
+zb 1 ...b n z ′□cb 2 ...b n , falls δ(z,b 1 ) = (z ′ ,c,L), n 1
+⊢ ≥
+Für z E gibt es keine Konfiguration k mit
+- ∈
+a ...a zb ...b k.
+1 m 1 n
+⊢
+C C
+.am#-F
+-
+/
+T
+*
+'
+Z zI E
+48
+Definition
+Die von einer Turingmaschine M = (Z,Σ,Γ,δ,z
+0
+,□,E)
+akzeptierte Sprache ist honhjcsahön
+Start
+✓
+L(M) = {w Σ ∗ | z 0 w ∗ uzv für ein z E und u,v Γ ∗ }.
+∈ ⊢ ∈ ∈
+← Endkoasigaeatioh
+Dabei ist k k , falls k = k oder es k ,...,k gibt mit
+a ∗ e a e 1 n
+⊢
+in
+Konfigurationenübergabin
+k k k k .
+a 1 n e
+schrillen ⊢ ⊢ ··· ⊢ ⊢
+mehreren
+Also: Ein Wort wird akzeptiert, falls irgendwann ein
+Endzustand angenommen wird.
+49
+Melatonin
+k t k ' für eindeutiges W falls Zustand in k aus ZIE
+- ,
+Folgen für k falls Endzustand
+keine
+,
+• .
+nichtdeterministisch
+In
+' "
+möglich Gr h # k
+eindeutig sein)
+(kann
+Endzustand
+keine
+Folgehat für k insbesondere für
+- . ,
+leitet )
+=
+B-uspief.TN die zu einer Eicgabezahl in Binärdarstellung Eins addiert
+,
+und Kopf auf erstes Zeichen bringt
+Nachfolger funktion
+s :
+ht> htt 10110 1011
+IM-
+> ( {zo Zaza ze } {0,13 {0,103,8 1011 1100
+, , , , ,
+zo 0 { ze ] ) wobei crwiefdgt : 1111
+, , ,
+(cid:15482)
+%!%E%\ Beispiel
+:
+(2-0,1
+R)
+10000
+,
+701-01 12-001
+Kopten Zoo → ZOOR (t) 10801
+¥E{
+rechtes Zoll → Zo 1k (2)
+101700
+Zoo → Zn OL (3) Prozent 10 !
+7,0 → 7dL (4) 1¥00 ]
+!I§ -
+^)
+OLG)
+! Zen → z ¥100
+¥
+,
+(6)
+µ z → zehn tlnzzw
+1100
+,
+-
+tt
+0¥50
+ZU → -220L (7)
+HIEß
+zu → Zahl CM
+Eu
+iger ZELTRCD
+→
+1--1
+Definition - - - O ID Ian l ad - - - - - IanK I
+Ein linear-beschränkter Automat (LBA) ist eine NTM
+bewegtsich
+Kopf
+M = (Z,Σ,Γ,δ,z
+0
+,□,E)
+Bereichder
+nur im
+Eingabe
+mit folgenden Eigenschaften:
+◮ Γ \Σ enthält zwei spezielle Symbole ⊲ und ⊳, die so
+genannte linke bzw. rechte Bandendemarkierung
+◮ Falls M ⊲ liest, ist keine Kopfbewegung nach links erlaubt
+◮ Falls M ⊳ liest, ist keine Kopfbewegung nach rechts erlaubt
+◮ Die Bandsymbole ⊲ und ⊳ dürfen nicht durch andere
+Zeichen überschrieben werden
+Die von M akzeptierte Sprache ist
+L(M) = {w Σ ∗ | z 0 ⊲w⊳ ∗ uzv für ein z E und u,v Γ ∗ }.
+∈ ⊢ ∈ ∈
+50
+Satz
+1. Eine Sprache L ist kontextsensitiv (Typ 1) gdw. es einen
+LBA gibt mit L(M) = L
+2. Eine Sprache L ist vom Typ 0 gdw. es eine TM M gibt mit
+L(M) = L gdw. es eine NTM M gibt mit L(M) = L
+51
+Bemerkung
+Es ist unbekannt, ob deterministische LBAen nicht schon die
+-
+Klasse der Typ-1-Sprachen akzeptieren.
+t LBA-Problem: Gibt es für jede Typ-1-Sprache einen
+deterministischen LBA, der sie akzeptiert?
+52
+
+--- SOURCE: 7_Folien_und_Notizen_02.12.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Der intuitive
+Berechenbarkeitsbegriff
+56
+Berechenbarkeit
+Eine Funktion f: N k N heißt berechenbar, falls es einen
+Algorithmus gibt, der f berechnet, d.h. gestartet mit Eingabe
+(n 1 ,...,n k ) N k hält→der Algorithmus nach endlich vielen
+∈
+Schritten mit Ausgabe f(n ,...,n ).
+1 k
+Wir fordern nicht, dass f total sein muss, d.h. für gewisse
+(n 1 ,...,n k ) N k darf f(n 1 ,...,n k ) undefiniert sein. In diesem
+∈
+Fall soll der Algorithmus nicht stoppen (Endlosschleife).
+57
+Ziel: Präzisierung des Berechenbarkeitsbegriffs, d.h. des
+Begriffs Algorithmus.
+Nur so ist es möglich, zu beweisen, dass eine Funktion nicht
+berechenbar ist.
+58
+Beispiel 1
+1, falls n ein Anfangsabschnitt der
+f (n) = Nachkommastellen von π ist
+1
+(
+) 0, sonst
+*
+59
+Beispiel 2
+1, falls n irgendwo in den
+f (n) = Nachkommastellen von π vorkommt
+2
+(
+) 0, sonst
+*
+60
+Beispiel 3
+1, falls 7 in den Nachkommastellen von π irgendwo
+f (n) = mindestens n-mal hintereinander vorkommt
+3
+(
+) 0, sonst
+*
+61
+Beispiel 4
+1, falls die Antwort auf das LBA-Problem „ja“ ist
+f (n) =
+4
+0, sonst
+.
+62
+Turing-Berechenbarkeit
+63
+Definition
+Eine Funktion f: N k N heißt Turing-berechenbar, falls es
+eine DTM M gibt, sodass für alle n 1 ,...,n k ,m N gilt:
+∈
+f(n ,...,n ) = m →
+1 k
+M mit Eingabe bin(n )#...#bin(n )
+1 k
+hält mit □ ⇒ □bin(m)□ □
+··· ···
+auf dem Arbeitsband.
+f(n ,...,n ) undefiniert
+1 k
+M mit Eingabe bin(n )#bin(n )#...#bin(n )
+1 2 k
+⇒
+stoppt nicht.
+bin(n) für n N bezeichnet die Binärdarstellung von n ohne
+∈
+führende Nullen.
+64
+Bemerkung
+Das Eingabealphabet einer TM, die eine Funktion über N im
+obigen Sinne berechnet, ist stets {0,1,#}.
+65
+Definition
+Eine Funktion f: Σ ∆ heißt Turing-berechenbar, falls es
+∗ ∗
+DTM M gibt, sodass für alle x Σ und y ∆ gilt:
+∗ ∗
+∈ ∈
+f(x) = y →
+M mit Eingabe x
+hält ⇒ mit □ □y□ □ auf dem Arbeitsband.
+··· ···
+f(x) undefiniert
+M mit Eingabe x stoppt nicht.
+⇒
+66
+Mehrband-Maschinen
+67
+Definition
+Eine k-Band-DTM ist ein 7-Tupel
+M = (Z,Σ,Γ,δ,z
+0
+,□,E),
+wobei für die einzelnen Komponenten gilt:
+◮ Z, Σ, Γ, z 0 , □ und E sind wie bei einer 1-Band-DTM
+definiert.
+◮ δ: Z Γk Z Γk {L,R,N}k mit
+× × ×
+(i) (ii) (iii) (iv) (v)
+→
+(i)!"a#k$tuel!l"er#$Zusta!n"#d$ !"#$ ! "# $
+(ii) gelesene Zeichen auf den k Bändern
+(iii) neuer Zustand
+(iv) geschriebene Zeichen auf den k Bändern
+(v) Kopfbewegungen auf den k Bändern
+68
+Arbeitsweise
+Die Eingabe steht zunächst auf Band 1. Die Bänder 2 bis k sind
+zunächst leer.
+Die Maschine führt einzelne Schritte durch, analog zu
+gewöhnlichen DTMn.
+Akzeptierte Sprache: Das Eingabewort x wird akzeptiert gdw.
+M erreicht irgendwann einen Endzustand.
+Berechnete Funktion: f(n ,...,n ) = m gdw. M mit Eingabe
+1 k
+bin(n )#...#bin(n ) erreicht irgendwann einen Endzustand
+1 k
+mit bin(m) auf Band 1.
+(Berechnung von Funktionen f: Σ ∆ analog.)
+∗ ∗
+→
+69
+Beispiel
+Folgende 2-Band-Turingmaschine akzeptiert {w#w|w {0,1} ∗ }:
+∈
+M=({z
+0
+,z
+1
+,z
+2
+,z
+e
+},{0,1,#},{0,1,#,□},δ,z
+0
+,□,{z
+e
+}),
+wobei für die Überführungsfunktion gilt:
+z
+0
+0□ z
+0
+00RR 0,1aufBand1werdenaufBand
+z 0 1□ z 0 11RR " 2 kopiert
+→
+→
+z 0 #□ z 1 #□NL # auf Band 1 Zustand z 1
+#
+→ Endlosschleife,⇒falls kein # ge-
+z 0□□ z 0□□NN
+funden wird
+#
+→
+z #0 z #0NL Kopf auf Band 2 nach links
+1 1
+z 1 #1 z 1 #1NL " Kopf auf Band 1 bleibt auf #
+→
+→ 70
+Beispiel (Fortsetzung)
+z 1 #□ z 2 #□RR □ auf Band 2 Zustand z 2
+/
+→ auf beiden Bän⇒dern nach rechts
+z 2 00 z 2 00RR gehen,
+z 2 11 z 2 11RR 0 solangegleicheZeichengefunden
+→ werden
+→
+z 2 01 z 2 01NN verschiedene Zeichen Endlos-
+z 2 10 z 2 10NN 0 schleife
+→ ⇒
+→
+z 2□□ z e□□NN Alles gleich, daher fertig
+/
+→
+71
+Beispiel (Fortsetzung)
+z
+2
+0□ z
+2
+0□NN
+z 2 1□ z 2 1□NN + unterschiedliche Länge End-
+1
+z 2□0 → z 2□0NN 1 1
+1
+losschleife
+,
+z 2□1 → z 2□1NN ⇒
+→ 1 1
+1
+1
+→ -
+z #0 z #0NN
+2 2
+Endlosschleife, falls zweites #
+z #1 z #1NN
+2 2 +
+gefunden wird
+z 2 #□ → z 2 #□NN 1 ,
+→
+1
+-
+→
+72
+Satz
+Sei k > 1. Zu jeder k-Band-DTM M gibt es eine (1-Band-)DTM
+M , sodass L(M) = L(M ) bzw. dass M und M dieselbe
+′ ′ ′
+Funktion berechnen.
+73
+Beweisidee:
+Sei M = (Q,Σ,Γ,δ,z
+0
+,□,E) eine k-Band-Maschine.
+Wir speichern auf dem Band von M hintereinander die Inhalte
+′
+der k Bänder von M, getrennt durch ein spezielles Trennsymbol.
+Wir markieren die Positionen der k Köpfe von M.
+Simulation eines Schrittes von M: Aktualisierung der gelesenen
+Zeichen sowie der Kopfpositionen an k Stellen auf dem Band
+von M .
+′
+Falls notwendig: Bereich für Bänder von M auf dem Band von
+M vergrößern.
+′
+74
+1-Band nach k-Band
+Sei M eine 1-Band-TM. Dann bezeichnet M(i,k) (1 i k),
+≤ ≤
+die k-Band-TM, die auf Band i genau die Aktion ausführt, die
+M auf seinem Band ausführt, und die Bänder
+1,...,i−1,i+1,...,k unverändert lässt. Ist also z.B. in M
+δ(z,a) = (z ,b,X) mit X {L,N,R}, so ergibt sich für M(2,4):
+′
+∈
+δ(z,c
+1
+,a,c
+3
+,c
+4
+) = (z
+′
+,c
+1
+,b,c
+3
+,c
+4
+,N,X,N,N)
+für alle c , c und c aus dem Arbeitsalphabet von M
+1 3 4
+(= Arbeitsalpahbet von M(2,4)).
+Schreibweise: M(i) statt M(i,k), falls k aus dem Kontext klar.
+75
+Spezielle Maschinen
+„Band := Band + 1“
+„Band i := Band i + 1“
+„Band i := Band i−1“ (hier: 0−1 = 0)
+„Band i := 0“
+„Band i := Band j“
+76
+Hintereinanderschaltung von Turingmaschinen
+Seien M
+i
+= (Z
+i
+,Σ,Γ
+i
+,δ
+i
+,z
+0,i
+,□,E
+i
+) mit i = 1,2 zwei DTMn mit
+o.B.d.A. Z Z = .
+1 2
+∩ ∅
+Wir definieren daraus die neue Turingmaschine
+M = (Z
+1
+Z
+2
+,Σ,Γ
+1
+Γ
+2
+,δ,z
+0,1
+,□,E
+2
+),
+∪ ∪
+wobei:
+δ (z,a), falls z Z \E und a Γ
+1 1 1 1
+∈ ∈
+δ(z,a) = δ (z,a), falls z Z und a Γ
+2 2 2
+( ∈ ∈
+) (z 0,2 ,a,N), falls z E 1 und a Γ 1
+∈ ∈
+Bezeichnungen*für M: „M ;M “ oder
+1 2
+Start M M Stopp. Dies lässt sich analog definieren
+1 2
+für mehr als zwei Maschinen.
+→ → →
+77
+Bedingte Verzweigungen
+Start
+ze1
+M M Stopp
+1
+ze2
+M
+2
+Stopp
+bezeichnet die Turingmaschine, die zuerst M simuliert und vom
+Endzustand z von M nach M und vom Endzustand z von
+e1 1 e2
+M nach M übergeht.
+2
+Bezeichnung: „IF M THEN M ELSE M “, falls z = ja und
+1 2 e1
+z = nein.
+e2
+78
+Test auf Null
+Definiere M = ({z
+0
+,z
+1
+,ja,nein},Σ,Γ,δ,z
+0
+,□,{ja,nein}) mit
+◮ Σ {0,1}
+⊇
+◮ Γ {0,1,□}
+⊇
+◮ für die Überführungsfunktion δ gilt:
+δ(z ,a) = (nein,a,N) für a Γ \{0}
+0
+∈
+δ(z ,0) = (z ,0,R)
+0 1
+δ(z
+1
+,□) = (ja,□,L)
+δ(z ,a) = (nein,a,L) für a Γ \{0}
+1
+∈
+Bezeichnung für M: „Band = 0?“.
+Schreibweise: „Band i = 0? “ statt „Band = 0? (i)“.
+79
+Schleifen
+Sei nun M eine beliebige Turingmaschine. „WHILE Band i = 0
+∕
+DO M“ bezeichnet dann die Turingmaschine
+Start
+ja
+Band i = 0? Stopp
+nein
+M
+80
+
+--- SOURCE: 8_Folien_und_Notizen_09.12.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Die Programmiersprache LOOP
+81
+Syntaktische Komponenten von LOOP
+◮ Variablen: x 0 ,x 1 ,x 2 ,...
+Zur besseren Lesbarkeit werden wir auch Variablennamen
+wie z.B. u,v,x,y,z,... benutzen.
+◮ Konstanten: 0,1,2,...
+◮ Operationszeichen: + und −
+◮ Trennsymbole: ; und :=
+◮ Schlüsselwörter: LOOP, DO und END
+82
+Syntax von LOOP
+◮ Sind x i und x j Variablen und c eine Konstante, so sind
+x := x +c und x := x −c
+i j i j
+LOOP-Programme.
+◮ Sind P 1 und P 2 LOOP-Programme, so ist
+P ;P
+1 2
+ein LOOP-Programm.
+◮ Ist P ein LOOP-Programm und x i eine Variable, so ist
+LOOP x DO P END
+i
+ein LOOP-Programm.
+83
+Semantik von LOOP
+Sei P ein LOOP-Programm. P berechnet eine Funktion
+f: N k N wie folgt:
+Zu Beginn der Rechnung befinden sich Eingabewerte
+n 1 ,...→,n k N in den Variablen x 1 ,...,x k . Alle anderen
+∈
+Variablen haben den Startwert 0. P wird wie folgt ausgeführt:
+◮ Durch das Programm „x i := x j +c“ erhält x i den Wert von
+x +c.
+j
+◮ Durch das Programm „x i := x j −c“ erhält x i den Wert von
+x −c, falls dieser nicht negativ ist, ansonsten den Wert 0.
+j
+◮ Bei Ausführung von „P 1 ;P 2 “ wird zunächst P 1 und dann P 2
+ausgeführt.
+◮ Ausführung des Programms „LOOP x i DO P ′ END“:
+P wird so oft ausgeführt, wie der Wert der Variablen x zu
+′ i
+Beginn angibt, d.h. Zuweisungen an x in P haben keinen
+i ′
+Einfluss auf die Anzahl der Wiederholungen.
+84
+Ergebnis der Ausführung von P
+f(n ,...,n ) = Wert von x am Ende der Ausführung.
+1 k 0
+Eine Funktion f: N k N heißt LOOP-berechenbar, falls es ein
+LOOP-Programm gibt, das f wie soeben festgelegt berechnet.
+→
+Beachte: Jedes LOOP-Programm hält nach endlich vielen
+Schritten an. Daraus folgt, dass jede LOOP-berechenbare
+Funktion total ist.
+85
+Einige spezielle LOOP-Programme
+„x := x “
+i j
+steht für
+„x := x +0“.
+i j
+86
+„x := c“ (für eine Konstante c)
+i
+steht für
+„x := x +c“
+i j
+(x ist eine noch nicht benutzte Variable, die also den Wert 0
+j
+hat).
+87
+„IF x = 0 THEN P END“ (für ein LOOP-Programm P)
+i
+steht für
+„x := 1;
+j
+LOOP x DO x := 0 END;
+i j
+LOOP x DO P END.“
+j
+(x ist eine Variable, die in P nicht vorkommt)
+j
+88
+„x := x +x “
+i j k
+steht für
+„x := x ;
+i j
+LOOP x DO x := x +1 END.“
+k i i
+89
+„x := x x “
+i j k
+∗
+steht für
+„x := 0;
+i
+LOOP x DO x := x +x END.“
+k i i j
+90
+Analog:
+„x := x DIV x “
+i j k
+„x := x MOD x “
+i j k
+91
+Die Programmiersprache WHILE
+92
+Syntax von WHILE
+Erweiterung von LOOP:
+neues Schlüsselwort: WHILE
+Syntax: Ist P ein WHILE-Programm und x eine Variable, so ist
+i
+WHILE x = 0 DO P END
+i
+∕
+ein WHILE-Programm.
+93
+Semantik von WHILE
+Die Ausführung von „WHILE x = 0 DO P END“ geschieht so,
+i
+∕
+dass Programm P so lange wiederholt ausgeführt wird, wie der
+Wert von x ungleich Null ist.
+i
+P berechnet f: N k N wie folgt:
+Eingabewerte n ,...,n in Variablen x ,...,x , die anderen
+1 k 1 k
+Variablen haben St→artwert 0.
+f(n ,...,n ) ist der Wert von x nach der Ausführung von P,
+1 k 0
+falls diese stoppt, ansonsten ist f(n ,...,n ) undefiniert.
+1 k
+Eine Funktion f heißt WHILE-berechenbar, falls es ein
+WHILE-Programm gibt, das f wie eben festgelegt berechnet.
+94
+Beispiel
+Das LOOP-Programm
+LOOP x DO P END
+kann simuliert werden durch
+y := x;
+WHILE y = 0 DO y := y−1; P END.
+∕
+(Dabei ist y eine noch nicht verwendete Variable.)
+95
+Korollar
+Jedes WHILE-Programm ist äquivalent zu (d.h. berechnet die
+gleiche Funktion) einem WHILE-Programm, in dem keine
+LOOP-Schleifen vorkommen.
+96
+Erfahrung:
+WHILE-Berechenbarkeit = Java-Berechenbarkeit.
+Satz
+Jede WHILE-berechenbare Funktion ist Turing-berechenbar.
+Satz
+Jede Turing-berechenbare Funktion ist WHILE-berechenbar.
+97
+Die Church’sche These
+98
+WHILE-Berechenbarkeit = Java-Berechenbarkeit
+= C++-Berechenbarkeit
+= Berechenbarkeit in beliebigen
+Programmiersprachen
+= Berechenbarkeit durch Registermaschinen
+= Berechenbarkeit mit Quanten-Computern
+= Markov-Berechenbarkeit
+= λ-Berechenbarkeit
+= µ-Rekursivität
+= Berechenbarkeit in jedem bislang
+untersuchten formalen System
+WHILE-Berechenbarkeit = Turing-Berechenbarkeit
+99
+These von Church
+Eine Funktion ist berechenbar im intuitiven Sinne, gdw. sie
+Turing-berechenbar ist.
+(Nicht beweisbar, da „berechenbar im intuitiven Sinne“ nicht
+formal gefasst.)
+Manchmal auch: „Church-Turing-These“
+100
+Allgemeine Sprechweise:
+berechenbar Turing-berechenbar
+≡
+Weitere gebräuchliche Bezeichnungen:
+rekursiv, partiell rekursiv, total rekursiv
+101
+◮ Es gibt WHILE-berechenbare Funktionen, die nicht
+LOOP-berechenbar sind.
+◮ Es gibt totale WHILE-berechenbare Funktionen, die nicht
+LOOP-berechenbar sind.
+Beispiel: Ackermann-Funktion
+102
+◮ Es gibt WHILE-berechenbare Funktionen, die nicht
+LOOP-berechenbar sind.
+◮ Es gibt totale WHILE-berechenbare Funktionen, die nicht
+LOOP-berechenbar sind.
+Beispiel: Ackermann-Funktion
+102
+
+--- SOURCE: 9_Folien_und_Notizen_16.12.24.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Entscheidbarkeit und
+Aufzählbarkeit
+103
+Definition
+Eine Sprache A Σ heißt entscheidbar, wenn die Funktion
+∗
+⊆
+c : Σ {0,1} mit
+A ∗
+1, falls w A
+→ c (w) := ∈
+A
+0, sonst
+.
+berechenbar ist. c heißt charakteristische Funktion von A.
+A
+104
+Definition
+Eine Sprache A Σ heißt semi-entscheidbar, wenn die
+∗
+⊆
+Funktion
+χ : Σ {0,1} mit
+A ∗
+1, falls w A
+→ χ (w) := ∈
+A
+undefiniert, sonst
+.
+berechenbar ist.
+105
+Satz
+Eine Sprache ist genau dann semi-entscheidbar, wenn sie vom
+Typ 0 ist.
+106
+Definition
+Seien A Σ und B Γ Sprachen.
+∗ ∗
+⊆ ⊆
+A heißt auf B reduzierbar, in Zeichen: A B, falls es eine
+≤
+totale, berechenbare Funktion f: Σ Γ gibt, sodass für alle
+∗ ∗
+w Σ gilt:
+∗
+∈
+w A f(w→) B
+∈ ∈
+⇔
+107
+Lemma
+Ist A B und B entscheidbar, so ist A entscheidbar.
+≤
+Ist A B und B semi-entscheidbar, so ist A semi-entschuldbar.
+≤
+108
+Beobachtung
+Sei A Σ . Es gilt:
+∗
+⊆
+◮ A ist entscheidbar = A ist semi-entscheidbar.
+◮ A ist entscheidbar ⇒ A ist entscheidbar.
+◮ A ist entscheidbar ⇐=⇒A und A sind semi-entscheidbar.
+⇒
+109
+Satz
+Sei A Σ . Es gilt:
+∗
+⊆
+A ist entscheidbar gdw. A und A sind semi-entscheidbar.
+110
+Definition
+Eine Sprache A Σ heißt rekursiv-aufzählbar, falls A = oder
+∗
+⊆ ∅
+falls es eine totale berechenbare Funktion f: N Σ ∗ gibt,
+sodass
+A = {f(0),f(1),f(2),...}. →
+Wir sagen: f zählt A auf.
+111
+Satz
+Eine Sprache ist rekursiv-aufzählbar gdw. sie semi-entscheidbar
+ist.
+112
+Korollar
+Eine Sprache A ist entscheidbar gdw. A und A
+rekursiv-aufzählbar sind.
+113
+
+--- SOURCE: Folien.pdf ---
+Grundlagen der Theoretischen Informatik
+Wintersemester 2024/25
+Prof. Dr. Heribert Vollmer
+InstitutfürTheoretischeInformatik
+LeibnizUniversitätHannover
+Link für Kurzfragen:
+URL: https://pingo.coactum.de/events/739935
+1
+Bitte scannen!
+URL: https://pingo.coactum.de/events/739935
+2
+Organisatorisches
+◮ Vorlesung Mo 10.15h hier in E001, Aufzeichnung in
+Stud.IP (aus WS20/21) werden eine Woche vor Vorlesung
+bereitgestellt
+◮ Materialien in Stud.IP: Skript, Folien
+◮ Übungen in Kleingruppen mit max. 25 TN, Beginn: heute!
+◮ Hausübungen werden dreimal im Semester verteilt;
+vermutlich Mitte Nov., Mitte Dez., Ende Jan.;
+Bearbeitungszeit 2 Wochen;
+elektr. Abgabe (PDF) in Gruppen (1-4 TN)
+◮ Studienleistung: 60% der Punkte der Hausübungen
+bitte E-Mail an Vivian Holzapfel
+◮ Prüfungsleistung: Klausur, 120 min,
+geplanter Termin: 24.02.24, 14h;
+für Lehramtsstudiengänge: mündl. Prüfung, Termin n. V.
+3
+Übungskonzept
+◮ Tutorien in Gruppen (max. 25 TN)
+◮ Vorbereitung: Vorlesung (ev.Aufzeichnung), Skript
+◮ Keine Wiederholung des Vorlesungsinhaltes in der Übung!
+◮ Aufgaben werden in der Übung gerechnet
+◮ Kleingruppen erarbeiten Lösungen
+◮ Lösungen werden in Gesamtgruppe besprochen
+4
+Inhalt
+Sprachen und Grammatiken Typ-1- und Typ-0-Sprachen
+Die Chomsky-Hierarchie DerintuitiveBerechenbarkeitsbegriff
+Reguläre (Typ-3-) Sprachen Berechenbarkeit durch Maschinen
+Endliche Automaten Turing-Berechenbarkeit
+Nichtdeterministische endliche Mehrband-Maschinen
+Automaten Berechenbarkeit in
+Endliche Automaten und Programmiersprachen
+Typ-3-Grammatiken Die Programmiersprache LOOP
+Das Pumping Lemma für Die Programmiersprache WHILE
+reguläre Sprachen Die Church’sche These
+Kontextfreie (Typ-2-) Sprachen EntscheidbarkeitundAufzählbarkeit
+Kellerautomaten Unentscheidbare Probleme
+Das Pumping-Lemma für Das Halteproblem
+kontextfreie Sprachen Der Satz von Rice
+2
+Sprachen und Grammatiken
+3
+Alphabete, Zeichen und Symbole
+Ein Alphabet ist eine endliche, nichtleere Menge. Die Elemente
+eines Alphabets heißen auch Zeichen oder Symbole.
+Wie üblich: Ist M eine Menge, so bezeichnet |M| die Anzahl der
+Elemente von M.
+4
+Wörter und Sprachen
+Sei Σ ein Alphabet.
+Ein Wort über Σ ist eine Folge von Symbolen aus Σ.
+Ein Wort entsteht also durch Hintereinanderschreiben
+(Konkatenation) von Symbolen aus Σ.
+Mit ε wird das leere Wort bezeichnet.
+5
+Wörter und Sprachen
+Die Menge aller Wörter über dem Alphabet Σ bezeichnen wir
+mit Σ . Eine Sprache über Σ ist eine Menge von Wörtern über
+∗
+Σ, also eine Teilmenge von Σ .
+∗
+6
+Konkatenation
+◮ Operation auf Wörtern: Konkatenation bzw.
+Hintereinanderschreiben
+◮ Schreibweise: u v oder kurz uv für Konkatenation der
+◦
+Wörter u und v
+◮ Für ein Wort w und n N ist wn die Konkatenation
+∈
+wn = w w w
+◦ ◦···◦
+n−mal
+◮ Wir definieren: w0 = ε.
+󰁿 󰁾󰁽 󰂀
+7
+Länge
+◮ Die Länge eines Wortes w ist die Anzahl der Symbole in w.
+Schreibweise: |w|
+◮ |ε| = 0.
+◮ Es ist |wn| = n|w|.
+Schreibweise: Σ+ = Σ \{ε}
+∗
+8
+Syntax der Aussagenlogik: Beispiel für EBNF
+φ ::= p | 0 | 1 | ¬φ | (φ∧φ) | (φ∨φ) | (φ φ) | (φ φ),
+wobei p eine aussagenlogische Variable ist→, also ↔
+p {p ,p ,p ,...}.
+1 2 3
+∈
+9
+Definition
+Eine Grammatik ist ein 4-Tupel G = (V,Σ,P,S), wobei:
+◮ V ist eine endliche Menge, die so genannte Menge der
+Variablen
+◮ Σ ist ein Alphabet, das so genannte Terminalalphabet, mit
+V Σ =
+∩ ∅
+◮ P ist die endliche Menge der Produktionen,
+P (V Σ)+ (V Σ)
+∗
+⊆ ∪ × ∪
+◮ S V ist die so genannte Startvariable
+∈
+10
+Definition
+Sei G = (V,Σ,P,S) eine Grammatik und seien u,v (V Σ) .
+∗
+∈ ∪
+Wir definieren eine Relation wie folgt:
+G
+◮ u G v, falls u,v zerlegt werden können in Teilwörter
+u = xyz und v = xy z m ⇒ it x,z (V Σ) und y y ist
+′ ∗ ′
+∈ ∪
+Re⇒gel in P.
+„u geht unter (Anwendung einer Regel in) G unm→ittelbar
+über in v“
+◮ u ∗G v, falls u = v oder es Wörter w 1 ,...,w k
+∈
+(V
+∪
+Σ) ∗
+gibt mit u = w , w w für i = 1,2....,k−1 und
+1 i G i+1
+v =⇒w .
+k
+Wir lassen den Index⇒G weg, falls dieser eindeutig ist.
+Die von G erzeugte Sprache ist L(G) = {w Σ | S w}.
+∈
+∗ ∗G
+Eine Ableitung von w L(G) in k Schritten ist eine Folge
+∈
+(w ,w ,...,w ) mit w = S, w = w und w w⇒ für
+0 1 k 0 k i G i+1
+i = 0,1,...,k−1.
+11
+⇒
+Die Chomsky-Hierarchie
+12
+Noam Chomsky
+7. Dez. 1928, Philadelphia 1957: Syntactic Structures
+∗
+13
+Definition
+◮ Jede Grammatik ist vom Typ 0 (d.h. keine
+Einschränkungen).
+◮ Eine Grammatik ist vom Typ 1 (oder: kontextsensitiv),
+falls für alle ihre Regeln u v gilt: |u| |v|.
+≤
+◮ Eine Typ-1-Grammatik ist vom Typ 2 (oder: kontextfrei),
+falls für alle ihre Regeln u → v gilt, dass u eine einzelne
+Variable ist (d.h. u V).
+∈
+→
+◮ Eine Typ-2-Grammatik ist vom Typ 3 (oder: regulär), falls
+für alle ihre Regeln u v gilt, dass v ein einzelnes
+Terminalzeichen ist (v Σ) oder v aus einem
+∈
+Terminalzeichen gefolg→t von einer Variablen besteht.
+14
+Zurück zur Syntax der Aussagenlogik
+EBNF:
+φ ::= p | 0 | 1 | ¬φ | (φ∧φ) | (φ∨φ) | (φ φ) | (φ φ),
+wobei p eine aussagenlogische Variable ist,
+also p {p ,p ,p ,...}. → ↔
+1 2 3
+∈
+Typ-2-Grammatik:
+S V | C | ¬S | (S∧S) | (S∨S) | (S S) | (S S)
+V p | p | p | ...
+1 2 3
+C→ 0 | 1 → ↔
+→
+Problem: unendliches Alphabet!
+→
+15
+Zurück zur Syntax der Aussagenlogik
+Lösung:
+Für p schreiben wir: pIi.
+i
+G = (Σ ,{S,V,C},P,S), wobei
+AL
+Σ = {p,I,0,1,∧,∨,¬, , ,(,)}
+AL
+S V | C | ¬S | (S∧S) | (S∨S) | (S S) | (S S)
+→ ↔
+P = V p | VI
+󰀻 󰀼
+󰀿 C→ 0 | 1 → ↔ 󰁀
+→
+󰀽 󰀾
+Die syntaktisch korrekten Wörter (also die aussagenlogischen
+→
+Formeln) kann man nun z.B. wie folgt erzeugen:
+S ¬S ¬(S∧S) ¬(VI∧VI) ¬(VI∧VII)
+¬(pI∧pII) ¬(p ∧p )
+1 2
+≃
+⇒ ⇒ ⇒ ⇒
+16
+⇒
+Spezialfall des leeren Wortes
+Bei einer Grammatik G = (V,Σ,P,S) vom Typ 1, 2 oder 3 ist
+unabhängig von den oben genannten Restriktionen die Regel
+S ε zugelassen.
+Ist aber S ε P, so darf es keine Regel in P geben, in der S
+∈
+au→f der rechten Seite vorkommt.
+→
+17
+Eine Sprache L Σ heißt vom Typ 0 (Typ 1, Typ 2, Typ 3),
+∗
+⊆
+falls es eine Typ-0-Grammatik (Typ-1-Grammatik,
+Typ-2-Grammatik, Typ-3-Grammatik) G gibt mit L = L(G).
+18
+Satz
+Das Wortproblem für Typ-1-Sprachen ist „entscheidbar“ , d.h.
+es gibt einen Algorithmus, der bei Eingabe einer
+kontextsensitiven Grammatik G = (V,Σ,P,S) und eines Wortes
+w Σ nach endlicher Zeit mit der Ausgabe „w L(G)“ oder
+∗
+∈ ∈
+„w / L(G)“ anhält.
+∈
+19
+Reguläre Sprachen
+20
+Definition
+Ein (deterministischer) endlicher Automat (kurz: DEA) ist ein
+5-Tupel
+M = (Z,Σ,δ,z ,E),
+0
+wobei für die einzelnen Komponenten gilt:
+◮ Z ist eine endliche Menge, die so genannte Zustandsmenge
+◮ Σ ist ein Alphabet, das so genannte Eingabealphabet,
+Z Σ =
+∩ ∅
+◮ δ: Z Σ Z ist die so genannte Überführungsfunktion
+×
+◮ z 0 Z ist der so genannte Startzustand
+∈
+→
+◮ E Z ist die Menge der so genannten Endzustände
+⊆
+21
+Definition
+Sei M = (Z,Σ,δ,z ,E) ein DEA. Die erweiterte
+0
+Überführungsfunktion δ^ : Z Σ Z ist (induktiv) definiert
+∗
+×
+wie folgt:
+δ^(z,ε) = z für alle z Z →
+∈
+δ^(z,ax) = δ^(δ(z,a),x) für alle z Z, a Σ und x Σ
+∗
+∈ ∈ ∈
+Die von M akzeptierte Sprache ist
+L(M) = {x Σ | δ^(z ,x) E}.
+∗ 0
+∈ ∈
+22
+Definition
+Ein nichtdeterministischer endlicher Automat (kurz: NEA) ist
+ein 5-Tupel
+M = (Z,Σ,δ,z ,E),
+0
+wobei für die einzelnen Komponenten gilt:
+◮ Z, Σ, z 0 und E sind wie bei deterministischen endlichen
+Automaten definiert
+◮ Für die Überführungsfunktion gilt: δ: Z Σ (Z).
+× P
+(Z) ist die Potenzmenge von Z. Für z Z und a Σ ist
+P ∈ ∈
+also δ(z,a) eine Menge von möglichen Folgez→uständen
+23
+Definition
+Wir definieren δ^: (Z) Σ (Z) wie folgt:
+∗
+P × P
+δ^(Z ,ε) = Z für alle Z Z
+′ ′ ′
+⊆
+δ^(Z ,ax) = δ^(δ(z,a),→x) für alle Z Z, a Σ und x Σ .
+′ z ∈ Z ′ ′ ⊆ ∈ ∈ ∗
+󰁖
+Die von M akzeptierte Sprache ist
+L(M) = {x Σ | δ^({z },x) E = }.
+∗ 0
+∈ ∩ ∕ ∅
+24
+Satz
+Zu jedem NEA M existiert ein DEA M mit L(M) = L(M ).
+′ ′
+25
+Satz
+Sei L Σ eine Sprache. Es gibt einen DEA M mit L = L(M)
+∗
+⊆
+gdw. es eine reguläre Grammatik G mit L = L(G) gibt.
+26
+Satz (Pumping-Lemma, uvw-Theorem)
+Sei L eine reguläre Sprache. Dann gibt es eine Zahl n, sodass
+sich alle Wörter x L mit |x| n zerlegen lassen in x = uvw,
+∈ ≥
+sodass folgende Eigenschaften gelten:
+1. |v| 1
+≥
+2. |uv| n
+≤
+3. Für alle i 0 gilt: uviw L.
+≥ ∈
+27
+Logische Struktur der Aussage des Pumping-Lemmas:
+(L regulär) ( n)( x L,|x| n)( u,v,w),
+∃ ∀ ∈ ≥ ∃
+[x = uvw und (1)–(3) gelten]
+⇒
+Aussage(󰂏)
+󰁿 󰁾󰁽 󰂀
+Nach dem Pumping-Lemma gilt: „L regulär (󰂏)“.
+Die Umkehrung (d.h. „(󰂏) L regulär“) gilt im Allgemeinen
+nicht! ⇒
+Aber: (󰂏) gilt nicht L nic⇒ht regulär. In dieser Form wird das
+Pumping-Lemma meistens verwendet.
+⇒
+28
+Kontextfreie Sprachen
+29
+Definition
+Ein (nichtdeterministischer) Kellerautomat (NKA, Pushdown
+Automaton (PDA)) ist ein 7-Tupel
+M = (Z,Σ,Γ,δ,z ,#,E),
+0
+wobei für die einzelnen Komponenten gilt:
+◮ Z ist die endliche Menge der Zustände
+◮ Σ ist das Eingabealphabet
+◮ Γ ist das Kelleralphabet
+◮ δ: Z Σ Γ (Z Γ ∗ ) ist die Überführungsfunktion. Es
+× × P ×
+gilt: δ(z,a,A) ist endlich für alle z Z, a Σ und A Γ
+∈ ∈ ∈
+◮ z 0 Z ist der → Startzustand
+∈
+◮ # Γ ist das unterste Kellersymbol
+∈
+◮ E Z ist die Menge der Endzustände
+⊆
+30
+Erläuterung der Arbeitsweise
+Startkonfiguration:
+M befindet sich am Anfang im Zustand z . Der Eingabekopf
+0
+steht auf dem ersten Zeichen der Eingabe. Der Keller enthält
+lediglich das Symbol #.
+Zustandsübergang:
+δ(z,a,A) (z ,B ,...,B ) bedeutet:
+′ 1 k
+∋
+Ist M im Zustand z, liest das Eingabezeichen a und ist A das
+oberste Kellersymbol, so kann M in den Zustand z übergehen
+′
+und das Kellersymbol A durch die Symbole B ,...,B (B wird
+1 k 1
+oberstes Kellersymbol) ersetzen. Der Eingabekopf wandert eine
+Position nach rechts.
+(z,z Z, a Σ, A,B ,...,B Γ.)
+′ 1 k
+∈ ∈ ∈
+31
+Erläuterung der Arbeitsweise
+Ende der Rechnung:
+◮ Eingabe ganz gelesen
+◮ oder keine Einträge in δ passen zur aktuellen Situation,
+d.h. M stürzt ab, beispielsweise dadurch, dass der Keller
+geleert wurde.
+Akzeptierte Sprache:
+Ein Eingabewort wird akzeptiert, falls ein Zustand aus E
+angenommen wird, nachdem die Eingabe ganz gelesen wurde.
+Genauer: Falls es eine Folge von nichtdeterministischen
+Wahlmöglichkeiten gibt, sodass M einen Endzustand annimmt,
+nachdem die Eingabe ganz gelesen wurde.
+L(M) = {w Σ ∗ | M akzeptiert w}
+∈ 32
+Beispiel 1: L = {anb n | n 1}
+≥
+L = L(M) für den NKA
+M = ({z ,z ,z },{a,b},{#,A,A},δ,z ,{z }),
+0 1 2 0 2
+wobei δ wie folgt definiert ist:
+z a# z A (1)
+0 0
+z aA z AA (2)
+0 0
+z aA →z AA (3)
+0 0
+→
+z bA→ z ε (4)
+0 1
+z bA z ε (5)
+0 2
+→
+z bA → z ε (6)
+1 1
+z bA z ε (7)
+1 2
+→
+→
+33
+Beispiel 1a: L = {anb n | n 1}
+≥
+w = aaabbb
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z aaabbb # (1)
+0
+z aabbb A (2)
+0
+z abbb AA (3)
+0
+z bbb AAA (4)
+0
+z bb AA (6)
+1
+z b A (7)
+1
+z ε ε
+2
+Damit gilt also aaabbb L(M).
+∈
+34
+Beispiel 1b: L = {anb n | n 1}
+≥
+w = aaabb
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z aaabb # (1),(2),(3)
+0
+z bb AAA (4)
+0
+z b AA (6)
+1
+z ε A
+1
+An dieser Stelle ist die Eingabe ganz gelesen und kein
+Endzustand erreicht worden, also gilt: aaabb / L(M).
+∈
+35
+Beispiel 1c: L = {anb n | n 1}
+≥
+w = abb
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z abb # (1)
+0
+z bb A (5)
+0
+z b ε
+2
+An dieser Stelle ist kein weiterer Befehl möglich und die
+Eingabe ist noch nicht vollständig gelesen worden, also gilt:
+abb / L(M).
+∈
+36
+Beispiel 2: L = {w$wR | w {a,b}+}
+∈
+L = L(M) für den NKA
+M = ({z ,z ,z },{a,b,$},{#,A,B,A,B},δ,z ,{z }),
+0 1 2 0 2
+wobei δ wie folgt definiert ist:
+z 0a# z 0A z 0aA z 0AA z 0aA z 0AA z 0aB z 0AB z 0aB z 0AB
+z 0b# z 0B z 0bA z 0BA z 0bA z 0BA z 0bB z 0BB z 0bB z 0BB
+→ z 0$A→z 1A z 0$A→z 1A z 0$B→z 1B z 0$B→z 1B
+→ z 1aA →z 2 ε z 1aA →z 1 ε → →
+→ → z 1bB→ z 2 ε z 1bB→ z 1 ε
+→ →
+→ →
+37
+Beispiel 2a: L = {w$wR | w {a,b}+}
+∈
+w = ab$ba
+Zustand Rest der Eingabe Kellerinhalt
+z ab$ba #
+0
+z b$ba A
+0
+z $ba BA
+0
+z ba BA
+1
+z a A
+1
+z ε ε
+2
+Also ist ab$ba L(M).
+∈
+38
+Beispiel 2b: L = {w$wR | w {a,b}+}
+∈
+w = ab$bb
+Zustand Rest der Eingabe Kellerinhalt
+z ab$bb #
+0
+z b$bb A
+0
+z $bb BA
+0
+z bb BA
+1
+z b A
+1
+keine weitere Bewegung möglich
+Also ist ab$bb / L(M).
+∈
+39
+Satz
+Eine Sprache L ist kontextfrei gdw. es einen NKA M gibt mit
+L = L(M).
+40
+Satz (Pumping-Lemma (uvwxy-Theorem))
+Sei L eine kontextfreie Sprache. Dann gibt es eine Zahl n,
+sodass sich alle Wörter z L mit |z| n zerlegen lassen in
+∈ ≥
+z = uvwxy, sodass folgende Eigenschaften erfüllt sind:
+1. |vx| 1
+≥
+2. |vwx| n
+≤
+3. Für alle i 0 gilt: uviwxiy L
+≥ ∈
+41
+Logische Struktur der Aussage des Pumping-Lemmas:
+(L kontextfrei) ( n N)( z L,|z| n)( u,v,w,x,y),
+∃ ∈ ∀ ∈ ≥ ∃
+[z = uvwxy∧(1)–(3) gelten]
+⇒
+(󰂏)
+󰁿 󰁾󰁽 󰂀
+Anwendung: Kontraposition des Satzes, also:
+(󰂏) gilt nicht L ist nicht kontextfrei.
+⇒
+42
+Typ-1- und Typ-0-Sprachen
+43
+Alan Turing
+Geboren: 23. Juni 1912, Maida Vale
+Gestorben: 7. Juni 1954, Wilmslow, Vereinigtes Königreich
+44
+Definition
+Eine Turingmaschine (TM) ist ein 7-Tupel
+M = (Z,Σ,Γ,δ,z
+0
+,□,E),
+wobei für die einzelnen Komponenten gilt:
+◮ Z ist die Menge der Zustände
+◮ Σ ist das Eingabealphabet
+◮ Γ Σ ist das Arbeitsalphabet
+⊃
+◮ z 0 Z ist der Startzustand
+∈
+◮ □ Γ \Σ ist das Leerzeichen bzw. Blank
+∈
+◮ E Z ist die Menge der Endzustände
+⊆
+◮ δ ist die Übergangsfunktion
+45
+Definition (Fortsetzung)
+Bei deterministischen Turingmaschinen (DTM, TM) gilt:
+δ: Z Γ Z Γ {L,N,R}
+× × ×
+Bei nichtdeterministischen Turingmaschinen (NTM) gilt:
+→
+δ: Z Γ (Z Γ {L,N,R})
+× P × ×
+→
+46
+Erläuterung der Arbeitsweise
+Startkonfiguration:
+M befindet sich am Anfang im Zustand z . Der Eingabekopf
+0
+steht auf dem ersten Zeichen der Eingabe. Alle Bandzellen
+außerhalb der Eingabe enthalten das Leersymbol.
+Zustandsübergang: (deterministischer Fall)
+δ(z,a) = (z ,b,X) bedeutet:
+′
+Ist M im Zustand z und liest das Eingabezeichen a, so geht M
+in den Zustand z über, ersetzt das Eingabezeichen durch b und
+′
+bewegt den Kopf gemäß X: R ≜ rechts, L ≜ links, N ≜ neutral
+(keine Kopfbewegung).
+(z,z Z, a,b Γ.)
+′
+∈ ∈
+Nichtdeterministische Maschine: mehrere mögliche analoge
+Übergänge.
+47
+Erläuterung der Arbeitsweise
+Ende der Rechnung:
+M hält, sobald ein Zustand aus E angenommen wird.
+Akzeptierte Sprache:
+Ein Eingabewort x wird akzeptiert, falls in der Rechnung von
+M auf x irgendwann ein Zustand aus E angenommen wird.
+L(M) = {w Σ ∗ | M akzeptiert w}
+∈
+48
+Definition
+Eine Konfiguration einer TM M = (Z,Σ,Γ,δ,z
+0
+,□,E) ist ein
+Wort k = uzv, wobei u,v Γ und z Z.
+∗
+∈ ∈
+Startkonfiguration von M bei Eingabe w: z w.
+0
+49
+Definition
+Sei M = (Z,Σ,Γ,δ,z
+0
+,□,E) eine TM. Wir definieren eine
+zweistellige Relation auf der Menge der Konfigurationen wie
+⊢
+folgt für z Z\E:
+∈
+a ...a zb ...b
+1 m 1 n
+⊢
+a ...a z cb ...b , falls δ(z,b ) = (z ,c,N), m 0, n 1
+1 m ′ 2 n 1 ′
+≥ ≥
+a ...a cz b ...b , falls δ(z,b ) = (z ,c,R), m 0, n 2
+1 m ′ 2 n 1 ′
+󰀻 ≥ ≥
+󰀿 a 1 ...z ′ a m cb 2 ...b n , falls δ(z,b 1 ) = (z ′ ,c,L), m 1, n 1
+≥ ≥
+󰀽
+50
+Sonderfälle
+n = 1, Maschine läuft nach rechts:
+a 1 ...a m zb 1 a 1 ...a m cz ′□, falls δ(z,b 1 ) = (z ′ ,c,R), m 0
+⊢ ≥
+m = 0, Maschine läuft nach links:
+zb 1 ...b n z ′□cb 2 ...b n , falls δ(z,b 1 ) = (z ′ ,c,L), n 1
+⊢ ≥
+Für z E gibt es keine Konfiguration k mit
+∈
+a ...a zb ...b k.
+1 m 1 n
+⊢
+51
+Definition
+Die von einer Turingmaschine M = (Z,Σ,Γ,δ,z
+0
+,□,E)
+akzeptierte Sprache ist
+L(M) = {w Σ ∗ | z 0 w ∗ uzv für ein z E und u,v Γ ∗ }.
+∈ ⊢ ∈ ∈
+Dabei ist k k , falls k = k oder es k ,...,k gibt mit
+a ∗ e a e 1 n
+⊢
+k k k k .
+a 1 n e
+⊢ ⊢ ··· ⊢ ⊢
+Also: Ein Wort wird akzeptiert, falls irgendwann ein
+Endzustand angenommen wird.
+52
+Definition
+Ein linear-beschränkter Automat (LBA) ist eine NTM
+M = (Z,Σ,Γ,δ,z
+0
+,□,E)
+mit folgenden Eigenschaften:
+◮ Γ \Σ enthält zwei spezielle Symbole ⊲ und ⊳, die so
+genannte linke bzw. rechte Bandendemarkierung
+◮ Falls M ⊲ liest, ist keine Kopfbewegung nach links erlaubt
+◮ Falls M ⊳ liest, ist keine Kopfbewegung nach rechts erlaubt
+◮ Die Bandsymbole ⊲ und ⊳ dürfen nicht durch andere
+Zeichen überschrieben werden
+Die von M akzeptierte Sprache ist
+L(M) = {w Σ ∗ | z 0 ⊲w⊳ ∗ uzv für ein z E und u,v Γ ∗ }.
+∈ ⊢ ∈ ∈
+53
+Satz
+1. Eine Sprache L ist kontextsensitiv (Typ 1) gdw. es einen
+LBA gibt mit L(M) = L
+2. Eine Sprache L ist vom Typ 0 gdw. es eine TM M gibt mit
+L(M) = L gdw. es eine NTM M gibt mit L(M) = L
+54
+Bemerkung
+Es ist unbekannt, ob deterministische LBAen nicht schon die
+Klasse der Typ-1-Sprachen akzeptieren.
+LBA-Problem: Gibt es für jede Typ-1-Sprache einen
+deterministischen LBA, der sie akzeptiert?
+55
+Der intuitive
+Berechenbarkeitsbegriff
+56
+Berechenbarkeit
+Eine Funktion f: N k N heißt berechenbar, falls es einen
+Algorithmus gibt, der f berechnet, d.h. gestartet mit Eingabe
+(n 1 ,...,n k ) N k hält→der Algorithmus nach endlich vielen
+∈
+Schritten mit Ausgabe f(n ,...,n ).
+1 k
+Wir fordern nicht, dass f total sein muss, d.h. für gewisse
+(n 1 ,...,n k ) N k darf f(n 1 ,...,n k ) undefiniert sein. In diesem
+∈
+Fall soll der Algorithmus nicht stoppen (Endlosschleife).
+57
+Ziel: Präzisierung des Berechenbarkeitsbegriffs, d.h. des
+Begriffs Algorithmus.
+Nur so ist es möglich, zu beweisen, dass eine Funktion nicht
+berechenbar ist.
+58
+Beispiel 1
+1, falls n ein Anfangsabschnitt der
+f (n) = Nachkommastellen von π ist
+1
+󰀻
+󰀿 0, sonst
+󰀽
+59
+Beispiel 2
+1, falls n irgendwo in den
+f (n) = Nachkommastellen von π vorkommt
+2
+󰀻
+󰀿 0, sonst
+󰀽
+60
+Beispiel 3
+1, falls 7 in den Nachkommastellen von π irgendwo
+f (n) = mindestens n-mal hintereinander vorkommt
+3
+󰀻
+󰀿 0, sonst
+󰀽
+61
+Beispiel 4
+1, falls die Antwort auf das LBA-Problem „ja“ ist
+f (n) =
+4
+0, sonst
+󰀝
+62
+Turing-Berechenbarkeit
+63
+Definition
+Eine Funktion f: N k N heißt Turing-berechenbar, falls es
+eine DTM M gibt, sodass für alle n 1 ,...,n k ,m N gilt:
+∈
+f(n ,...,n ) = m →
+1 k
+M mit Eingabe bin(n )#...#bin(n )
+1 k
+hält mit □ ⇒ □bin(m)□ □
+··· ···
+auf dem Arbeitsband.
+f(n ,...,n ) undefiniert
+1 k
+M mit Eingabe bin(n )#bin(n )#...#bin(n )
+1 2 k
+⇒
+stoppt nicht.
+bin(n) für n N bezeichnet die Binärdarstellung von n ohne
+∈
+führende Nullen.
+64
+Bemerkung
+Das Eingabealphabet einer TM, die eine Funktion über N im
+obigen Sinne berechnet, ist stets {0,1,#}.
+65
+Definition
+Eine Funktion f: Σ ∆ heißt Turing-berechenbar, falls es
+∗ ∗
+DTM M gibt, sodass für alle x Σ und y ∆ gilt:
+∗ ∗
+∈ ∈
+f(x) = y →
+M mit Eingabe x
+hält ⇒ mit □ □y□ □ auf dem Arbeitsband.
+··· ···
+f(x) undefiniert
+M mit Eingabe x stoppt nicht.
+⇒
+66
+Mehrband-Maschinen
+67
+Definition
+Eine k-Band-DTM ist ein 7-Tupel
+M = (Z,Σ,Γ,δ,z
+0
+,□,E),
+wobei für die einzelnen Komponenten gilt:
+◮ Z, Σ, Γ, z 0 , □ und E sind wie bei einer 1-Band-DTM
+definiert.
+◮ δ: Z Γk Z Γk {L,R,N}k mit
+× × ×
+(i) (ii) (iii) (iv) (v)
+→
+(i)󰁿󰁾a󰁽k󰂀tuel󰁿l󰁾er󰁽󰂀Zusta󰁿n󰁾󰁽d󰂀 󰁿󰁾󰁽󰂀 󰁿 󰁾󰁽 󰂀
+(ii) gelesene Zeichen auf den k Bändern
+(iii) neuer Zustand
+(iv) geschriebene Zeichen auf den k Bändern
+(v) Kopfbewegungen auf den k Bändern
+68
+Arbeitsweise
+Die Eingabe steht zunächst auf Band 1. Die Bänder 2 bis k sind
+zunächst leer.
+Die Maschine führt einzelne Schritte durch, analog zu
+gewöhnlichen DTMn.
+Akzeptierte Sprache: Das Eingabewort x wird akzeptiert gdw.
+M erreicht irgendwann einen Endzustand.
+Berechnete Funktion: f(n ,...,n ) = m gdw. M mit Eingabe
+1 k
+bin(n )#...#bin(n ) erreicht irgendwann einen Endzustand
+1 k
+mit bin(m) auf Band 1.
+(Berechnung von Funktionen f: Σ ∆ analog.)
+∗ ∗
+→
+69
+Beispiel
+Folgende 2-Band-Turingmaschine akzeptiert {w#w|w {0,1} ∗ }:
+∈
+M=({z
+0
+,z
+1
+,z
+2
+,z
+e
+},{0,1,#},{0,1,#,□},δ,z
+0
+,□,{z
+e
+}),
+wobei für die Überführungsfunktion gilt:
+z
+0
+0□ z
+0
+00RR 0,1aufBand1werdenaufBand
+z 0 1□ z 0 11RR 󰀬 2 kopiert
+→
+→
+z 0 #□ z 1 #□NL # auf Band 1 Zustand z 1
+󰀞
+→ Endlosschleife,⇒falls kein # ge-
+z 0□□ z 0□□NN
+funden wird
+󰀞
+→
+z #0 z #0NL Kopf auf Band 2 nach links
+1 1
+z 1 #1 z 1 #1NL 󰀬 Kopf auf Band 1 bleibt auf #
+→
+→ 70
+Beispiel (Fortsetzung)
+z 1 #□ z 2 #□RR □ auf Band 2 Zustand z 2
+󰀞
+→ auf beiden Bän⇒dern nach rechts
+z 2 00 z 2 00RR gehen,
+z 2 11 z 2 11RR 󰀬 solangegleicheZeichengefunden
+→ werden
+→
+z 2 01 z 2 01NN verschiedene Zeichen Endlos-
+z 2 10 z 2 10NN 󰀬 schleife
+→ ⇒
+→
+z 2□□ z e□□NN Alles gleich, daher fertig
+󰀞
+→
+71
+Beispiel (Fortsetzung)
+z
+2
+0□ z
+2
+0□NN
+z 2 1□ z 2 1□NN 󰀼 unterschiedliche Länge End-
+󰁁
+z 2□0 → z 2□0NN 󰁁 󰁁
+󰁁
+losschleife
+󰁀
+z 2□1 → z 2□1NN ⇒
+→ 󰁁 󰁁
+󰁁
+󰁁
+→ 󰀾
+z #0 z #0NN
+2 2
+Endlosschleife, falls zweites #
+z #1 z #1NN
+2 2 󰀼
+gefunden wird
+z 2 #□ → z 2 #□NN 󰁁 󰁀
+→
+󰁁
+󰀾
+→
+72
+Satz
+Sei k > 1. Zu jeder k-Band-DTM M gibt es eine (1-Band-)DTM
+M , sodass L(M) = L(M ) bzw. dass M und M dieselbe
+′ ′ ′
+Funktion berechnen.
+73
+Beweisidee:
+Sei M = (Q,Σ,Γ,δ,z
+0
+,□,E) eine k-Band-Maschine.
+Wir speichern auf dem Band von M hintereinander die Inhalte
+′
+der k Bänder von M, getrennt durch ein spezielles Trennsymbol.
+Wir markieren die Positionen der k Köpfe von M.
+Simulation eines Schrittes von M: Aktualisierung der gelesenen
+Zeichen sowie der Kopfpositionen an k Stellen auf dem Band
+von M .
+′
+Falls notwendig: Bereich für Bänder von M auf dem Band von
+M vergrößern.
+′
+74
+1-Band nach k-Band
+Sei M eine 1-Band-TM. Dann bezeichnet M(i,k) (1 i k),
+≤ ≤
+die k-Band-TM, die auf Band i genau die Aktion ausführt, die
+M auf seinem Band ausführt, und die Bänder
+1,...,i−1,i+1,...,k unverändert lässt. Ist also z.B. in M
+δ(z,a) = (z ,b,X) mit X {L,N,R}, so ergibt sich für M(2,4):
+′
+∈
+δ(z,c
+1
+,a,c
+3
+,c
+4
+) = (z
+′
+,c
+1
+,b,c
+3
+,c
+4
+,N,X,N,N)
+für alle c , c und c aus dem Arbeitsalphabet von M
+1 3 4
+(= Arbeitsalpahbet von M(2,4)).
+Schreibweise: M(i) statt M(i,k), falls k aus dem Kontext klar.
+75
+Spezielle Maschinen
+„Band := Band + 1“
+„Band i := Band i + 1“
+„Band i := Band i−1“ (hier: 0−1 = 0)
+„Band i := 0“
+„Band i := Band j“
+76
+Hintereinanderschaltung von Turingmaschinen
+Seien M
+i
+= (Z
+i
+,Σ,Γ
+i
+,δ
+i
+,z
+0,i
+,□,E
+i
+) mit i = 1,2 zwei DTMn mit
+o.B.d.A. Z Z = .
+1 2
+∩ ∅
+Wir definieren daraus die neue Turingmaschine
+M = (Z
+1
+Z
+2
+,Σ,Γ
+1
+Γ
+2
+,δ,z
+0,1
+,□,E
+2
+),
+∪ ∪
+wobei:
+δ (z,a), falls z Z \E und a Γ
+1 1 1 1
+∈ ∈
+δ(z,a) = δ (z,a), falls z Z und a Γ
+2 2 2
+󰀻 ∈ ∈
+󰀿 (z 0,2 ,a,N), falls z E 1 und a Γ 1
+∈ ∈
+Bezeichnungen󰀽für M: „M ;M “ oder
+1 2
+Start M M Stopp. Dies lässt sich analog definieren
+1 2
+für mehr als zwei Maschinen.
+→ → →
+77
+Bedingte Verzweigungen
+Start
+ze1
+M M Stopp
+1
+ze2
+M
+2
+Stopp
+bezeichnet die Turingmaschine, die zuerst M simuliert und vom
+Endzustand z von M nach M und vom Endzustand z von
+e1 1 e2
+M nach M übergeht.
+2
+Bezeichnung: „IF M THEN M ELSE M “, falls z = ja und
+1 2 e1
+z = nein.
+e2
+78
+Test auf Null
+Definiere M = ({z
+0
+,z
+1
+,ja,nein},Σ,Γ,δ,z
+0
+,□,{ja,nein}) mit
+◮ Σ {0,1}
+⊇
+◮ Γ {0,1,□}
+⊇
+◮ für die Überführungsfunktion δ gilt:
+δ(z ,a) = (nein,a,N) für a Γ \{0}
+0
+∈
+δ(z ,0) = (z ,0,R)
+0 1
+δ(z
+1
+,□) = (ja,□,L)
+δ(z ,a) = (nein,a,L) für a Γ \{0}
+1
+∈
+Bezeichnung für M: „Band = 0?“.
+Schreibweise: „Band i = 0? “ statt „Band = 0? (i)“.
+79
+Schleifen
+Sei nun M eine beliebige Turingmaschine. „WHILE Band i = 0
+∕
+DO M“ bezeichnet dann die Turingmaschine
+Start
+ja
+Band i = 0? Stopp
+nein
+M
+80
+Die Programmiersprache LOOP
+81
+Syntaktische Komponenten von LOOP
+◮ Variablen: x 0 ,x 1 ,x 2 ,...
+Zur besseren Lesbarkeit werden wir auch Variablennamen
+wie z.B. u,v,x,y,z,... benutzen.
+◮ Konstanten: 0,1,2,...
+◮ Operationszeichen: + und −
+◮ Trennsymbole: ; und :=
+◮ Schlüsselwörter: LOOP, DO und END
+82
+Syntax von LOOP
+◮ Sind x i und x j Variablen und c eine Konstante, so sind
+x := x +c und x := x −c
+i j i j
+LOOP-Programme.
+◮ Sind P 1 und P 2 LOOP-Programme, so ist
+P ;P
+1 2
+ein LOOP-Programm.
+◮ Ist P ein LOOP-Programm und x i eine Variable, so ist
+LOOP x DO P END
+i
+ein LOOP-Programm.
+83
+Semantik von LOOP
+Sei P ein LOOP-Programm. P berechnet eine Funktion
+f: N k N wie folgt:
+Zu Beginn der Rechnung befinden sich Eingabewerte
+n 1 ,...→,n k N in den Variablen x 1 ,...,x k . Alle anderen
+∈
+Variablen haben den Startwert 0. P wird wie folgt ausgeführt:
+◮ Durch das Programm „x i := x j +c“ erhält x i den Wert von
+x +c.
+j
+◮ Durch das Programm „x i := x j −c“ erhält x i den Wert von
+x −c, falls dieser nicht negativ ist, ansonsten den Wert 0.
+j
+◮ Bei Ausführung von „P 1 ;P 2 “ wird zunächst P 1 und dann P 2
+ausgeführt.
+◮ Ausführung des Programms „LOOP x i DO P ′ END“:
+P wird so oft ausgeführt, wie der Wert der Variablen x zu
+′ i
+Beginn angibt, d.h. Zuweisungen an x in P haben keinen
+i ′
+Einfluss auf die Anzahl der Wiederholungen.
+84
+Ergebnis der Ausführung von P
+f(n ,...,n ) = Wert von x am Ende der Ausführung.
+1 k 0
+Eine Funktion f: N k N heißt LOOP-berechenbar, falls es ein
+LOOP-Programm gibt, das f wie soeben festgelegt berechnet.
+→
+Beachte: Jedes LOOP-Programm hält nach endlich vielen
+Schritten an. Daraus folgt, dass jede LOOP-berechenbare
+Funktion total ist.
+85
+Einige spezielle LOOP-Programme
+„x := x “
+i j
+steht für
+„x := x +0“.
+i j
+86
+„x := c“ (für eine Konstante c)
+i
+steht für
+„x := x +c“
+i j
+(x ist eine noch nicht benutzte Variable, die also den Wert 0
+j
+hat).
+87
+„IF x = 0 THEN P END“ (für ein LOOP-Programm P)
+i
+steht für
+„x := 1;
+j
+LOOP x DO x := 0 END;
+i j
+LOOP x DO P END.“
+j
+(x ist eine Variable, die in P nicht vorkommt)
+j
+88
+„x := x +x “
+i j k
+steht für
+„x := x ;
+i j
+LOOP x DO x := x +1 END.“
+k i i
+89
+„x := x x “
+i j k
+∗
+steht für
+„x := 0;
+i
+LOOP x DO x := x +x END.“
+k i i j
+90
+Analog:
+„x := x DIV x “
+i j k
+„x := x MOD x “
+i j k
+91
+Die Programmiersprache WHILE
+92
+Syntax von WHILE
+Erweiterung von LOOP:
+neues Schlüsselwort: WHILE
+Syntax: Ist P ein WHILE-Programm und x eine Variable, so ist
+i
+WHILE x = 0 DO P END
+i
+∕
+ein WHILE-Programm.
+93
+Semantik von WHILE
+Die Ausführung von „WHILE x = 0 DO P END“ geschieht so,
+i
+∕
+dass Programm P so lange wiederholt ausgeführt wird, wie der
+Wert von x ungleich Null ist.
+i
+P berechnet f: N k N wie folgt:
+Eingabewerte n ,...,n in Variablen x ,...,x , die anderen
+1 k 1 k
+Variablen haben St→artwert 0.
+f(n ,...,n ) ist der Wert von x nach der Ausführung von P,
+1 k 0
+falls diese stoppt, ansonsten ist f(n ,...,n ) undefiniert.
+1 k
+Eine Funktion f heißt WHILE-berechenbar, falls es ein
+WHILE-Programm gibt, das f wie eben festgelegt berechnet.
+94
+Beispiel
+Das LOOP-Programm
+LOOP x DO P END
+kann simuliert werden durch
+y := x;
+WHILE y = 0 DO y := y−1; P END.
+∕
+(Dabei ist y eine noch nicht verwendete Variable.)
+95
+Korollar
+Jedes WHILE-Programm ist äquivalent zu (d.h. berechnet die
+gleiche Funktion) einem WHILE-Programm, in dem keine
+LOOP-Schleifen vorkommen.
+96
+Erfahrung:
+WHILE-Berechenbarkeit = Java-Berechenbarkeit.
+Satz
+Jede WHILE-berechenbare Funktion ist Turing-berechenbar.
+Satz
+Jede Turing-berechenbare Funktion ist WHILE-berechenbar.
+97
+Die Church’sche These
+98
+WHILE-Berechenbarkeit = Java-Berechenbarkeit
+= C++-Berechenbarkeit
+= Berechenbarkeit in beliebigen
+Programmiersprachen
+= Berechenbarkeit durch Registermaschinen
+= Berechenbarkeit mit Quanten-Computern
+= Markov-Berechenbarkeit
+= λ-Berechenbarkeit
+= µ-Rekursivität
+= Berechenbarkeit in jedem bislang
+untersuchten formalen System
+WHILE-Berechenbarkeit = Turing-Berechenbarkeit
+99
+These von Church
+Eine Funktion ist berechenbar im intuitiven Sinne, gdw. sie
+Turing-berechenbar ist.
+(Nicht beweisbar, da „berechenbar im intuitiven Sinne“ nicht
+formal gefasst.)
+Manchmal auch: „Church-Turing-These“
+100
+Allgemeine Sprechweise:
+berechenbar Turing-berechenbar
+≡
+Weitere gebräuchliche Bezeichnungen:
+rekursiv, partiell rekursiv, total rekursiv
+101
+◮ Es gibt WHILE-berechenbare Funktionen, die nicht
+LOOP-berechenbar sind.
+◮ Es gibt totale WHILE-berechenbare Funktionen, die nicht
+LOOP-berechenbar sind.
+Beispiel: Ackermann-Funktion
+102
+Entscheidbarkeit und
+Aufzählbarkeit
+103
+Definition
+Eine Sprache A Σ heißt entscheidbar, wenn die Funktion
+∗
+⊆
+c : Σ {0,1} mit
+A ∗
+1, falls w A
+→ c (w) := ∈
+A
+0, sonst
+󰀝
+berechenbar ist. c heißt charakteristische Funktion von A.
+A
+104
+Definition
+Eine Sprache A Σ heißt semi-entscheidbar, wenn die
+∗
+⊆
+Funktion
+χ : Σ {0,1} mit
+A ∗
+1, falls w A
+→ χ (w) := ∈
+A
+undefiniert, sonst
+󰀝
+berechenbar ist.
+105
+Satz
+Eine Sprache ist genau dann semi-entscheidbar, wenn sie vom
+Typ 0 ist.
+106
+Definition
+Seien A Σ und B Γ Sprachen.
+∗ ∗
+⊆ ⊆
+A heißt auf B reduzierbar, in Zeichen: A B, falls es eine
+≤
+totale, berechenbare Funktion f: Σ Γ gibt, sodass für alle
+∗ ∗
+w Σ gilt:
+∗
+∈
+w A f(w→) B
+∈ ∈
+⇔
+107
+Lemma
+Ist A B und B entscheidbar, so ist A entscheidbar.
+≤
+Ist A B und B semi-entscheidbar, so ist A semi-entschuldbar.
+≤
+108
+Beobachtung
+Sei A Σ . Es gilt:
+∗
+⊆
+◮ A ist entscheidbar = A ist semi-entscheidbar.
+◮ A ist entscheidbar ⇒ A ist entscheidbar.
+◮ A ist entscheidbar ⇐=⇒A und A sind semi-entscheidbar.
+⇒
+109
+Satz
+Sei A Σ . Es gilt:
+∗
+⊆
+A ist entscheidbar gdw. A und A sind semi-entscheidbar.
+110
+Definition
+Eine Sprache A Σ heißt rekursiv-aufzählbar, falls A = oder
+∗
+⊆ ∅
+falls es eine totale berechenbare Funktion f: N Σ ∗ gibt,
+sodass
+A = {f(0),f(1),f(2),...}. →
+Wir sagen: f zählt A auf.
+111
+Satz
+Eine Sprache ist rekursiv-aufzählbar gdw. sie semi-entscheidbar
+ist.
+112
+Korollar
+Eine Sprache A ist entscheidbar gdw. A und A
+rekursiv-aufzählbar sind.
+113
+Unentscheidbare Probleme
+114
+Erkennen von Endlosschleifen:
+Das Halteproblem ist die Sprache
+H = { M,x | M hält bei Eingabe x}.
+〈 〉
+115
+Gödelisierung
+Gödelisierung = Kodierung von Turing-Maschinen durch
+Binärwörter
+Sei w {0,1} . Dann ist
+∗
+∈
+M, falls w Gödelisierung von M
+M :=
+w
+󰀫 M, sonst (d.h. w ist keine gültige Gödelisierung),
+wobei M ei󰁦ne festgehaltene Turingmaschine ist.
+󰁦
+116
+Definition
+Das spezielle Halteproblem ist die Sprache
+K = {w {0,1} ∗ | M w hält bei Eingabe w}.
+∈
+Das (allgemeine) Halteproblem ist die Sprache
+H = {w#x | M hält bei Eingabe x}.
+w
+117
+Beobachtung
+K und H sind rekursiv-aufzählbar.
+118
+Satz
+K ist nicht entscheidbar.
+119
+Korollar
+K ist nicht rekursiv-aufzählbar.
+120
+Satz
+H ist nicht entscheidbar.
+121
+Satz
+Eine Sprache A Σ ist rekursiv-aufzählbar gdw. es eine
+∗
+⊆
+berechenbare Funktion f: N Σ ∗ gibt, sodass
+A = {f(0),f(1),f(2),...}.
+→
+122
+Satz
+Eine Sprache A Σ ist rekursiv-aufzählbar gdw. es eine
+∗
+⊆
+entscheidbare Sprache B gibt, sodass
+A = {x Σ | y : x,y B}.
+∗
+∈ ∃ 〈 〉 ∈
+123
+Zusammenfassung
+Sei A eine Sprache. Aus den bisherigen Resultaten ergibt sich,
+dass die folgenden Aussagen äquivalent sind:
+1. A ist vom Typ 0.
+2. A = L(M) für eine Turingmaschine M.
+3. A ist semi-entscheidbar.
+4. A ist rekursiv-aufzählbar.
+5. A ist Wertebereich einer totalen berechenbaren Funktion
+oder A = .
+∅
+6. A ist Wertebereich einer (eventuell partiellen)
+berechenbaren Funktion.
+7. A ist Definitionsbereich einer berechenbaren Funktion.
+8. Es gibt eine entscheidbare Sprache B sodass
+A = {x Σ | y : x,y B}.
+∗
+∈ ∃ 〈 〉 ∈
+124
+Korollar
+Die Klasse der Typ-1-Sprachen ist eine echte Teilmenge der
+Klasse der Typ-0-Sprachen.
+125
+Satz von Rice
+Sei die Klasse aller berechenbaren Funktionen. Sei
+R S ⊆ R
+mit = und = . Dann ist die Sprache
+S ∕ ∅ S ∕ R
+C( ) = {w | die von M berechnete Funktion ist aus }
+w
+S S
+nicht entscheidbar.
+126
+Definition
+Das Halteproblem auf leerem Band ist die Sprache
+H = {w | M angesetzt auf leerem Band hält}.
+0 w
+127
+Satz
+H ist nicht entscheidbar.
+0
+128
+Satz
+Sei die Klasse aller berechenbaren Funktionen. Sei
+R S ⊆ R
+mit = und = . Die Sprache C( ) sei definiert als
+S ∕ ∅ S ∕ R S
+C( ) = {w | die von M berechnete Funktion ist aus }.
+w
+S S
+Dann gilt:
+K C( ) oder K C( )
+≤ S ≤ S
+129
+Korollar (Satz von Rice)
+Sei die Klasse aller berechenbaren Funktionen. Sei
+R S ⊆ R
+mit = und = . Dann ist die Sprache
+S ∕ ∅ S ∕ R
+C( ) = {w | die von M berechnete Funktion ist aus }
+w
+S S
+nicht entscheidbar.
+130
+Korollar
+Die folgenden Sprachen sind nicht entscheidbar:
+◮ {w | M w berechnet eine totale Funktion}
+„Das gegebene Programm stürzt nicht ab.“
+◮ {w | M w berechnet eine monotone Funktion}
+◮ {w | M w berechnet eine konstante Funktion}
+◮ {w | M w berechnet die Funktion f(x) = x+1}
+„Das gegebene Programm erfüllt eine gegebene
+Spezifikation“
+(hier im Beispiel: „Das gegebene Programm berechnet die
+Nachfolgerfunktion“).
+131
+
+--- SOURCE: Skript.pdf ---
+Skript zur Vorlesung
+Grundlagen der Theoretischen Informatik
+Prof. Dr. Heribert Vollmer
+Wintersemester 2024/25
+Institut für Theoretische Informatik
+Leibniz Universität Hannover
+Grundlagen der Theoretischen Informatik Inhaltsverzeichnis
+Inhaltsverzeichnis
+1 Sprachen und Grammatiken 3
+2 Die Chomsky-Hierarchie 6
+3 Reguläre Sprachen 8
+3.1 Endliche Automaten . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3.2 Nichtdeterministische endliche Automaten . . . . . . . . . . . . . . . . . . . . . . . 9
+3.3 Endliche Automaten und Typ-3-Grammatiken. . . . . . . . . . . . . . . . . . . . . 11
+3.4 Das Pumping-Lemma . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+4 Kontextfreie Sprachen 15
+4.1 Kellerautomaten . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+4.2 Das Pumping-Lemma für kontextfreie Sprachen . . . . . . . . . . . . . . . . . . . . 19
+5 Typ-1- und Typ-0-Sprachen 20
+6 Der intuitive Berechenbarkeitsbegriff 25
+7 Berechenbarkeit durch Maschinen 27
+7.1 Turing-Berechenbarkeit . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+7.2 Mehrband-Maschinen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+7.3 Zusammensetzung von Turingmaschinen . . . . . . . . . . . . . . . . . . . . . . . . 31
+7.3.1 1-Band nach k-Band . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+7.3.2 Einige spezielle Maschinen . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+7.3.3 Hintereinanderschaltung von Turingmaschinen . . . . . . . . . . . . . . . . 32
+7.3.4 Schleifen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+8 Berechenbarkeit in Programmiersprachen 34
+8.1 Die Programmiersprache WHILE . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+8.2 Die Programmiersprache GOTO . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+9 Die Church’sche These 41
+10 Entscheidbarkeit und Aufzählbarkeit 42
+11 Unentscheidbare Probleme 46
+11.1 Das Halteproblem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+11.2 Entscheidbarkeit in der Chomsky-Hierarchie . . . . . . . . . . . . . . . . . . . . . . 48
+11.3 Der Satz von Rice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+Kommentiertes Literaturverzeichnis 52
+2
+Grundlagen der Theoretischen Informatik 1 Sprachen und Grammatiken
+1 Sprachen und Grammatiken
+EinAlphabet isteineendliche,nichtleereMenge.DieElementeeinesAlphabetsheißenauchZeichen
+oder Symbole.
+Beispiel 1. {0,1}, {a,b,c,...,z,A,...,Z}
+Wie üblich: Ist M eine Menge, so bezeichnet |M| die Anzahl der Elemente von M.
+Sei Σ ein Alphabet. Ein Wort über Σ ist eine Folge von Symbolen aus Σ. Ein Wort entsteht also
+durch Hintereinanderschreiben (Konkatenation) von Symbolen aus Σ.
+Beispiel 2. w =abbab ist ein Wort über dem Alphabet {a,b}.
+Spezialfall: leeres Wort bzw. leere Folge; Bezeichnung: ε
+Die Menge aller Wörter über dem Alphabet Σ bezeichnen wir mit Σ∗.
+Beispiel 3. Für Σ={a,b} ist Σ∗ ={ε,a,b,aa,ab,ba,bb,aaa,aab,aba,...}.
+Eine Sprache über Σ ist eine Menge von Wörtern über Σ, also eine Teilmenge von Σ∗.
+Beispiel 4. Die Menge der deutschen Wörter ist eine Sprache über
+{a,b,c,...,z,A,...,Z,ä,ö,ü,...,ß}
+Die Menge aller C-Programme ist eine Sprache über
+{a,b,c,...,z,A,...,Z,{,},(,),[,],+,∗,−,/,=,.,_,␣}
+Operation auf Wörtern: Konkatenation bzw. Hintereinanderschreiben. Schreibweise: u◦v oder
+kurz uv für Konkatenation der Wörter u und v.
+Beispiel 5. Ist u=ab und v =bab, so ist u◦v =abbab.
+Die Länge eines Wortes w ist die Anzahl der Symbole in w. Schreibweise: |w|
+Beispiel 6. |aba|=3, |ε|=0, |u◦v|=|u|+|v|
+Für ein Wort w und n∈N ist wn die Konkatenation wn =w◦w◦···◦w.
+| {z }
+n-mal
+Wir definieren: w0 =ε. Es ist |wn|=n·|w|. Schreibweise: Σ+ =Σ∗\{ε}.
+SprachensindimAllgemeinenunendlicheObjekte.WirmöchtensieaufendlicheWeisebeschreiben,
+zum Beispiel durch Grammatiken.
+Beispiel 7 (für eine Grammatik).
+3
+Grundlagen der Theoretischen Informatik 1 Sprachen und Grammatiken
+⟨Satz⟩ → ⟨Subjekt⟩⟨Prädikat⟩⟨Objekt⟩
+⟨Subjekt⟩ → ⟨Artikel⟩⟨Attribut⟩⟨Substantiv⟩
+⟨Artikel⟩ → der
+⟨Artikel⟩ → die
+⟨Substantiv⟩ → Hund
+⟨Substantiv⟩ → Katze
+⟨Attribut⟩ → ⟨Adjektiv⟩
+⟨Attribut⟩ → ⟨Adjektiv⟩⟨Attribut⟩
+⟨Adjektiv⟩ → kleine
+⟨Adjektiv⟩ → große
+⟨Prädikat⟩ → jagt
+Ableitbare Sätze:
+Der große Hund jagt die kleine Katze.
+Es können unendlich viele Sätze abgeleitet werden:
+Der große Hund jagt die kleine kleine ... Katze.
+Bestandteile einer Grammatik:
+• Regeln (... → ...)
+• Variablen (⟨...⟩)
+• Startvariable (Startsymbol, ⟨Satz⟩)
+• Eigentliche Symbole, die in abgeleiteten Sätzen vorkommen (sogenannte Terminalsymbole:
+der, die, Hund, ...)
+Formale Fassung:
+Definition 8. Eine Grammatik ist ein 4-Tupel G=(V,Σ,P,S), wobei:
+• V ist eine endliche Menge, die so genannte Menge der Variablen.
+• Σ ist ein Alphabet, das so gennante Terminalalphabet, mit V ∩Σ=∅.
+• P ist die endliche Menge der Produktionen, P ⊆(V ∪Σ)+×(V ∪Σ)∗.
+• S ∈V ist die so genannte Startvariable.
+Zu den Produktionen: Eine Produktion u→v, wobei u und v Folgen über V ∪Σ sind, wird formal
+als Paar (u,v) aufgefasst.
+Die Menge der Produktionen ist also eine Relation
+P ⊆ (V ∪Σ)+ × (V ∪Σ)∗
+| {z } | {z }
+linkeRegelseite, rechteRegelseite
+nichtleeresWortüber(V ∪Σ)
+Schreibweise: u→v ∈P statt (u,v)∈P.
+Definition 9. Sei G=(V,Σ,P,S) eine Grammatik und seien u,v ∈(V ∪Σ)∗. Wir definieren
+eine Relation ⇒ wie folgt:
+G
+u⇒ v,fallsu,v zerlegtwerdenkönneninTeilwörteru=xyz undv =xy′z mitx,z ∈(V ∪Σ)∗
+G
+4
+Grundlagen der Theoretischen Informatik 1 Sprachen und Grammatiken
+und y →y′ ist Regel in P.
+„u geht unter (Anwendung einer Regel in) G unmittelbar über in v.“
+u ⇒∗ v, falls u = v oder es Wörter w ,...,w ∈ (V ∪Σ)∗ gibt mit u = w , w ⇒ w für
+G 1 k 1 i G i+1
+i=1,2,...,k−1 und v =w .
+k
+Wir lassen den Index G weg, falls dieser eindeutig ist.
+Die von G erzeugte Sprache ist L(G)={w ∈Σ∗ |S ⇒∗ w}
+G
+EineAbleitung vonw ∈L(G)ink SchrittenisteineFolge(w ,w ,...,w )mitw =S,w =w
+0 1 k 0 k
+und w ⇒ w für i=0,1,...,k−1.
+i G i+1
+Beispiel 10. G=(V,Σ,P,S) mit V = {S,B,C},
+Σ = {a,b,c},
+P = { S →aSBC, (1)
+S →aBC, (2)
+CB →BC, (3)
+aB →ab, (4)
+bB →bb, (5)
+bC →bc, (6)
+cC →cc } (7)
+Beispiel für eine Ableitung:
+S
+=(1
+⇒
+)
+aSBC
+=(1
+⇒
+)
+aaSBCBC
+=(2
+⇒
+)
+aaaBCBCBC
+=(3
+⇒
+)
+aaaBBCCBC
+=(3
+⇒
+)
+aaaBBCBCC
+=(3
+⇒
+)
+aaaBBBCCC
+=(4
+⇒
+)
+aaabBBCCC
+=(5
+⇒
+)
+aaabbBCCC
+=(5
+⇒
+)
+aaabbbCCC
+=(6
+⇒
+)
+aaabbbcCC
+=(7
+⇒
+)
+aaabbbccC
+=(7
+⇒
+)
+aaabbbccc
+Behauptung L(G)={anbncn |n≥1}.
+Beweis 11.
+„⊇“: Sei n≥1. Es gilt:
+S ⇒∗ an(BC)n (Regeln 1 und 2)
+⇒∗ anBnCn (Regel 3)
+⇒∗ anbncn (Regeln 4 bis 7), also anbncn ∈L(G)
+„⊆“: Sei w ∈L(G), also S ⇒∗ w. Es gilt: Anzahl von a’s in w = Anzahl b’s in w = Anzahl c’s
+in w, da aufgrund der Form der Regeln in P in jedem einzelnen Schritt der Ableitung nur
+Wörter erzeugt werden können mit der Eigenschaft Anzahl a’s = Anzahl b’s + Anzahl
+B’s = Anzahl c’s + Anzahl C’s.
+Außerdem gilt: Alle a’s stehen ganz links. Aufgrund der Regeln 4–7 müssen sich in einem
+Wort, das nur aus Terminalzeichen besteht, daran die b’s und dann die c’s anschließen. ■
+5
+Grundlagen der Theoretischen Informatik 2 Die Chomsky-Hierarchie
+2 Die Chomsky-Hierarchie
+Noam Chomsky (Pionier der Linguistik) teilte Grammatiken in vier Typen ein.
+Definition 12.
+• Jede Grammatik ist vom Typ 0 (d.h. keine Einschränkungen).
+• Eine Grammatik ist vom Typ 1 (oder: kontextsensitiv), falls für alle ihre Regeln u→v
+gilt: |u|≤|v|.
+• Eine Typ-1-Grammatik ist vom Typ 2 (oder: kontextfrei), falls für alle ihre Regeln u→v
+gilt, dass u eine einzelne Variable ist (d.h. u∈V).
+• Eine Typ-2-Grammatik ist vom Typ 3 (oder: regulär), falls für alle ihre Regeln u→ v
+gilt, dass v ein einzelnes Terminalzeichen ist (v ∈Σ) oder v aus einem Terminalzeichen
+gefolgt von einer Variablen besteht.
+Eine Sprache L ⊆ Σ∗ heißt vom Typ 0 (Typ 1, Typ 2, Typ 3), falls es eine Typ-0-Grammatik
+(Typ-1-Grammatik, Typ-2-Grammatik, Typ-3-Grammatik) G gibt mit L=L(G).
+Beispiel 13. Die Grammatik aus obigem Beispiel für {anbncn |n≥1} ist vom Typ 1.
+Beispiel 14 (für eine kontextfreie Grammatik). G = (V,Σ,P,S) mit V = {S}, Σ = {a,b}
+und P ={S →aSb,S →ab}. Es ist L(G)={anbn |n≥1}.
+Zu den Namen „kontextfrei“/„kontextsensitiv“: Bei einer kontextfreien Regel A→x kann in
+einer Ableitung stets (unabhängig vom Kontext) Variable A durch x ersetzt werden.
+Bei kontextsensitiven Grammatiken kann man durch die Regel uAv →uxv erzwingen, dass diese
+Ersetzung nur im „Kontext“ zwischen u und v erfolgen darf.
+Spezialfall des leeren Wortes Das leere Wort kann bei Typ-1-, Typ-2- und Typ-3-Grammatiken
+nicht abgeleitet werden, d.h. es ist immer ε̸∈L(G) (wegen |u|≤|v| für u→v ∈P).
+Deshalb: Abänderung obiger Definition um folgende Sonderregelung: Bei einer Grammatik
+(V,Σ,P,S) vom Typ 1, 2 oder 3 ist unabhängig von den oben genannten Restriktionen die
+Regel S →ε zugelassen.
+Ist aber S →ε∈P, so darf es keine Regel in P geben, in der S auf der rechten Seite vorkommt.1
+Es gilt: Sprachen vom Typ 3 ⊆ Sprachen vom Typ 2
+⊆ Sprachen vom Typ 1
+⊆ Sprachen vom Typ 0
+Alle Inklusionen sind strikt (dazu später).
+Frage: Kann man überhaupt feststellen, ob w ∈L(G), d.h. S ⇒∗ w?
+Wortproblem für Typ-i-Grammatiken (i=0,1,2,3)
+Gegeben: Grammatik G vom Typ i und ein Wort w.
+Frage: Ist w ∈L(G)?
+1DiesistkeineBeschränkungderAllgemeinheit.Siehehierzuauch„TheoretischeInformatik–kurzgefasst“,Uwe
+Schöning,Seite18
+6
+Grundlagen der Theoretischen Informatik 2 Die Chomsky-Hierarchie
+Satz 15. DasWortproblemfürTyp-1-Sprachenistentscheidbar,d.h.esgibteinenAlgorithmus,
+der bei Eingabe einer kontextsensitiven Grammatik G=(V,Σ,P,S) und eines Wortes w ∈Σ∗
+nach endlicher Zeit mit der Ausgabe „w ∈L(G)“ oder „w ̸∈L(G)“ anhält.
+Beweis 16. Für m,n∈N, definiere
+(cid:26) (cid:12) (cid:27)
+Tn = w ∈(V ∪Σ)∗ (cid:12) (cid:12) |w|≤n und w lässt sich aus S in
+m (cid:12) höchstens m Schritten ableiten
+Für alle n gilt:
+Tn ={S}
+0
+Tn =Abl (Tn),
+m+1 n m
+wobei Abl (X)=X∪{w ∈(V ∪Σ)∗ ||w|≤n und w′ ⇒ w für ein w′ ∈X}.
+n G
+Es gilt:
+• Tn ⊆Tn ⊆Tn ⊆···
+0 1 2
+• Tn =Tn ⇒Tn =Tn für alle k >m, also Tn =S Tn
+m m+1 m k m k≥0 k
+• Es gibt nur endlich viele Wörter der Länge ≤n in (V ∪Σ)∗, also ist Tn =S Tn endlich.
+m k≥0 k
+Zusammengenommen: Für jedes n gibt es ein m mit Tn =Tn =Tn =···. Falls w ∈L(G)
+m m+1 m+2
+und |w|=n gilt, so folgt also: w ∈Tn für das obige m.
+m
+Algorithmus:
+Eingabe: G=(V,Σ,P,S), w ∈Σ∗
+n:=|w|
+T :={S}
+Wiederhole
+T :=T
+1
+T :=Abl (T)
+n
+solange, bis w ∈T oder T =T
+1
+Falls w ∈T, dann Ausgabe „w ∈L(G)“
+sonst Ausgabe „w ̸∈L(G)“
+■
+Bemerkung 17.
+• Das Wortproblem für Typ-2- und Typ-3-Sprachen ist entscheidbar.
+• Obiger Beweis funktioniert nicht für Typ-0-Sprachen, da hier nicht Tn = Abl (Tn)
+m+1 n m
+gilt. (Wort der Länge n kann aus längerem Wort durch verkürzende Regel entstehen.)
+Tatsächlich: Das Wortproblem für Typ-0-Sprachen ist nicht entscheidbar (dazu später).
+7
+Grundlagen der Theoretischen Informatik 3 Reguläre Sprachen
+3 Reguläre Sprachen
+3.1 Endliche Automaten
+Startzustand
+Zustand
+a
+z z
+0 1
+b
+a b b a
+b Übergänge
+z z
+3 2
+a
+Endzustand
+Definition 18. Ein (deterministischer) endlicher Automat (kurz: DEA) ist ein 5-Tupel
+M =(Z,Σ,δ,z ,E),
+0
+wobei für die einzelnen Komponenten gilt:
+• Z ist eine endliche Menge, die so genannte Zustandsmenge,
+• Σ ist ein Alphabet, das sogenannte Eingabealphabet, Z∩Σ=∅,
+• z ∈Z ist der so genannte Startzustand,
+0
+• E ⊆Z ist die Menge der so genannten Endzustände,
+• δ: Z×Σ→Z ist die so genannte Überführungsfunktion.
+Bemerkung: δ ist total, d.h. für alle z ∈ Z und a ∈ Σ gibt es ein z′ ∈ Z, so dass
+δ(z,a)=z′.
+Beispiel 19 (zum obigen Automaten). Für M =(Z,Σ,δ,z ,E) gilt:
+0
+• Z ={z ,z ,z ,z }
+0 1 2 3
+• Σ={a,b}
+• E ={z }
+3
+• δ(z,a)=z′, falls es eine mit a beschriftete Kante von z nach z′ gibt und δ(z,b)=z′, falls
+es eine mit b beschriftete Kante von z nach z′. Also:
+δ(z ,a)=z ,
+0 1
+δ(z ,b)=z ,
+0 3
+δ(z ,a)=z , usw.
+1 2
+8
+Grundlagen der Theoretischen Informatik 3 Reguläre Sprachen
+Der Automat ist anfangs im Zustand z . Bei Eingabe eines Wortes ändert sich Zeichen für
+0
+Zeichen der Zustand. Ein Wort heißt akzeptiert, falls der Automat sich nach Eingabe aller
+Zeichen eines Wortes in einem Endzustand befindet.
+Also gilt im obigen Beispiel:
+w =aabaa wird akzeptiert (Zustand z )
+3
+w =aabba wird nicht akzeptiert (Zustand z )
+1
+Formaler ausgedrückt gilt:
+Definition 20. Sei M =(Z,Σ,δ,z ,E) ein DEA. Die erweiterte Überführungsfunktion δ ˆ: Z×
+0
+Σ∗ →Z ist (induktiv) definiert wie folgt:
+δ ˆ(z,ε)=z für alle z ∈Z
+δ ˆ(z,ax)=δ ˆ(δ(z,a),x) für alle z ∈Z,a∈Σ und x∈Σ∗
+Die von M akzeptierte Sprache ist
+L(M)={x∈Σ∗ |δ ˆ(z ,x)∈E}.
+0
+Beispiel 21. Für das obige Beispiel gilt:
+aabaa∈L(M) und aabba̸∈L(M).
+Allgemeiner gilt:
+w ∈L(M)⇔(Anzahl a’s in w−Anzahl b’s in w)≡3 mod 4.
+Wobei gilt: m≡n mod l genau dann, wenn m−n durch l teilbar ist.
+3.2 Nichtdeterministische endliche Automaten
+VoneinemZustandz ausdürfenmehrere(oderauchkeine)mitdemselbenBuchstabenamarkierte
+Pfeile ausgehen (siehe Grafik unten).
+z′
+a
+z
+a
+z′′
+Ein nichtdeterministischerendlicherAutomat hatbeiEingabea im Zustandz mehrereMöglichkei-
+ten. Bei Eingabe eines Wortes gibt es also im Allgemeinen mehrere Rechenwege/Zustandsfolgen.
+Ein Wort heißt akzeptiert, falls einer von diesen in einem Endzustand endet.
+Definition 22. Ein nichtdeterministischer endlicher Automat (kurz: NEA) ist ein 5-Tupel
+M =(Z,Σ,δ,z ,E),
+0
+wobei für die einzelnen Komponenten gilt:
+9
+Grundlagen der Theoretischen Informatik 3 Reguläre Sprachen
+• Z, Σ, z und E sind wie bei deterministischen endlichen Automaten definiert.
+0
+• Für die Überführungsfunktion gilt: δ: Z×Σ→P(Z).
+P(Z) ist die Potenzmenge von Z. Für z ∈Z und a∈Σ ist also δ(z,a) eine Menge von
+möglichen Folgezuständen.
+Wir definieren δ ˆ: P(Z)×Σ∗ →P(Z) wie folgt:
+δ ˆ(Z′,ε)=Z′ für alle Z′ ⊆Z
+δ ˆ(Z′,ax)= [ δ ˆ(δ(z,a),x) für alle Z′ ⊆Z,a∈Σ und x∈Σ∗.
+z∈Z′
+Die von M akzeptierte Sprache ist
+L(M)={x∈Σ∗ |δ ˆ({z },x)∩E ̸=∅}.
+0
+Beispiel 23. Der folgende nichtdeterminischte Automat akzeptiert alle Wörter über {0,1}, die
+mit 00 enden:
+0,1
+0 0
+z z z
+0 1 2
+Satz 24. Zu jedem NEA M existiert ein DEA M′ mit L(M)=L(M′).
+Beweis 25 (Potenzmengenkonstruktion). Sei M = (Z,Σ,δ,z ,E) ein NEA. Konstruiere einen
+0
+DEA, der sich in seinen Zuständen merkt, welche verschiedenen Rechenwege der NEA durchlaufen
+könnte, genauer:
+Setze M′ =(Z′,Σ,δ′,Z′,E′), wobei:
+0
+Z′ =P(Z),
+z′ ={z },
+0 0
+[
+δ′(X,a)= δ(z,a) für alle X ⊆Z,
+z∈X
+E′ ={X ⊆Z |X∩E ̸=∅}
+Dann gilt für alle w =a a ...a ∈Σ∗:
+1 2 n
+w ∈L(M) ⇔ δ ˆ({z },w)∩E ̸=∅
+0
+⇔ es gibt eine Folge von Zustandsmengen Z ,...,Z ⊆Z mit
+1 n
+δ ˆ({z },a )=Z ,δ ˆ(Z ,a )=Z ,...,δ ˆ(Z ,a )=Z und
+0 1 1 1 2 2 n−1 n n
+Z ∩E ̸=∅
+n
+⇔ es gibt Z ,...,Z ⊆ Z mit δ′({z },a ) = Z ,δ′(Z ,a ) =
+1 n 0 1 1 1 2
+Z ,...,δ′(Z ,a ) = Z und Z ∩ E ̸= ∅ (beachte
+2 n−1 n n n
+δ′(X,a)=δ ˆ(X,a))
+⇔ δ ˆ ′({z },w)∩E ̸=∅
+0
+⇔ δ ˆ ′({z },w)∈E′
+0
+⇔ w ∈T(M′)
+■
+10
+Grundlagen der Theoretischen Informatik 3 Reguläre Sprachen
+Beispiel 26. M sei gewählt wie im vorherigen Beispiel. Definiere M′ wie folgt:
+M′ =(Z′,Σ,δ′,z′,E′)
+0
+mit Z′ =(cid:8) ∅,{z },{z },{z },{z ,z },{z ,z },{z ,z },{z ,z ,z } (cid:9) und z′ ={z }.
+0 1 2 0 1 0 2 1 2 0 1 2 0 0
+1
+1
+0
+0
+{z } {z ,z } {z ,z ,z } 0
+0 0 1 0 1 2
+1
+0
+1
+{z ,z }
+0 2
+0,1 0,1
+∅ 1 {z 1 } {z 1 ,z 2 }
+0
+0,1 0
+{z }
+2
+Bemerkung Man kann alle Zustände bis auf auf {z }, {z ,z } und {z ,z ,z } streichen.
+0 0 1 0 1 2
+Beispiel 27. L ={w ∈{0,1}∗ ||w|≥k und der k-letzte Buchstabe von w ist 0} mit k ≥0.
+k
+Folgender NEA mit k+1 Zuständen akzeptiert L :
+k
+0,1
+0 0 0
+0
+z z z ··· z
+0 1 2 k
+1 1 1
+Man kann zeigen, dass es keinen DEA gibt, der L akzeptiert und weniger als 2k Zustände
+k
+besitzt.
+3.3 Endliche Automaten und Typ-3-Grammatiken
+11
+Grundlagen der Theoretischen Informatik 3 Reguläre Sprachen
+Satz 28. Sei L⊆Σ∗ eine Sprache. Es gibt einen DEA M mit L=L(M) genau dann, wenn es
+eine reguläre Grammatik G mit L=L(G) gibt.
+Beweis 29.
+„⇒“: Sei L=L(M) für den DEA M =(Z,Σ,δ,z ,E). Definiere die Grammatik G=(V,Σ,P,S)
+0
+wie folgt:
+V ={A |z ∈Z}
+z
+S =A
+z0
+P enthält folgende Regeln:
+• Falls ε∈L(M) (d.h. falls z ∈E) gilt, so ist A →ε∈P.
+0 z0
+• Falls δ(z ,a)=z ein Übergang in M ist, so ist A →aA ∈P.
+1 2 z1 z2
+Ist außerdem z ∈E, so ist zusätzlich a →a∈P.
+2 z1
+Dann gilt für alle w =a ...a ∈Σ∗:
+1 n
+w ∈L(M) ⇔ es gibt z ,...,z ∈Z mit Z ∈E
+1 n n
+und δ(z ,a )=z für i=1,...,n
+i−1 i i
+⇔ es gibt z ,...,z ∈V mit
+1 n
+z ⇒a A ⇒a a A ⇒...⇒a ...a A ⇒a ...a
+0 1 z1 1 2 z2 1 n−1 zn−1 1 n
+⇔ w ∈L(G)
+Wirmüsseneventuell(fallsA →ε∈P)dafürsorgen,dassA aufkeinerrechtenRegelseite
+z0 z0
+vorkommt (siehe Übungsaufgabe).
+„⇐“: Sei L = L(G) für G = (V,Σ,P,S). Es reicht zu zeigen, dass ein NEA M mit L = L(M)
+existiert. Definiere NEA M =(Z,Σ,δ,z ,E) wie folgt:
+0
+Z ={z |A∈V}∪{z }
+A +
+z =z
+0 S
+(
+{z ,z }, falls S →ε∈P
+E = S +
+{z }, falls S →ε∈/ P
++
+(
+z , falls A→aB ∈P
+δ(z ,a)∋ B
+A z , falls A→a∈P
++
+Dann gilt für w =a ...a ∈Σ∗ mit n≥1:
+1 n
+w ∈L(G) ⇔ es gibt A ,...,A ∈V mit
+1 n−1
+S ⇒a A ⇒a a A ⇒a ...a A ⇒a ...a
+1 1 1 2 2 1 n−1 n−1 1 n
+⇔ es gibt z ,...,z ∈Z mit
+A1 An−1
+δ(z ,a )∋z ,δ(z ,a )∋z ,...,δ(z ,a )∋z
+S 1 A1 A1 2 A2 An−1 n +
+⇔ w =a ...a ∈L(M)
+1 n
+■
+3.4 Das Pumping-Lemma
+Wichtigstes Hilfsmittel, um für eine Sprache nachzuweisen, dass sie nicht regulär ist:
+12
+Grundlagen der Theoretischen Informatik 3 Reguläre Sprachen
+Satz 30 (Pumping-Lemma, uvw-Theorem). Sei L eine reguläre Sprache. Dann gibt es eine
+Zahl n ∈ N, sodass sich alle Wörter x ∈ L mit |x| ≥ n zerlegen lassen in x = uvw, sodass
+folgende Eigenschaften gelten:
+(1) |v|≥1
+(2) |uv|≤n
+(3) Für alle i≥0 gilt: uviw ∈L.
+Beweis 31. Sei M = (Z,Σ,δ,z ,E) ein DEA mit L = L(M). Wähle n = |Z|. Sei nun x ∈ L
+0
+beliebig mit |x|≥n, x=a a ...a , m≥n und a ,...,a ∈Σ.
+1 2 m 1 m
+Definierez =δ(z ,a )füri=1,...,m.Dam+1>|Z|,gilt:Inz ,z ,...,z kommtmindestens
+i i−1 i 0 1 m
+ein Zustand zweimal vor. Sei z der erste solche Zustand, und sei r >l minimal mit z =z .
+l l r
+Setze u=a ...a , v =a ...a und w =a ...a (u=ϵ, falls l=0 und w =ϵ, falls r =m).
+1 l l+1 r r+1 m
+Dann gilt:
+(1) |v|≥1, da r >l.
+(2) |uv|≤n, da l und r am weitesten links gewählt sind mit z =z .
+l r
+(3) Da z =z gilt, folgt: δ ˆ(z ,u)=δ ˆ(z ,uv), also
+l r 0 0
+δ ˆ(z ,uvw)=δ ˆ(δ ˆ(z ,uv),w)=δ ˆ(δ ˆ(z ,u),w)=δ ˆ(z ,uw), also uw ∈L.
+0 0 0 0
+Weiterhin gilt:
+δ ˆ(z ,uvvw)=δ ˆ(δ ˆ(z ,uv),vw)=δ ˆ(δ ˆ(z ,u),vw)=δ ˆ(z ,uvw), also uvvw =uv2w ∈L.
+0 0 0 0
+Analog: uv3w ∈L und uv4w ∈L, ..., allgemein: uviw ∈L für alle i.2
+■
+Logische Struktur der Aussage des Pumping-Lemmas:
+(L regulär)⇒(∃n∈N)(∀x∈L,|x|≥n)(∃u,v,w) [x=uvw und (1)-(3) gelten]
+| {z }
+Aussage(⋆)
+Nach dem Pumping-Lemma gilt: „L regulär⇒(⋆)“.
+Die Umkehrung (d.h. „(⋆)⇒L regulär“) gilt im Allgemeinen nicht!
+Aber: (⋆) gilt nicht ⇒ L nicht regulär. In dieser Form wird das Pumping-Lemma meistens ver-
+wendet.
+Beispiel 32. L={aibi |i≥1} ist nicht regulär.
+Angenommen L wäre regulär. Dann gibt es eine Zahl n∈N, sodass sich alle x∈L mit |x|≥n
+zerlegen lassen in x=uvw, sodass die Aussagen (1)–(3) des Pumping-Lemmas gelten.
+Wir betrachten speziell x=anbn, |x|=2n≥n. Man kann also x zerlegen in x=uvw, sodass
+|v|≥1 (wegen (1)) und |uv|≤n (wegen (2)), d.h. v besteht nur aus a’s.
+Dann gilt: uv2w hat mehr a’s als b’s, also uv2w ̸∈L und das ist ein Widerspruch.
+2SiehehierzuauchJ.Hopcroft,R.Motwani,J.Ullman„EinführungindieAutomatentheorie,FormaleSprache
+undKomplexitätstheorie“,Seite136f.
+13
+Grundlagen der Theoretischen Informatik 3 Reguläre Sprachen
+Beispiel 33. L={0m |m ist eine Quadratzahl} ist nicht regulär.
+AngenommenLwäreregulär.DannexistierteineZahln∈NwieimPumping-Lemma.Betrachte
+nun x=0n2, |x|=n2 ≥n. Man kann x also zerlegen in x=uvw mit (1)–(3) wie im Pumping-
+Lemma. Es gilt dann: 1≤|v|≤|uv|≤n (wegen (1) und (2)) und uv2w ∈L
+Aber: n2 =|x|=|uvw|<|uv2w|≤n2+n<n2+2n+1=(n+1)2, also gilt: |uv2w| liegt echt
+zwischendenbenachbartenQuadratzahlenn2 und(n+1)2;|uv2w|kannalsokeineQuadratzahl
+sein, also uv2w ̸∈L und das ist ein Widerspruch.
+14
+Grundlagen der Theoretischen Informatik 4 Kontextfreie Sprachen
+4 Kontextfreie Sprachen
+4.1 Kellerautomaten
+Endliche Automaten haben keinen Speicher. Ein endlicher Automat kann daher die Sprache
+{anbn |n≥0} nicht akzeptieren, da er beim Lesen des ersten b’s nicht mehr „weiß“, wieviele a’s
+er gelesen hat.
+Die einzige gespeicherte Information ist der momentane Zustand, wobei es jedoch nur endlich viele
+Zustände gibt. DEAs und NEAs können daher nur eine endliche Information speichern.
+Wir erweitern nun dieses Modell um einen unbeschränkten Speicher, auf den aber nur in einge-
+schränkter Form zugegriffen werden kann.
+Lesekkopf,bewegt
+Eingabeband
+sichnachrechts
+a a ... ...
+1 2
+endliche Kontrolle
+Lesekkopf,stehtimmerauf
+(Zustand) D demoberstenKellersymbol
+C
+B
+A
+#
+Keller
+In Abhängigkeit vom
+(1) aktuellen Zustand der endlichen Kontrolle
+(2) gelesenen Zeichen auf dem Eingabeband
+(3) gelesenen obersten Symbol im Keller
+führt der Automat folgende Aktionen durch:
+(4) Die endliche Kontrolle wechselt in einen neuen Zustand.
+(5) Das oberste Kellersymbol wird durch eine Folge von Kellersymbolen ersetzt.
+Bei endlichen Automaten besteht ein Schritt nur aus (1), (2) und (3).
+Definition 34. Ein (nichtdeterministischer) Kellerautomat (NKA, Pushdown Automat (PDA))
+ist ein 7-Tupel
+M =(Z,Σ,Γ,δ,z ,#,E),
+0
+wobei für die einzelnen Komponenten gilt:
+• Z ist die endliche Menge der Zustände,
+15
+Grundlagen der Theoretischen Informatik 4 Kontextfreie Sprachen
+• Σ ist das Eingabealphabet,
+• Γ ist das Kelleralphabet,
+• δ: Z×Σ×Γ→P(Z×Γ∗) ist die Überführungsfunktion. Es gilt: δ(z,a,A) ist endlich für
+alle z ∈Z, a∈Σ und A∈Γ.
+• z ∈Z ist der Startzustand,
+0
+• #∈Γ ist das unterste Kellersymbol,
+• E ⊆Z ist die Menge der Endzustände.
+Intuitive Erläuterung der Arbeitsweise M befindet sich am Anfang im Zustand z . Der Ein-
+0
+gabekopf steht auf dem ersten Zeichen der Eingabe. Der Keller enthält lediglich das Symbol
+#.
+δ(z,a,A)∋(z′,B ,...,B ) (für z,z′ ∈Z, a∈Σ, A,B ,...,B ∈Γ) bedeutet:
+1 k 1 k
+Ist M im Zustand z, liest das Eingabezeichen a und ist A das oberste Kellersymbol, so kann M
+in den Zustand z′ übergehen und das Kellersymbol A durch die Symbole B ,...,B (B wird
+1 k 1
+oberstes Kellersymbol) ersetzen. Der Eingabekopf wandert eine Position nach rechts.
+a a
+z z
+=⇒
+B
+1
+.
+.
+.
+A B
+k
+. .
+. .
+. .
+Rechnung endet, falls
+• die Eingabe ganz gelesen wurde sind
+• oder keine Einträge in δ zur aktuellen Situation passen, z.B. dadurch, dass der Keller geleert
+wurde.
+Ein Eingabewort wird akzeptiert, falls ein Zustand aus E angenommen wird, nachdem die Eingabe
+ganz gelesen wurde. Genauer: Falls es eine Folge von nichtdeterministischen Wahlmöglichkeiten
+gibt, sodass M einen Endzustand annimmt, nachdem die Eingabe ganz gelesen wurde.
+L(M)={w ∈Σ∗ |M akzeptiert w}
+Schreibweise: zaA→z′B ...B statt δ(z,a,A)∋(z′,B ,...,B ).
+1 k 1 k
+Beispiel 35. L={anbn |n≥1}. Es gilt L=L(M) für
+M =(cid:0) {z ,z ,z },{a,b},{#,A,A},δ,z ,{z } (cid:1) ,
+0 1 2 0 2
+16
+Grundlagen der Theoretischen Informatik 4 Kontextfreie Sprachen
+wobei gilt:
+z a#→z A (1)
+0 0
+z aA→z AA (2)
+0 0
+z aA→z AA (3)
+0 0
+z bA→z ε (4)
+0 1
+z bA→z ε (5)
+0 2
+z bA→z ε (6)
+1 1
+z bA→z ε (7)
+1 2
+M arbeitet wie folgt auf Eingabe w =aaabbb:
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z aaabbb # (1)
+0
+z aabbb A (2)
+0
+z abbb AA (3)
+0
+z bbb AAA (4)
+0
+z bb AA (6)
+1
+z b A (7)
+1
+z ε ε
+2
+Damit gilt also aaabbb∈L(M).
+Für die Eingabe w =aaabb erhält man:
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z aaabb # (1),(2),(3)
+0
+z bb AAA (4)
+0
+z b AA (6)
+1
+z – A
+1
+An dieser Stelle ist die Eingabe ganz gelesen und kein Endzustand erreicht worden, also gilt:
+aaabb̸∈L(M).
+Für die Eingabe w =abb erhält man:
+Zustand Rest der Eingabe Kellerinhalt Befehl
+z abb # (1)
+0
+z bb A (5)
+0
+z b ε
+2
+An dieser Stelle ist kein weiterer Befehl möglich und die Eingabe ist noch nicht vollständig
+gelesen worden, also gilt: abb̸∈L(M).
+Beispiel 36. L = {w$wR | w ∈ {a,b}+}, wobei wR = „w rückwärts“, also wR = a ...a a ,
+n 2 1
+falls w =a a ...a .
+1 2 n
+17
+Grundlagen der Theoretischen Informatik 4 Kontextfreie Sprachen
+L=L(M) für den NKA
+M =(cid:0) {z ,z ,z },{a,b,$},{#,A,B,A,B},δ,z ,{z } (cid:1) ,
+0 1 2 0 2
+wobei δ wie folgt definiert ist:
+z a#→z A z aA→z AA z aA→z AA z aB→z AB z aB→z AB
+0 0 0 0 0 0 0 0 0 0
+z b#→z B z bA→z BA z bA→z BA z bB→z BB z bB→z BB
+0 0 0 0 0 0 0 0 0 0
+z $A→z A z $A→z A z $B→z B z $B→z B
+0 1 0 1 0 1 0 1
+z aA→z ε z aA→z ε
+1 2 1 1
+z bB→z ε z bB→z ε
+1 2 1 1
+M arbeitet wie folgt auf der Eingabe w =ab$ba:
+Zustand Rest der Eingabe Kellerinhalt
+z ab$ba #
+0
+z b$ba A
+0
+z $ba BA
+0
+z ba BA
+1
+z a A
+1
+z ε ε
+2
+Also ist ab$ba∈L(M).
+Bei Eingabe ab$bb arbeitet M wie folgt:
+Zustand Rest der Eingabe Kellerinhalt
+z ab$bb #
+0
+z b$bb A
+0
+z $bb BA
+0
+z bb BA
+1
+z b A
+1
+keine weitere Bewegung möglich
+Also ist ab$bb̸∈L(M).
+Beispiel 37. L={wwR |w ∈{a,b}+}
+Im vorherigen Beispiel ist die dritte Zeile zu ersetzen durch:
+z aA→z ε z bB→z ε z aA→z ε z bB→z ε
+0 1 0 1 0 2 0 2
+Satz 38. EineSpracheListkontextfreigenaudann,wenneseinenNKAM gibtmitL=L(M).
+Beweis 39. Wird in der Vorlesung „Formale Sprachen“ gebracht.3
+3SiehehierzuauchJ.Hopcroft,R.Motwani,J.Ullman.„EinführungindieAutomatentheorie,FormaleSprachen
+undKomplextätstheorie“S.248ff.
+18
+Grundlagen der Theoretischen Informatik 4 Kontextfreie Sprachen
+Bemerkung 40. Es gibt auch deterministische Kellerautomaten (DKA). Obiger Satz gilt nicht
+für deterministische Kellerautomaten.3
+Zum Beispiel kann die kontextfreie Sprache {wwR |w ∈{a,b}+} von keinem DKA akzeptiert
+werden. DKAen akzeptieren also nur eine echte Teilmenge der kontextfreien Sprachen.
+4.2 Das Pumping-Lemma für kontextfreie Sprachen
+Wichtigstes Hilfsmittel, um nachzuweisen, dass eine Sprache nicht kontextfrei ist.
+Satz 41 (Pumping-Lemma, uvwxy-Theorem). Sei L eine kontextfreie Sprache. Dann gibt
+es eine Zahl n ∈ N, sodass sich alle Wörter z ∈ L mit |z| ≥ n zerlegen lassen in z = uvwxy,
+sodass folgende Eigenschaften erfüllt sind:
+(1) |vx|≥1
+(2) |vwx|≤n
+(3) Für alle i≥0 gilt: uviwxiy ∈L
+Struktur des Satzes:
+(L kontextfrei)⇒(∃n∈N)(∀z ∈L,|z|≥n)(∃u,v,w,x,y) [z =uvwxy∧(1)–(3) gelten]
+| {z }
+(⋆)
+Anwendung: Kontraposition des Satzes, also:
+(⋆) gilt nicht⇒L ist nicht kontextfrei4
+Beispiel 42. L={aibici |i≥1} ist nicht kontextfrei.
+Angenommen L wäre kontextfrei. Dann gibt es eine Zahl n ∈ N, sodass sich alle z ∈ L mit
+|z|≥n zerlegen lassen in z =uvwxy, sodass die Aussagen (1)–(3) des Pumping-Lemmas gelten.
+Wir betrachten speziell z = anbncn, |z| = 3n ≥ n. Man kann also z zerlegen in z = uvwxy,
+sodass
+• |vx|≥1
+• |vwx|≤n, d.h. vwx kann höchstens zwei der 3 Buchstaben a, b oder c enthalten.
+z = a ... a b ... b c ... c =anbncn
+uwx=
+Dann gilt: In uv2wx2y ist die Anzahl der a’s, b’s und c’s nicht gleich. Also ist uv2wx2y ̸∈ L
+und das ist ein Widerspruch zur Annahme.
+4SiehehierzuU.Schöning„TheoretischeInformatikkurzgefasst“Seite57ff.
+19
+Grundlagen der Theoretischen Informatik 5 Typ-1- und Typ-0-Sprachen
+5 Typ-1- und Typ-0-Sprachen
+Kellerautomaten haben unbegrenzten Speicher, auf den sie aber nur eingeschränkt zugreifen
+können. Verallgemeinerung: Hilfsspeicher an beliebiger Stelle lesbar und modifizierbar.
+Turingmaschine:
+Bandzellen Schreib-Lese-Kopf
+□ □ □ □ a b c $ a b $ 0 0 1 $ □ □ □ □
+unendliches Band
+endliche Kontrolle
+□= Leerzeichen (Blank)
+(Zustand)
+In Abhängigkeit vom
+(1) aktuellen Zustand der endlichen Kontrolle
+(2) gelesenen Zeichen auf dem Eingabeband
+führt die Maschine folgende Aktionen durch:
+(1) Sie wechselt in einen neuen Zustand.
+(2) Sie ersetzt das gelesene Zeichen durch ein neues Zeichen.
+(3) Sie bewegt den Schreib-Lese-Kopf.
+Definition 43. Eine Turingmaschine (TM) ist ein 7-Tupel
+M =(Z,Σ,Γ,δ,z ,□,E),
+0
+wobei für die einzelnen Komponenten gilt:
+• Z ist die Menge der Zustände,
+• Σ ist das Eingabealphabet,
+• Γ⊃Σ ist das Arbeitsalphabet,
+• z ∈Z ist der Startzustand,
+0
+• □∈Γ\Σ ist das Leerzeichen bzw. Blank
+• E ⊆Z ist die Menge der Endzustände.
+• δ ist die Übergangsfunktion.
+Bei deterministischen Turingmaschinen (DTM, TM) gilt:
+δ: Z×Γ→Z×Γ×{L,N,R}
+Bei nichtdeterministischen Turingmaschinen (NTM) gilt:
+δ: Z×Γ→P(Z×Γ×{L,N,R})
+20
+Grundlagen der Theoretischen Informatik 5 Typ-1- und Typ-0-Sprachen
+Informelle Arbeitsweise: δ(z,a)=(z′,b,X) und X ∈{L,N,R} bedeutet:
+Befindet sich M im Zustand z und liest der Schreib-Lese-Kopf das Zeichen a, so geht M in den
+Zustand z′ über, ersetzt das Zeichen a durch b und bewegt den Kopf
+
+nach rechts, falls X =R
+
+nach links, falls X =L
+nicht, falls X =N (neutral)
+Für eine NTM gilt: δ(z,a)∋(z′,bX) bedeutet:
+Befindet sich M im Zustand z und liest der Schreib-Lese-Kopf das Zeichen a, so kann M in den
+Zustand z′ übergehen, ersetzt das Zeichen a durch b und bewegt den Kopf
+
+nach rechts, falls x=R
+
+nach links, falls x=L
+nicht, falls x=N (neutral)
+M hält an, sobald ein Zustand aus E angenommen wird.
+Wir fassen als Nächstes die Arbeitsweise einer Turingmaschine formaler:
+Definition 44. Eine Konfiguration einer TM M = (Z,Σ,Γ,δ,z ,□,E) ist ein Wort k = uzv,
+0
+wobei u,v ∈Γ∗ und z ∈Z.
+Eine Konfiguration entspricht einer „Momentanaufnahme“ der TM, also der vollständigen Be-
+schreibung ihrer Situation zu einem Zeitpunkt.
+k =uzv bedeutet:
+• M ist im Zustand z.
+• Der Teil des Bandes, der die Eingabe enthält oder bisher vom Kopf von M besucht wurde,
+ist uv.
+• Der Kopf steht auf dem ersten Zeichen von v.
+Start der Arbeitsweise:
+• Die Kontrolle im Zustand z .
+0
+• Auf dem Band befindet sich ein Wort x.
+• Der Kopf steht auf dem ersten Zeichen von x.
+Formal: Die Startkonfiguration von M bei Eingabe x ist z x.
+0
+Seien k und k Konfigurationen.
+1 2
+Frage: Wann geht k aus k durch einen Rechenschritt von M hervor (in Zeichen: k ⊢k )?
+2 1 1 2
+Definition 45. Sei M =(Z,Σ,Γ,δ,z ,□,E) eine TM. Wir definieren eine zweistellige Relation
+0
+⊢ auf der Menge der Konfigurationen wie folgt für z ∈Z\E:
+
+a ...a z′cb ...b , falls δ(z,b )=(z′,c,N), m≥0, n≥1
+ 1 m 2 n 1
+a ...a zb ...b = a ...a cz′b ...b , falls δ(z,b )=(z′,c,R), m≥0, n≥2
+1 m 1 n 1 m 2 n 1
+a ...z′a cb ...b , falls δ(z,b )=(z′,c,L), m≥1, n≥1
+1 m 2 n 1
+Sonderfälle:
+21
+Grundlagen der Theoretischen Informatik 5 Typ-1- und Typ-0-Sprachen
+• n=1, Maschine läuft nach rechts:
+a ...a zb ⊢a ...a cz′□, falls δ(z,b )=(z′,c,R), m≥0
+1 m 1 1 m 1
+• m=0, Maschine läuft nach links:
+zb ...b ⊢z′□cb ...b , falls δ(z,b )=(z′,c,L), n≥1
+1 n 2 n 1
+Für z ∈E gibt es keine Konfiguration k mit
+a ...a zb ...b ⊢k.
+1 m 1 n
+Für NTM M gilt: Überall „δ(z,b )=(...)“ ersetzen durch „δ(z,b )∋(...)“.
+1 1
+Also gilt:
+• Ist M eine DTM und k eine Konfiguration, so gibt es höchstens eine Konfiguration k′ mit
+k ⊢k′.
+• Ist M eine NTM und k eine Konfiguration, so gibt es eine beliebige endliche Anzahl von k′
+mit k ⊢k′.
+Konfigurationen verlängern sich, falls der Kopf eine noch nicht besuchte Bandzelle betritt.
+Schreibweise: Statt δ(z,a)=(z′,b,x) oder δ(z,a)∋(z′,b,x) kurz: za→z′bx.
+Beispiel 46. FolgendeTMaddiertzueineraufdemBandbefindlichenZahlxinBinärdarstellung
+(x∈{0,1}∗) die Zahl 1 und positioniert anschließend den Kopf auf das erste Zeichen der Zahl:
+M =({z ,z ,z ,z },{0,1},{0,1,□},δ,z ,□,{z })
+0 1 2 e 0 e
+wobei:
+z 0 → z 0R 
+0 0 
+z 1 → z 1R Kopf ans rechte Eingabeende positionieren
+0 0
+z □ → z □L 
+0 1
+z 0 → z 1L  Nach links laufen bis zur ersten Null, dabei
+1 2 
+z 1 → z 0L alle 1 durch 0 ersetzen. Falls keine 0 gefunden
+1 1
+z □ → z 1N  wird, links 1 anhängen und anhalten.
+1 e
+z 0 → z 0L 
+2 2 
+z 1 → z 1L Kopf ans linke Eingabeende positionieren
+2 2
+z □ → z □R 
+2 e
+Beispiel für eine Rechnung:
+z 101 ⊢ 1z 01 ⊢ 10z 1 ⊢ 101z □ ⊢ 10z 1□ 1z 00□
+0 0 0 0 1 1
+⊢ z 110□ ⊢ z □110□ ⊢ □z 110□
+2 2 e
+Definition 47. Die von einer Turingmaschine M =(Z,Σ,Γ,δ,z ,□,E) akzeptierte Sprache ist
+0
+L(M)={w ∈Σ∗ |z w ⊢∗ uzv für ein z ∈E und u,v ∈Γ∗}.
+0
+22
+Grundlagen der Theoretischen Informatik 5 Typ-1- und Typ-0-Sprachen
+Dabei ist k ⊢k , falls k =k oder es k ,...,k gibt mit
+a e a e 1 n
+k ⊢k ⊢···⊢k ⊢k .
+a 1 n e
+Also: Ein Wort wird akzeptiert, falls irgendwann ein Endzustand angenommen wird.
+Definition 48. Ein linear-beschränkter Automat (LBA) ist eine NTM
+M =(Z,Σ,Γ,δ,z ,□,E)
+0
+mit folgenden Eingenschaften:
+• Γ\Σ enthält zwei spezielle Symbole ▷ und ◁, die so genannte linke bzw. rechte Bandende-
+markierung.
+• Falls M ▷ liest, ist keine Kopfbewegung nach links erlaubt.
+• Falls M ◁ liest, ist keine Kopfbewegung nach rechts erlaubt.
+• Die Bandsymbole ▷ und ◁ dürfen nicht durch andere Zeichen überschrieben werden.
+Die von M akzeptierte Sprache ist
+L(M)={w ∈Σ∗ |z ▷w◁⊢∗ uzv für ein z ∈E und u,v ∈Γ∗}.
+0
+Also:EinWortwheißtakzeptiert,fallsbeiEingabe▷w◁dieMaschineirgendwanneinenEndzustand
+annimmt. Der Kopf bewegt sich niemals aus dem Bereich des Wortes ▷w◁ heraus.
+Die Anzahl der besuchten Bandzellen ist also |▷w◁|, also linear abhängig von der Eingabelänge,
+daher die Bezeichnung „LBA“.
+Beispiel 49. Sei L={anbncn |n≥1}. Folgender LBA
+M =({z ,z ,z ,z ,z ,z ,z ,z ,z },{a,b,c},{a,b,c,◁,▷,□},δ,z ,□,{z })
+0 1 2 3 4 a b c L 0 4
+akzeptiert L, wobei die Überführungsfunktion δ wie folgt gegeben ist:
+z ▷ → z ▷R 
+z
+z
+z
+0
+0
+a
+b
+a
+a
+→
+→
+→ z
+z
+z
+0
+a
+a
+b
+a
+a
+R
+R
+R
+
+a b Test, ob Eingabe die Form a+b+c+ hat
+z b → z bR
+z
+z
+z
+b
+b
+c
+◁
+c
+c →
+→
+→ z
+z
+z
+b
+c
+c
+◁
+c
+c
+R
+R
+L
+
+c L
+z c → z cL 
+z
+L
+L
+b → z
+L
+L
+bL
+
+z a → z aL Durchlauf nach links
+L L
+z
+z
+L
+□
+▷
+→
+→ z
+z
+L
+▷
+□L
+R
+
+L 1
+z □ → z □R 
+1 1 
+z a → z □R Suche und Löschen des ersten as
+1 2
+z ◁ → z ◁L 
+1 4
+23
+Grundlagen der Theoretischen Informatik 5 Typ-1- und Typ-0-Sprachen
+z a → z aR 
+2 2 
+z □ → z □R Suche und Löschen des ersten bs
+2 2
+z b → z □R 
+2 3
+z b → z bR 
+3 3 
+z □ → z □R Suche und Löschen des ersten cs
+3 3
+z c → z □L 
+3 L
+Begründung:
+Sei w die Eingabe. Zuerst durchläuft M das Wort w von links nach rechts und testet, ob w die
+Form a+b+c+ hat. Ist dies nicht der Fall, so bleibt M stecken und akzeptiert nicht. Natürlich
+gilt dann auch w ̸∈L.
+Gilt aber w = akblcm mit k,l,m ≥ 1 so läuft M wieder auf die linke Begrenzung. Ab jetzt
+ist die Arbeit von M in Durchgänge eingeteilt: In jedem Durchgang läuft M nach rechts und
+ersetzt jeweils ein a, b und c durch □. Am Ende des Durchgangs läuft M dann wieder auf die
+linke Begrenzung.
+Gilt nicht k =l=m, d.h. w ̸∈L, so bleibt M in Durchgang 1+min{k,l,m} stecken, weil er
+eines der Zeichen a, b oder c nicht mehr findet.
+Gilt aber k =l=m, d.h. w ∈L, so steht nach Durchgang k das Wort □k□k□k zwischen den
+Begrenzungen. In Durchgang k+1 läuft dann M im Zustand z komplett durch das Wort nach
+1
+rechts bis zur rechten Begrenzung „◁“. Dann geht M in den akzeptierenden Zustand z über.
+4
+Satz 50.
+(1) Eine Sprache L ist kontextsensitiv (Typ 1) genau dann, wenn es einen LBA gibt mit
+L(M)=L.
+(2) Eine Sprache L ist vom Typ 0 genau dann, wenn es eine TM M gibt mit L(M) = L
+genau dann, wenn es eine NTM M gibt mit L(M)=L.
+Beweis 51. In der Vorlesung „Formale Sprachen“. ■
+Bemerkung 52. Es ist unbekannt, ob deterministische LBAs nicht schon die Klasse der Typ-1-
+Sprachen akzeptieren.
+LBA-Problem: Gibt es für jede Typ-1-Sprache einen deterministischen LBA, der sie akzeptiert?
+24
+Grundlagen der Theoretischen Informatik 6 Der intuitive Berechenbarkeitsbegriff
+6 Der intuitive Berechenbarkeitsbegriff
+Was ist berechenbar?
+Wir schränken uns (zunächst) auf Funktionen über den natürlichen Zahlen ein.
+Eine Funktion f: Nk →N heißt berechenbar, falls es ein Rechenverfahren bzw. einen Algorithmus
+gibt (z.B. Scheme-Programm, C++-Programm), das f berechnet, d.h. gestartet mit Eingabe
+(n ,...,n )∈Nk hält der Algorithmus nach endlich vielen Schritten mit Ausgabe f(n ,...,n ).
+1 k 1 k
+Wir fordern nicht, dass f total sein muss, d.h. für gewisse (n ,...,n ) ∈ Nk darf f(n ,...,n )
+1 k 1 k
+undefiniert sein. In diesem Fall soll der Algorithmus nicht stoppen (Endlosschleife).
+Beispiel 53. Addition, Multiplikation und die „gewöhnlichen“ zahlentheoretischen Funktionen
+sind berechenbar.
+Beispiel 54.
+(
+1, falls n ein Anfangsabschnitt der Nachkommastellen von π ist
+f (n)=
+1 0, sonst
+f (1)=f (14)=f (141)=f (1415)=1, da π =3,1415...; f(2)=0
+1 1 1 1
+f ist berechenbar, da es Näherungsalgorithmen zur Berechnung von π gibt, die immer weitere
+1
+Ziffern von π ausgeben.
+Beispiel 55.
+(
+1, falls n irgendwo in den Nachkommastellen von π vorkommt
+f (n)=
+2 0, sonst
+f (141)=f (415)=1, da π =3,1415.... f(1010101010)= ?
+2 2
+Es ist nicht bekannt, ob f berechenbar ist.
+2
+Beispiel 56.
+
+1, falls 7 in den Nachkommastellen von π irgendwo
+
+f (n)= mindestens n-mal hintereinander vorkommt
+3
+0, sonst
+Wir wissen nicht, wie lange Blöcke von „7“ in der Darstellung von π vorkommen. Trotzdem ist
+f berechenbar, denn:
+3
+(1) Entweder kommen beliebig lange Blöcke von „7“ vor, also f (n) = 1 für alle n und f
+3 3
+berechenbar.
+(2) oder es gibt eine maximale solche Blocklänge c, also:
+(
+1, falls n≤c
+f (n)=
+3 0, sonst
+Diese Funktion ist auch berechenbar.
+25
+Grundlagen der Theoretischen Informatik 6 Der intuitive Berechenbarkeitsbegriff
+Beispiel 57.
+(
+1, falls die Antwort auf das LBA-Problem „ja“ ist
+f (n)=
+4 0, sonst
+f ist die Konstant-1- oder Konstant-0-Funktion, also berechenbar.
+4
+f und f sind berechenbar, jedoch wissen wir nicht, wie der entsprechende Algorithmus aussieht.
+3 4
+Ziel: Präzisierung des Berechenbarkeitsbegriffs.
+Nur so ist es möglich, zu beweisen, dass eine Funktion nicht berechenbar ist.
+26
+Grundlagen der Theoretischen Informatik 7 Berechenbarkeit durch Maschinen
+7 Berechenbarkeit durch Maschinen
+7.1 Turing-Berechenbarkeit
+Wir verwenden TMn nicht nur, um Sprachen zu akzeptieren, sondern auch, um Funktionen zu
+berechnen.
+Definition 58. Eine Funktion f: Nk →N heißt Turing-berechenbar, falls es eine DTM M gibt,
+sodass für alle n ,...,n ,m∈N gilt:
+1 k
+f(n ,...,n )=m ⇒ M mit Eingabe bin(n )#...#bin(n ) hält mit
+1 k 1 k
+□···□bin(m)□···□ auf dem Arbeitsband
+f(n ,...,n ) undefiniert ⇒ M mit Eingabe bin(n )#bin(n )#...#bin(n )
+1 k 1 2 k
+stoppt nicht
+bin(n) für n∈N bezeichnet die Binärdarstellung von n ohne führende Nullen.
+Bemerkung 59. Das Eingabealphabet einer TM, die eine Funktion über N im obigen Sinne
+berechnet, ist stets {0,1,#}.
+Definition 60. Eine Funktion f: Σ∗ → ∆∗ heißt Turing-berechenbar, falls es DTM M gibt,
+sodass für alle x∈Σ∗ und y ∈∆∗ gilt:
+f(x)=y ⇒ M mit Eingabe x hält mit □···□y□···□ auf dem Ausgabeband
+f(x) undefiniert ⇒ M mit Eingabe x stoppt nicht
+Beispiel 61. Die Nachfolgerfunktion s: N→N, s(n)=n+1 ist Turing-berechenbar.
+(Siehe Abschnitt 5.)
+Beispiel 62. Die überall undefinierte Funktion Ω wird berechnet von folgender Turingmaschine:
+z a→z aN für alle a∈Γ.
+0 0
+Beispiel 63. Die Funktion f: N → N, f(n) = 2n ist Turing-berechenbar vermöge folgender
+TM:
+z a→z aR für a∈{0,1}
+0 0
+z □→z 0L
+0 1
+z a→z aL für a∈{0,1}
+1 1
+z □→z □R
+1 e
+27
+Grundlagen der Theoretischen Informatik 7 Berechenbarkeit durch Maschinen
+7.2 Mehrband-Maschinen
+Band 1
+endliche
+Band 2
+Kontrolle
+.
+.
+.
+Band k
+Bei einer Mehrband-Turingmaschine hängt die durchzuführende Aktion vom aktuellen Zustand
+und den k gelesen Zeichen auf den k Arbeitsbändern ab.
+Definition 64. Eine k-Band-DTM ist ein 7-Tupel
+M =(Z,Σ,Γ,δ,z ,□,E),
+0
+wobei für die einzelnen Komponenten gilt:
+• Z, Σ, Γ, z , □ und E sind wie bei einer 1-Band-DTM definiert.
+0
+• δ: Z ×Γk → Z ×Γk×{L,R,N}k mit
+(1) (2) (3) (4) (5)
+(1) aktueller Zustand
+(2) gelesene Zeichen auf den k Bändern
+(3) neuer Zustand
+(4) geschriebene Zeichen auf den k Bändern
+(5) Kopfbewegungen auf den k Bändern
+Arbeitsweise: Die Eingabe steht zunächst auf Band 1. Die Bänder 2 bis k sind zunächst leer.
+Die Maschine führt einzelne Schritte durch, analog zu gewöhnlichen DTMn.
+Akzeptierte Sprache: Das Eingabewort x wird genau dann akzeptiert, wenn M irgendwann
+einen Endzustand erreicht.
+BerechneteFunktion: f(n ,...,n )=mgdw.M mitEingabebin(n )#...#bin(n )erreicht
+1 k 1 k
+irgendwann einen Endzustand mit bin(m) auf Band 1.
+(Berechnung von Funktionen f: Σ∗ →∆∗ analog.)
+Schreibweise: Statt δ(z,a ,...,a )=(z′,b ,...,b ,X ,...,X ) kurz:
+1 k 1 k 1 k
+za ...a →z′b ...b X ...X
+1 k 1 k 1 k
+Beispiel 65. Folgende 2-Band-Turingmaschine akzeptiert {w#w |w ∈{0,1}∗}:
+M =({z ,z ,z ,z },{0,1,#},{0,1,#,□},δ,z ,□,{z }),
+0 1 2 e 0 e
+wobei für die Überführungsfunktion gilt:
+28
+Grundlagen der Theoretischen Informatik 7 Berechenbarkeit durch Maschinen
+z 0□ → z 00RR (cid:27)
+0 0 0, 1 auf Band 1 werden auf Band 2 kopiert
+z 1□ → z 11RR
+0 0
+z #□ → z #□NL (cid:9) # auf Band 1 ⇒ Zustand z
+0 1 1
+z □□ → z □□NN (cid:9) Endlosschleife, falls kein # gefunden wird
+0 2
+z #0 → z #0NL (cid:27) Kopf auf Band 2 nach links
+1 1
+z #1 → z #1NL Kopf auf Band 1 bleibt auf #
+1 1
+z #□ → z #□RR (cid:9) □ auf Band 2 ⇒ Zustand z
+1 2 2
+z 00 → z 00RR (cid:27) auf beiden Bändern nach rechts gehen,
+2 2
+z 11 → z 11RR solange gleiche Zeichen gefunden werden
+2 2
+z 01 → z 01NN (cid:27)
+2 2 verschiedene Zeichen ⇒ Endlosschleife
+z 10 → z 10NN
+2 2
+z □□ → z □□NN (cid:9) Alles gleich, daher fertig
+2 e
+z 0□ → z 0□NN 
+z
+2
+1□ → z
+2
+1□NN
+
+2 2 unterschiedliche Länge ⇒ Endlosschleife
+z □0 → z □0NN
+z
+2
+□1 → z
+2
+□1NN
+
+2 2
+z #0 → z #0NN 
+2 2 
+z #1 → z #1NN Endlosschleife, falls zweites # gefunden wird
+2 2
+z #□ → z #□NN 
+2 2
+Andere Einträge in δ sind beliebig.
+Beispiel für eine Rechnung:
+Konfigurationen von k-Band-DTMn:
+(u zv ,u zv ,...,u zv )
+1 1 2 2 k k
+mit z ∈Z, u ....,u ,v ,...,v ∈Γ∗. Bedeutung wie bei Konfigurationen von 1-Band-Turing-
+1 k 1 k
+maschinen.
+29
+Grundlagen der Theoretischen Informatik 7 Berechenbarkeit durch Maschinen
+Eingabe w =101#101:
+(z 101#101,z □)⊢(1z 01#101,1z □)
+0 0 0 0
+⊢(10z 1#101,10z □)
+0 0
+⊢(101z #101,101z □)
+0 0
+⊢(101z #101,10z 1□)
+1 1
+⊢(101z #101,1z 01□)
+1 1
+⊢(101z #101,z 101□)
+1 1
+⊢(101z #101,z □101□)
+1 1
+⊢(101#z 101,□z 101□)
+2 2
+⊢(101#1z 01,□1z 01□)
+2 2
+⊢(101#10z 1,□10z 1□)
+2 2
+⊢(101#101z □,□101z □)
+2 2
+⊢(101#101z □,□101z □),also w ∈L(M)
+e e
+Satz 66. Sei k >1. Zu jeder k-Band-DTM M gibt es eine (1-Band-)DTM M′, sodass L(M)=
+L(M′) bzw. dass M und M′ dieselbe Funktion berechnen.
+Beweis 67. Sei M =(Q,Σ,Γ,δ,z ,□,E). Wir unterteilen das Band von M′ in 2k „Spuren“, in
+0
+denen wir die Inhalte von k Bändern von M sowie die Position der k Köpfe von M speichern.
+Zum Beispiel:
+Situation von M (k =3):
+a a a a a a a a a a Band 1
+1 2 3 4 5 6 7 8 9 10
+M b b b b b b b b b b Band 2
+1 2 3 4 5 6 7 8 9 10
+c c c c c c c c c c Band 3
+1 2 3 4 5 6 7 8 9 10
+Entsprechende Situation von M′:
+a a a a a a a a a a
+1 2 3 4 5 6 7 8 9 10
+X
+M′ b b b b b b b b b b
+1 2 3 4 5 6 7 8 9 10
+X
+c c c c c c c c c c
+1 2 3 4 5 6 7 8 9 10
+X
+M′ hat 6 Spuren:
+30
+Grundlagen der Theoretischen Informatik 7 Berechenbarkeit durch Maschinen
+• Die Spuren 1, 3 und 5 entsprechen den Bänder von M
+• Die Spuren 2, 4 und 6 entsprechen den Kopfposition der Bänder von M
+Formal: Arbeitsalphabet Γ′ von M′ besteht neben den Zeichen aus Γ aus 2k-Tupeln, deren
+Komponenten jeweils Zeichen von Γ oder die Markierung „X“ (X̸∈Γ) enthalten:
+Γ′ =Γ∪(Γ∪{X}2k)
+Arbeitsweise von M′:
+Eingabe x=a a ...a ∈Σ∗:
+1 2 n
+• M′ erzeugt die Spurendarstellung der Startkonfiguration von M, also:
+a a a ··· a
+1 2 3 n
+X
+□ □ □ ··· □
+X
+...(weitere Spuren) ...
+• M′ simuliert jeweils einen Schritt von M durch folgende Operationen:
+– M′ bewegt den Kopf auf die linkeste Position, die eine Markierung „X“ enthält.
+– M′ läuft nach rechts, bis alle Markierungen gefunden wurden und merkt sich dabei die
+Symbole aus Γ in den markierten Feldern.
+– M′ sieht in δ nach, welche Aktion durchzuführen ist, bewegt den Kopf wieder nach
+ganz links und läuft sodann nach rechts, um die Bandinhalte und die Markierungen zu
+aktualisieren.
+• Sobald M′ bemerkt, dass M einen Endzustand annimmt, erzeugt M′ aus der aktuellen
+Spurendarstellung einen Bandinhalt, der genau dem Inhalt der ersten Spur entspricht. M′
+bewegt den Kopf nach ganz links und hält an (nimmt Endzustand an). ■
+7.3 Zusammensetzung von Turingmaschinen
+7.3.1 1-Band nach k-Band
+Sei M eine 1-Band-TM. Dann bezeichnet M(i,k) (1 ≤ i ≤ k), die k-Band-TM, die auf Band i
+genaudieAktionausführt,dieM aufseinemBandausführt,unddieBänder1,...,i−1,i+1,...,k
+unverändert lässt.
+Ist also z.B. in M δ(z,a)=(z′,b,X) mit X ∈{L,N,R}, so ergibt sich für M(2,4):
+δ(z,c ,a,c ,c )=(z′,c ,b,c ,c ,N,X,N,N)
+1 3 4 1 3 4
+für alle c , c und c aus dem Arbeitsalphabet von M (= Arbeitsalpahbet von M(2,4)).
+1 3 4
+Schreibweise: M(i) statt M(i,k), falls k aus dem Kontext klar.
+31
+Grundlagen der Theoretischen Informatik 7 Berechenbarkeit durch Maschinen
+7.3.2 Einige spezielle Maschinen
+Die Maschinen aus Abschnitt 5, die zu einer Zahl (in Binärdarstellung) 1 addiert, bezeichnen wir
+mit „Band := Band + 1“.
+Statt „Band := Band + 1 (i)“ schreiben wir: „Band i := Band i + 1“.
+Analog konstruieren wir Maschinen „Band i := Band i−1“ (hier: 0−1=0), „Band i := 0“ und
+„Band i := Band j“.
+7.3.3 Hintereinanderschaltung von Turingmaschinen
+Seien M =(Z ,Σ,Γ ,δ ,z ,□,E ) mit i=1,2 zwei DTMn mit o.B.d.A. Z ∩Z =∅.
+i i i i 0,i i 1 2
+Wir definieren daraus die neue Turingmaschine
+M =(Z ∪Z ,Σ,Γ ∪Γ ,δ,z ,□,E ),
+1 2 1 2 0,1 2
+wobei:
+
+δ (z,a), falls z ∈Z \E und a∈Γ
+ 1 1 1 1
+δ(z,a)= δ (z,a), falls z ∈Z und a∈Γ
+2 2 2
+(z ,a,N), falls z ∈E und a∈Γ
+0,2 1 1
+BezeichnungenfürM:„M ;M “oderStart→M →M →Stopp.Dieslässtsichanalogdefinieren
+1 2 1 2
+für mehr als zwei Maschinen.
+Beispiel 68. Start
+↓
+Band:=Band+1
+↓
+Band:=Band+1
+↓
+Band:=Band+1
+↓
+Stopp
+Dies ist eine Turingmaschine, die zum Bandinhalt 3 addiert.
+Analog:
+Start
+↓
+M z →e1 M →Stopp
+1
+↓ze2
+M
+2
+↓
+Stopp
+bezeichnet die Turingmaschine, die zuerst M simuliert und vom Endzustand z von M nach
+e1
+M und vom Endzustand z von M nach M übergeht.
+1 e2 2
+32
+Grundlagen der Theoretischen Informatik 7 Berechenbarkeit durch Maschinen
+Start
+↓
+M z →e1 Stopp
+↓ze2
+M
+2
+↓
+Stopp
+bezeichnet die Turingmaschine, die zuerst M simuliert und vom Endzustand z von M anhält
+e1
+und vom Endzustand z von M nach M übergeht.
+e2 2
+7.3.4 Schleifen
+Betrachte folgende Turingmaschine
+M =({z ,z ,ja,nein},Σ,Γ,δ,z ,□,{ja,nein})
+0 1 0
+mit
+• Σ⊇{0,1}
+• Γ⊇{0,1,□}
+• für die Überführungsfunktion δ gilt:
+δ(z ,a)=(nein,a,N) für a∈Γ\{0}
+0
+δ(z ,0)=(z ,0,R)
+0 1
+δ(z ,□)=(ja,□,L)
+1
+δ(z ,a)=(nein,a,L) für a∈Γ\{0}
+1
+Bezeichnung für M: „Band = 0?“.
+Schreibweise: „Band i = 0?“ statt „Band = 0? (i)“.
+Sei nun M eine beliebige Turingmaschine. „WHILE Band i ̸= 0 DO M“ bezeichnet dann die
+Turingmaschine
+Start
+ja
+Band i=0? Stopp
+nein
+M
+33
+Grundlagen der Theoretischen Informatik 8 Berechenbarkeit in Programmiersprachen
+8 Berechenbarkeit in Programmiersprachen
+Syntaktische Komponenten von LOOP
+• Variablen: x ,x ,x ,...
+0 1 2
+Zur besseren Lesbarkeit werden wir auch Variablennamen wie z.B. uv,x,y,z,... benutzen.
+• Konstanten: 0,1,2,...
+• Operationszeichen: + und −
+• Trennsymbole: ; und :=
+• Schlüsselwörter: LOOP, DO und END
+Syntax von LOOP
+• Sind x und x Variablen und c eine Konstante, so sind
+i j
+x :=x +c und x :=x −c
+i j i j
+LOOP-Programme.
+• Sind P und P LOOP-Programme, so ist
+1 2
+P ;P
+1 2
+ein LOOP-Programm.
+• Ist P ein LOOP-Programm und x eine Variable, so ist
+i
+LOOP x DO P END
+i
+ein LOOP-Programm.
+Semantik von LOOP
+Sei P ein LOOP-Programm. P berechnet eine Funktion f: Nk →N wie folgt:
+Zu Beginn der Rechnung befinden sich Eingabewerte n ,...,n ∈N in den Variablen x ,...,x .
+1 k 1 k
+Alle anderen Variablen haben den Startwert 0. P wird wie folgt ausgeführt:
+• Durch das Programm „x :=x +c“ erhält x als Wert den Wert von x +c.
+i j i j
+• Durch das Programm „x := x −c“ erhält x als Wert den Wert von x −c, falls dieser
+i j i j
+nichtnegativ ist, ansonsten ist der Wert 0.
+• Bei Ausführung des Programms „P ;P “ wird zunächst P und dann P ausgeführt.
+1 2 1 2
+• Die Ausführung des Programms „LOOP x DO P′ END“ geschieht wie folgt:
+i
+Das Programm P′ wird so oft ausgeführt, wie der Wert der Variablen x zu Beginn angibt,
+i
+d.h. Zuweisungen an x in P′ haben keinen Einfluss auf die Anzahl der Wiederholungen.
+i
+Das Ergebnis der Ausführung von P ist der Wert von x nach Abarbeitung, also f(n ,...,n )=
+0 1 k
+Wert von x am Ende der Ausführung.
+0
+Eine Funktion f: Nk →N heißt LOOP-berechenbar, falls es ein LOOP-Programm gibt, das f wie
+soeben festgelegt berechnet.
+Beachte: Jedes LOOP-Programm hält nach endlich vielen Schritten an. Daraus folgt, dass jede
+LOOP-berechenbare Funktion total ist.
+34
+Grundlagen der Theoretischen Informatik 8 Berechenbarkeit in Programmiersprachen
+Spezielle LOOP-Programme
+„x :=x “ steht für: „x :=x +0“.
+i j i j
+„x :=c“(füreineKonstantec)stehtfür„x :=x +c“,wobeix einenochnichtbenutzteVariable
+i i j j
+ist (die also den Wert 0 hat).
+„IF x =0 THEN P END“ (für ein LOOP-Programm P) steht für folgendes Programm:
+i
+„x :=1;
+j
+LOOP x DO x :=0 END;
+i j
+LOOP x DO P END“,
+j
+wobei x eine Variable ist, die in P nicht vorkommt.
+j
+„x :=x +x “ steht für
+i j k
+„x :=x ;
+i j
+LOOP x DO x :=x +1 END“.
+k i i
+„x :=x ∗x “ steht für
+i j k
+„x :=0;
+i
+LOOP x DO x :=x +x END“.
+k i i j
+Analog: „x :=x DIV x “
+i j k
+(Wert von x wird größte Zahl kleiner gleich Wert von Wertvonxj, so genannte ganzzahlige
+Division.)
+i Wertvonxk
+„x :=x MOD x “
+i j k
+(Wert von x wird der Rest der ganzzahligen Division des Wertes von x durch den Wert von x .)
+i j k
+8.1 Die Programmiersprache WHILE
+Erweiterung von LOOP:
+neues Schlüsselwort: WHILE
+Syntax: Ist P ein WHILE-Programm und x eine Variable, so ist
+i
+WHILE x ̸=0 DO P END
+i
+ein WHILE-Programm.
+Semantik: Die Ausführung von „WHILE x ̸=0 DO P END“ geschieht so, dass Programm P so
+i
+lange wiederholt ausgeführt wird, wie der Wert von x ungleich Null ist.
+i
+P berechnet f: Nk →N wie folgt:
+Eingabewerte n ,...,n in Variablen x ,...,x , die anderen Variablen haben Startwert 0.
+1 k 1 k
+f(n ,...,n ) ist der Wert von x nach der Ausführung von P, falls diese stoppt, ansonsten ist
+1 k 0
+f(n ,...,n ) undefiniert.
+1 k
+Eine Funktion f heißt WHILE-berechenbar, falls es ein WHILE-Programm gibt, das f wie eben
+festgelegt berechnet.
+Beispiel 69. Das LOOP-Programm
+LOOP x DO P END
+kann simuliert werden durch
+y :=x;
+WHILE y ̸=0 DO y :=y−1; P END,
+35
+Grundlagen der Theoretischen Informatik 8 Berechenbarkeit in Programmiersprachen
+wobei y eine noch nicht verwendete Variable ist.
+Korollar 70. Jedes WHILE-Programm ist äquivalent zu (d.h. berechnet die gleiche Funktion)
+einem WHILE-Programm, in dem keine LOOP-Schleifen vorkommen.
+Satz 71. Jede WHILE-berechenbare Funktion ist Turing-berechenbar.
+Beweis 72. Sei P ein WHILE-Programm. P enthalte o.B.d.A. keine LOOP-Schleifen.
+Idee: Konstruiere Turingmaschine, die für jede vorkommende Variable ein Band verwendet.
+P = „x := x +c“:
+k j
+Siehe Turingmaschine aus Beispiel 68. Die Werte von x und x befinden sich auf den
+j k
+Bändern j und k.
+P = „P ;P “:
+1 2
+Seien M und M Turingmaschinen, welche die von P und P berechneten Funktionen
+1 2 1 2
+berechnen. Dann simuliert M ;M das Programm P.
+1 2
+P = „WHILE x ̸= 0 DO P′ END“:
+i
+Sei M′ eine Turingmaschine, welche die von P′ berechnete Funktion berechnet. Der Wert
+von x befinde sich dabei auf Band i.
+i
+Dann entspricht P folgender Turingmaschine: WHILE Band i̸=0 DO M′. ■
+Damit folgt:
+LOOP-berechnbar⇒ (i) WHILE-berechenbar( ⇒ ii)Turing-berechenbar,
+wobei für die Implikation (i) die Umkehrung nicht gilt und für die Implikation (ii) die Umkehrung
+gilt, aber noch ein Zwischenschritt (im folgenden Abschnitt) durchzuführen ist.
+8.2 Die Programmiersprache GOTO
+Ein GOTO-Programm ist eine Folge
+M : A ;
+1 1
+M : A ;
+2 2
+.
+.
+.
+M : A ;
+k k
+wobei die M so genannte Marken (Labels) und die A Anweisungen sind.
+i i
+Mögliche Anweisungen:
+• Wertzuweisung: x :=x ±c (x und x Variablen, c Konstante)
+i j i j
+• Sprung: GOTO M
+i
+• Bedingter Sprung: IF x =c THEN GOTO M (x Variable, c Konstante)
+i j i
+• Stoppanweisung: HALT
+Die letzte Anweisung eines Programms ist eine Stoppanweisung oder ein Sprung.
+36
+Grundlagen der Theoretischen Informatik 8 Berechenbarkeit in Programmiersprachen
+Semantik
+Die Abarbeitung eines GOTO-Programmes beginnt mit der Ausführung der ersten Anweisung.
+Die Ausführung der Anweisungen der einzelnen Typen geschieht wie folgt:
+• x :=x ±c: Wert von x wird x ±c, danach weiter mit nächster Anweisung.
+i j i j
+• GOTO M : Weiter mit der Anweisung mit der Marke M .
+i i
+• IF x =c THEN GOTO M : Falls Wert von x gleich c ist, weiter mit der Anweisung mit
+i j i
+der Marke M , sonst weiter mit nächster Anweisung.
+j
+• HALT: Ausführung des Programms stoppen.
+Die berechnete Funktion ist wie bei LOOP- bzw. WHILE-Programmen definiert.
+Vereinbarung: Marken, die nie hinter einem GOTO vorkommen, dürfen weggelassen werden.
+Marken müssen nicht in der Reihenfolge M ...M ...M ... benutzt werden.
+1 2 3
+Beispiel 73. Das WHILE-Programm
+WHILE x ̸=0 DO P END
+i
+kann simuliert werden durch
+M : IF x =0 THEN GOTO M ;
+1 i 2
+P;
+GOTO M ;
+1
+M : ...
+2
+Korollar 74. Jede WHILE-berechenbare Funktion ist GOTO-berechenbar.
+Für die Umkehrung gilt:
+Gegeben sei ein GOTO-Programm
+M : A ;
+1 1
+M : A ;
+2 2
+.
+.
+.
+M : A ;
+k k
+Dies kann durch folgendes WHILE-Programm simuliert werden:
+x:=1;
+WHILE x̸=0 DO
+IF x=1 THEN A′ END;
+1
+IF x=2 THEN A′ END;
+2
+.
+.
+.
+IF x=k THEN A′ END;
+k
+END
+Dabei ist x irgendeine Variable, die in A ,...,A nicht verwendet wird, und A′ (1≤i≤k) ist
+1 k i
+folgendes Programm:
+• „x :=x ±c; x:=x+1“, falls A =„x :=x ±c“
+j l i j l
+• „x:=m“, falls A =„GOTO M “
+i m
+• „IF x =c THEN x:=m ELSE x:=x+1 END“,
+j
+falls A =„IF x =c THEN GOTO M “
+i j m
+• „x:=0“, falls A =„HALT“
+i
+37
+Grundlagen der Theoretischen Informatik 8 Berechenbarkeit in Programmiersprachen
+Das „IF ... THEN ... ELSE ...“-Programm kann durch LOOP-Schleifen ersetzt werden (Übungs-
+aufgabe).
+Beachte: Das konstruierte WHILE-Programm hat nur eine WHILE-Schleife! (Aber weitere LOOP-
+Schleifen.)
+Korollar 75. Jede GOTO-berechenbare Funktion ist auch WHILE-berechenbar.
+Korollar 76. Jede WHILE-berechenbare Funktion kann durch ein WHILE-Programm mit nur
+einer WHILE-Schleife ersetzt werden.
+Beweis 77. Seif WHILE-berechenbarvermögeP.DannsimuliereP durchdasGOTO-Programm
+P′, und simuliere P′ durch das WHILE-Programm P′′ wie oben. P′′ hat dann nur eine WHILE-
+Schleife. ■
+Sei f Turing-berechenbar. Sei M = (Z,Σ,Γ,δ,z ,□,E) eine 1-Band-Turingmaschine, die f
+1
+berechnet. Wir wollen zeigen, dass f GOTO-berechenbar ist.
+Seien Z ={z ,...,z } und Γ={a ,...,a }. Sei b=m+1.
+1 k 1 m
+Wir repräsentieren eine Konfiguration a a ...a z a a ...a durch die Werte der Programm-
+i1 i2 ip l j1 j2 jq
+variablen x,y und z, wobei
+• x=(i ...i ) ,d.h.dieZahli ...i inb-adischerDarstellungist.DasleereWortwirddurch
+1 p b 1 p
+0 kodiert.
+• y =(j ...j )
+q 1 b
+• z =l
+Also: x=Pp i ·bp−µ und y =Pq i ·bµ−1.
+µ=1 µ µ=1 µ
+Das GOTO-Programm, das f berechnet, sieht folgendermaßen aus:
+M : P ;
+1 K
+M : P ;
+2 M
+M : P ;
+3 D
+DabeiistP einProgrammstück,dasdieKodierungderStartkonfigurationvonM indenVariablen
+K
+x, y und z erzeugt.
+P ist ein Programmstück, das M schrittweise simuliert durch Änderungen der Werte von x, y
+M
+und z.
+P ist ein Programmstück, das aus der Kodierung der Endkonfiguration von M in x, y und z die
+D
+Ausgabe von M in x erzeugt.
+0
+Wir geben zunächst P genauer an:
+M
+38
+Grundlagen der Theoretischen Informatik 8 Berechenbarkeit in Programmiersprachen
+M : n:=y MOD b;
+2
+IF z =1 THEN GOTO M ;
+21
+IF z =2 THEN GOTO M ;
+22
+.
+.
+.
+IF z =k THEN GOTO M ;
+2k
+M : IF n=1 THEN GOTO M ;
+21 211
+IF n=2 THEN GOTO M ;
+212
+.
+.
+.
+IF n=m THEN GOTO M ;
+21m
+M : IF n=1 THEN GOTO M ;
+22 221
+IF n=2 THEN GOTO M ;
+222
+.
+.
+.
+IF n=m THEN GOTO M ;
+22m
+.
+.
+.
+M : P ;
+211 211
+M : P ;
+212 212
+.
+.
+.
+M : P ;
+2km 2km
+Es bleibt noch, die Programmfragmente P (1≤i≤k,1≤j ≤m) anzugeben.
+2ij
+Wir betrachten die Marke M . Sie wird angesprungen, falls z und n = j, also falls die Tu-
+2ij i
+ringmaschine M im Zustand z ist und das Zeichen a liest (beachte: n = y MOD b = j , falls
+i j 1
+y =(j ...j ) ist).
+q 1 b
+Sei δ(z ,a )=(z ,a ,X). Die Konfiguration von M sei a a ...a z a a ...a mit j =j.
+i j r s i1 i2 ip i j1 j2 jq 1
+Das Programm P sieht dann wie folgt aus:
+2ij
+δ(z ,a )=(z ,a ,N) wird simuliert durch:
+i j r s
+z :=r; Zustand z neue Konfiguration
+r
+y :=y DIV b; y =(j ...j ) a a ...a z a a ...a
+q 2 b i1 i2 ip r s j2 jq
+y :=b∗y+s; y =(j ...j s)
+q 2 b
+δ(z ,a )=(z ,a ,L) wird simuliert durch:
+i j r s
+z :=r; Zustand z neue Konfiguration
+r
+y :=y DIV b; y =(j ...j ) a a ...a z a a a ...a
+q 2 b i1 i2 ip−1 r ip s j2 jq
+y :=b∗y+s; y =(j ...j s)
+q 2 b
+y :=b∗y+(x MOD b); y =(j ...j si )
+q 2 p b
+x:=x DIV b; x=(i i ...i )
+1 2 p−1 b
+δ(z ,a )=(z ,a ,R) wird simuliert durch:
+i j r s
+z :=r; Zustand z neue Konfiguration
+r
+y :=y DIV b; y =(j ...j ) a a ...a a z a ...a
+q 2 b i1 i2 ip s r j2 jq
+x:=x∗b+s; x=(i ...i s)
+1 p b
+(Im Falle einer Kopfbewegung nach links nehmen wir dabei der Einfachheit halber an, dass x̸=0.)
+Ist z ∈E, so fügen wir in allen drei Fällen den Befehl „GOTO M “ an, ansonsten fügen wir den
+r 3
+Befehl „GOTO M “ an.
+2
+Wir geben als nächstes das GOTO-Programm P genau an. Wir nehmen zur Vereinfachung der
+K
+Präsentation dabei an, dass die betrachtete Turingmaschine M eine einstellige Funktion berechnet.
+Die Eingabe von M ist also stets eine Zahl in Binärdarstellung und das Eingabealphabet ist
+39
+Grundlagen der Theoretischen Informatik 8 Berechenbarkeit in Programmiersprachen
+demnach Σ={0,1}. Wir nehmen für das Arbeitsalphabet Γ={a ,a ,...,a } an, dass a =0,
+1 2 m 1
+a =1 und a =□.
+2 3
+Die Eingabe von M ist die Binärdarstellung einer Zahl. Sei v diese Zahl und sei v ...v die
+1 n
+BinärdarstellungdieserZahl.FürdieEingabevonP giltdannx =v undalleanderenVariablen
+K 1
+sind 0. Die Startkonfiguration von M ist z a a ...a .
+1 v1+1 v2+1 vn+1
+Wir müssen also folgendes mit P erreichen:
+K
+x=0
+y =((v +1)(v +1)...(v +1))
+n n−1 1 b
+z =1
+D.h. y =Pn (v +1)·bµ−1. Folgendes Programm erreicht dies:
+µ=1 µ
+x:=0;
+z :=1;
+y :=0;
+IF x =0 THEN GOTO 2; // Abfangen des Spezialfalls v =0
+1
+1: IF x =0 THEN GOTO 3;
+1
+x :=x MOD 2;
+2 1
+x :=x +1;
+2 2
+y :=y·b;
+y :=y+x ;
+2
+x :=x DIV 2;
+1 1
+GOTO 1;
+2: y :=1; // v =0→y =1
+3: HALT
+Die Konstruktion von P verbleibt als Übungsaufgabe.
+D
+Es folgt:
+Satz 78. Jede Turing-berechenbare Funktion ist GOTO-berechenbar.
+40
+Grundlagen der Theoretischen Informatik 9 Die Church’sche These
+9 Die Church’sche These
+Wir haben gesehen:
+Turing-berechenbar⇔WHILE-berechenbar⇔GOTO-berechenbar
+Auch andere Versuche, den Begriff der Berechenbarkeit formal zu fassen, haben sich als äquivalent
+herausgestellt, z.B.
+• µ-rekursive Funktion,
+• λ-definierbare Funktionen,
+• Markov-Programme,
+• Registermaschinen,
+• ...
+Alle bekannten Programmiersprachen führen ebenfalls zum gleichen Begriff von Berechenbarkeit.
+These von Church
+Eine Funktion ist berechenbar im intuitiven Sinne genau dann, wenn sie Turing-berechenbar ist.
+(Nicht beweisbar, da „berechenbar im intuitiven Sinne“ nicht formal gefasst.)
+Wir verwenden also in Zukunft den Begriff „berechenbar“ synonym mit „Turing-berechenbar“.
+Andere Sprechweise: „rekursiv“ oder „partiell rekursiv“
+(„total rekursiv“ = berechenbar und total, d.h. überall definiert.)
+Bemerkung 79. Es gibt berechenbare Funktionen, die nicht LOOP-berechenbar sind. Zum
+Beispiel ist keine nicht-überall definierte Funktion LOOP-berechenbar.
+Frage: Gibt es totale und berechenbare Funktionen, die nicht LOOP-berechenbar sind?
+Antwort: Ja, zum Beispiel die so genannte Ackermannfunktion (siehe Schöning).
+41
+Grundlagen der Theoretischen Informatik 10 Entscheidbarkeit und Aufzählbarkeit
+10 Entscheidbarkeit und Aufzählbarkeit
+Übertragung des Begriffs „Berechenbarkeit“ aus der Welt der Funktionen in den Kontext von
+Sprachen:
+Definition 80. Eine Sprache A⊆Σ∗ heißt entscheidbar, wenn die Funktion c : Σ∗ →{0,1}
+A
+mit
+(
+1, falls w ∈A
+c (w):=
+A 0, sonst
+berechenbar ist. c heißt charakteristische Funktion von A.
+A
+Also: Eine Sprache A ist entscheidbar, falls ein Algorithmus M existiert, der bei Eingabe w nach
+endlicher Zeit stoppt und „ja“ ausgibt, falls w ∈A, und „nein“ ausgibt, falls w ̸∈A.
+ja / 1
+w M
+nein / 0
+M heißt „Entscheidungsalgorithmus“ für A.
+Definition 81. Eine Sprache A⊆Σ∗ heißt semi-entscheidbar, wenn die Funktion
+(
+1, falls w ∈A
+χ : Σ∗ →{0,1} mit χ (w):=
+A A undefiniert, sonst
+berechenbar ist.
+Also: Eine Sprache A ist semi-entscheidbar, falls ein Algorithmus M existiert, der bei Eingabe w
+nach endlicher Zeit stoppt und „ja“ ausgibt, falls w ∈A, und in eine Endlosschleife gerät, falls
+w ̸∈A.
+ja / 1
+w M
+∞-Schleife
+M heißt „Semi-Entscheidungsalgorithmus“ für A.
+Analoge Definitionen ergeben sich für A⊆N.
+Für A⊆Σ∗ ist A= Σ∗\A={w ∈Σ∗ |w ̸∈A}.
+def
+Beobachtung Sei A⊆Σ∗. Es gilt:
+A ist entscheidbar genau dann, wenn A ist entscheidbar.
+Satz 82. Sei A⊆Σ∗. Es gilt:
+A ist entscheidbar genau dann, wenn A und A sind semi-entscheidbar.
+Beweis 83.
+42
+Grundlagen der Theoretischen Informatik 10 Entscheidbarkeit und Aufzählbarkeit
+„⇒“: Sei M ein Entscheidungsalgorithmus für A.
+Semi-EntscheidungsalgorithmusfürA:
+Eingabe: w
+Simuliere M bei Eingabe w;
+Falls M mit „ja“ stoppt, dann Ausgabe „ja“, stopp;
+Sonst: Endlosschleife.
+Semi-EntscheidungsalgorithmusfürA:
+Eingabe: w
+Simuliere M bei Eingabe w;
+Falls M mit „nein“ stoppt, dann Ausgabe „ja“, stopp;
+Sonst: Endlosschleife.
+„⇐“: Seien M und M Turingmaschinen, die χ bzw. χ berechnen. Dann ist folgender Algo-
+1 2 A A
+rithmus ein Entscheidungsalgorithmus für A:
+Eingabe: w
+s:=1;
+M : Simuliere M für s Schritte;
+1 1
+Falls M dabei stoppt, dann: Ausgabe „1“ und HALT;
+1
+Simuliere M für s Schritte;
+2
+Falls M dabei stoppt, dann: Ausgabe „0“ und HALT;
+2
+s:=s+1;
+GOTO M.
+■
+Definition 84. Eine Sprache A ⊆ Σ∗ heißt rekursiv-aufzählbar, falls A = ∅ oder falls es eine
+totale berechenbare Funktion f: N→Σ∗ gibt, sodass
+A={f(0),f(1),f(2),...}.
+Wir sagen: f zählt A auf.
+Satz 85. Eine Sprache ist rekursiv-aufzählbar genau dann, wenn sie semi-entscheidbar ist.
+Beweis 86.
+„⇒“: Sei A={f(0),f(1),f(2),...} für eine totale, berechenbare Funktion f.
+Der folgende Algorithmus ist ein Semi-Entscheidungsalgorithmus für f:
+Eingabe: w
+n:=0;
+M : IF f(n)=w THEN Ausgabe „1“; HALT END;
+1
+n:=n+1;
+GOTO M.
+43
+Grundlagen der Theoretischen Informatik 10 Entscheidbarkeit und Aufzählbarkeit
+„⇐“: Wir benötigen eine Kodierung von Paaren von natürlichen Zahlen durch eine natürliche
+Zahl. Dazu definieren wir:
+1
+c(x,y)= (x+y+1)(x+y)+x.
+2
+Schreibweise: ⟨x,y⟩=c(x,y).
+Es gilt: Für jede natürliche Zahl n gibt es genau ein Paar x,y, sodass n=⟨x,y⟩.
+Mit anderen Worten: Die Funktion: c: N×N→N ist bijektiv.
+Die Behauptung ergibt sich aus folgender Wertetabelle für c:
+x
+0 1 2 3 4
+y 0 0 2 5 9 14
+1 1 4 8 13
+2 3 7 12
+3 6 11
+4 10
+Sei nun A⊆Σ∗ semi-entscheidbar. Sei M eine Turingmaschine, die χ berechnet. Ist A=∅,
+A
+so ist A rekursiv-aufzählbar nach Definition.
+Sei also A̸=∅ und a∈A. Folgender Algorithmus berechnet dann eine Funktion f, die A
+aufzählt:
+Eingabe: n
+Seien k,s∈N so, dass n=⟨k,s⟩;
+Sei w das k-te Wort in Σ∗ in lexikographischer Reihenfolge;
+Simuliere M bei Eingabe w für s Schritte;
+Falls M dabei „1“ ausgibt, dann Ausgabe „w“; sonst: Ausgabe „a“
+Stopp.
+Es gilt: f ist total und berechenbar. Ist w ein Wort, das vom Algorithmus ausgegeben wird,
+so ist w ∈A, also:
+{f(0),f(1),f(2),...}⊆A.
+Sei nun w ∈ A. Dann gibt es eine Zahl s, sodass M bei Eingabe w nach s Schritten mit
+Ausgabe „1“ stoppt.
+Sei w das k-te Wort in Σ∗. Sei n = ⟨k,s⟩. Aus dem Algorithmus ergibt sich, dass dann
+f(n)=w, also
+A⊆{f(0),f(1),f(2),...}.
+Zusammengenommen:
+A={f(0),f(1),f(2),...},
+also ist A rekursiv-aufzählbar. ■
+44
+Grundlagen der Theoretischen Informatik 10 Entscheidbarkeit und Aufzählbarkeit
+Korollar 87. Eine Sprache A ist entscheidbar genau dann, wenn A und A rekursiv-aufzählbar
+sind.
+45
+Grundlagen der Theoretischen Informatik 11 Unentscheidbare Probleme
+11 Unentscheidbare Probleme
+11.1 Das Halteproblem
+Gibt es rekursiv-aufzählbare Sprachen, die nicht entscheidbar sind?
+Beispiel 88.
+Eingabe: n
+WHILE n̸=1 DO
+n:=n−2
+END
+Ausgabe: n
+DerAlgorithmushält,fallsdieEingabeneineungeradeZahlist,ansonstenhältderAlgorithmus
+nicht.
+Beispiel 89.
+Eingabe: n
+WHILE n̸=1 DO
+IF n ist gerade THEN
+n:=n div 2
+ELSE n:=3·n+1
+END
+Ausgabe: 1
+Beispielsweise erhält man für die Eingabe 3 folgendes:
+n=3|10|5|16|8|4|2|1 Ausgabe 1, halt.
+Es ist nicht bekannt, ob der Algorithmus für alle Eingaben hält.
+Zunächst: Wir möchten Turingmaschinen durch Wörter über dem Alphabet {0,1} kodieren.
+Sei M = (Z,Σ,Γ,δ,z ,□,E) mit Γ = {a ,a ,...,a } und Z = {z ,z ,...,z }. Dann kodieren
+0 0 1 k 0 1 n
+wir einen Übergang δ(z ,a )=(z ,a ,X) durch das Wort
+i j i′ j′
+
+0, falls X =L
+
+##bin(i)#bin(j)#bin(i′)#bin(j′)#bin(m) mit m:= 1, falls X =N
+2, falls X =R
+WirhängenallesoerhaltenenWörterfüralleÜbergängeinδaneinander(inbeliebigerReihenfolge).
+Ergebnis: Kodierung von M als Wort über {0,1,#} oder als natürliche (Binärdarstellung).
+In diesem Wort kodieren wir schließlich die einzelnen Buchstaben wie folgt:
+0 durch 00
+1 durch 01
+# durch 11
+Ergebnis: Kodierung von M als Wort {0,1}.
+Man nennt diese Kodierung auch Gödelisierung von M.
+46
+Grundlagen der Theoretischen Informatik 11 Unentscheidbare Probleme
+Nicht jedes Wort aus {0,1}∗ ergibt sich so als Kodierung einer Turingmaschine. Wir legen aber
+fest:
+Sei w ∈{0,1}∗. Dann ist
+(
+M, falls w Gödelisierung von M wie oben beschrieben ist
+M :=
+w Mc, sonst,
+wobei Mc die Turingmaschine aus Beispiel 62 ist, die Ω berechnet.
+Definition 90. Das spezielle Halteproblem ist die Sprache
+K ={w ∈{0,1}∗ |M hält bei Eingabe w}
+w
+beobachtung K ist rekursiv-aufzählbar.
+Beweis 91. Semi-Entscheidungsalgorithmus für K:
+Eingabe w:
+Konstruiere die δ-Funktion von M ;
+w
+Simuliere M auf Eingabe w;
+w
+Falls Simulation stoppt, dann Ausgabe „1“; HALT. ■
+Satz 92. K ist nicht entscheidbar.
+Beweis 93. Annahme: K wäre entscheidbar. Sei M eine Turingmaschine, die c berechnet.
+K
+Definiere Turingmaschine M′ wie folgt:
+Start
+M
+ja
+Band =0? Stopp
+nein
+Also: M′ stoppt genau dann, wenn M gibt „0“ aus.
+M′ gerät in Endlosschleife genau dann, wenn M gibt „1“ aus.
+Sei w eine Gödelisierung von M′. Nun gilt:
+w ∈K ⇔M′ hält bei Eingabe w (Definition von K)
+⇔M hält bei Eingabe w und gibt „0“ aus (Konstruktion von M′)
+⇔c (w)=0 (Definition von M)
+K
+⇔w ̸∈K
+Dies ist ein Widerspruch zur Annahme, also ist K nicht entscheidbar. ■
+47
+Grundlagen der Theoretischen Informatik 11 Unentscheidbare Probleme
+Korollar 94. K ist nicht rekursiv-aufzählbar.
+Nachweis, dass weitere Probleme nicht entscheidbar sind: Zurückführen auf bekannte unent-
+scheidbare Probleme (das heißt zunächst auf K).
+Formal:
+Definition 95. Seien A⊆Σ∗ und B ⊆Γ∗ Sprachen.
+A heißt auf B reduzierbar, in Zeichen: A ≤ B, falls es eine totale, berechenbare Funktion
+f: Σ∗ →Γ∗ gibt, sodass für alle w ∈Σ∗ gilt:
+w ∈A⇔f(w)∈B
+Lemma 96. Ist A≤B und B entscheidbar, so ist A entscheidbar.
+Beweis 97. Sei A ≤ B via f und c berechenbar. Dann ist c berechenbar mit folgendem
+B A
+Algorithmus:
+Eingabe: w
+Berechne z =f(w)
+Berechne b=c (z)
+B
+Ausgabe: b
+Es gilt:
+w ∈A⇔f(w)=z ∈B ⇔b=c (z)=1⇔Algorithmus gibt „1“ aus. ■
+B
+Kontraposition Ist A≤B und A nicht entscheidbar, dann ist auch B nicht entscheidbar.
+Definition 98. Das (allgemeine) Halteproblem ist die Sprache
+H ={w#x|M hält bei Eingabe x}.
+w
+Satz 99. H ist nicht entscheidbar.
+Beweis 100. Wir zeigen: K ≤H.
+Wähle f(w)=w#w. Dann gilt: w ∈K ⇔w#w ∈H ⇔f(w)∈H.
+Also K ≤H via f. ■
+11.2 Entscheidbarkeit in der Chomsky-Hierarchie
+Wir haben bereits gesehen: Ist A eine Sprache vom Typ 1, 2 oder 3, so ist A entscheidbar (siehe
+Abschnitt 2).
+Es verbleiben die Typ-0-Sprachen.
+48
+Grundlagen der Theoretischen Informatik 11 Unentscheidbare Probleme
+Satz 101. Eine Sprache ist vom Typ 0 genau dann, wenn sie rekursiv-aufzählbar ist.
+Beweis 102.
+„⇐“: Zur Erinnerung: Eine Sprache ist vom Typ 0 genau dann, wenn es eine Turingmaschine M
+gibt mit:
+w ∈A⇒M erreicht bei Eingabe A einen Endzustand
+w ̸∈A⇒M gerät bei Eingabe A in eine Endlosschleife
+Sei nun A rekursiv-aufzählbar via Semi-Entscheidungsverfahren M. Dann akzeptiert M die
+Sprache A in obigem Sinne, also ist A vom Typ 0.
+„⇒“: A werde von Turingmaschine M akzeptiert. Wir modifizieren M so, dass beim Erreichen
+eines Endzustands eine „1“ ausgegeben wird. Diese neue Turingmaschine berechnet also χ ,
+A
+also ist A rekursiv-aufzählbar. ■
+Sei A eine Sprache. Aus den bisherigen Resultaten ergibt sich, dass die folgenden Aussagen
+äquivalent sind:
+(1) A ist vom Typ 0.
+(2) A=L(M) für eine Turingmaschine M.
+(3) A ist rekursiv-aufzählbar.
+(4) A ist Wertebereich einer totalen berechenbaren Funktion oder A=∅.
+(5) A ist semi-entscheidbar.
+(6) A ist Definitionsbereich einer berechenbaren Funktion.
+Man kann zeigen, dass folgende Aussage zu obigen äquivalent ist:
+(7) A ist Wertebereich einer (eventuell partiellen) berechenbaren Funktion.
+Korollar 103. Die Klasse der Typ-1-Sprachen ist eine echte Teilmenge der Klasse der Typ-0-
+Sprachen.
+Beweis 104. Das Halteproblem ist rekursiv-aufzählbar, also vom Typ 0, aber nicht entscheidbar
+und daher nicht vom Typ 1. ■
+Die Sprachklassen im Überblick:
+(1) (2) (3)
+Typ 3 ⫋ Typ 2 ⫋ Typ 1 ⫋ Typ 0,
+das heißt, dass die Inklusionen echt sind. Beispiele dafür, dass die Inklusionen echt sind:
+(1) {anbn |n≥0}.
+(2) {anbncn |n≥1}.
+(3) Die Sprachen H und K.
+11.3 Der Satz von Rice
+49
+Grundlagen der Theoretischen Informatik 11 Unentscheidbare Probleme
+Definition 105. Das Halteproblem auf leerem Band ist die Sprache
+H ={w |M angesetzt auf leerem Band hält}
+0 w
+Satz 106. H ist nicht entscheidbar.
+0
+Beweis 107. Wir zeigen: H ≤H .
+0
+Zu jedem Wort w#x betrachten wir die Turingmaschine M , die folgendermaßen arbeitet:
+(w#x)
+Eingabe: y
+Falls Band leer (also y =ε):
+Schreibe x auf das Band und simuliere danach M auf Eingabe x.
+w
+Falls Band nicht leer: Stopp.
+Sei f eine Funktion, die w#x abbildet auf die Gödelisierung von M :
+(w#x)
+f(w#x)=Gödelisierung von M .
+(w#x)
+Sei f beliebig definiert für Eingaben, die nicht von der Form w#x sind. f ist berechenbar. (Bei
+Eingabe w#x konstruiere zunächst M und bilde dann deren Gödelisierung.)
+(w#x)
+Es gilt weiterhin:
+w#x∈H ⇔M hält bei Eingabe x
+w
+⇔M hält mit leerem Band
+(w#x)
+⇔f(w#x)∈H
+0
+Also ist H ≤H vermöge f. ■
+0
+Der folgende Satz zeigt, dass jede funktionale Eigenschaft von Turingmaschinen unentscheidbar
+ist.
+Satz 108 (von Rice). Sei R die Klasse aller berechenbaren Funktionen. Sei S ⊆R mit S ≠ ∅
+und S ≠ R.
+Dann ist die Sprache
+C(S)={w |die von M berechnete Funktion ist aus S}
+w
+nicht entscheidbar.
+Beweis 109. Sei Ω die überall undefinierte Funktion.
+Fall 1: Ω ∈ S
+Da S ≠ R, gibt es eine Funktion g ∈R\S. Sei M eine Turingmaschine, die g berechnet.
+g
+Zu jedem Wort w betrachten wir die Turingmaschine M(w), die folgendermaßen arbeitet:
+Eingabe: y
+Simuliere M bei leerem Band;
+w
+Falls diese Simulation stoppt: Simuliere M bei Eingabe y;
+g
+50
+Grundlagen der Theoretischen Informatik 11 Unentscheidbare Probleme
+Sei h die von M(w) berechnete Funktion. Dann gilt:
+(
+Ω, falls M bei leerem Band nicht stoppt.
+h= w
+g, sonst.
+Sei f(w) die Gödelisierung von M(w). f ist berechenbar.
+Es gilt weiterhin:
+w ∈H ⇒M bei leerem Band stoppt
+0 w
+⇒M(w) berechnet die Funktion g
+⇒die von M(w) berechnete Funktion liegt nicht S
+⇒f(w)̸∈C(S)
+w ̸∈H ⇒M bei leerem Band stoppt nicht
+0 w
+⇒M(w) berechnet die Funktion Ω
+⇒die von M(w) berechnete Funktion liegt S
+⇒f(w)∈C(S)
+Es folgt: H ≤C(S) vermöge f, also ist C(S) nicht entscheidbar, da H nicht entscheidbar
+0 0
+ist.
+Fall 2: Ω ∈/ S
+Da S ̸= ∅, gibt es eine Funktion g ∈ S. Definiere mit diesem g die Maschinen M , M(w)
+g
+und die Funktion f wie oben.
+Nun gilt:
+w ∈H ⇒M bei leerem Band stoppt
+0 w
+⇒M(w) berechnet die Funktion g
+⇒die von M(w) berechnete Funktion liegt S
+⇒f(w)∈C(S)
+w ̸∈H ⇒M bei leerem Band stoppt nicht
+0 w
+⇒M(w) berechnet die Funktion Ω
+⇒die von M(w) berechnete Funktion liegt nicht S
+⇒f(w)̸∈C(S)
+Daraus folgt: H ≤C(S), also ist C(S) nicht entscheidbar. ■
+0
+Korollar 110. Die folgenden Sprachen sind nicht entscheidbar:
+• {w |M berechnet eine totale Funktion}
+w
+• {w |M berechnet eine monotone Funktion}
+w
+• {w |M berechnet eine konstante Funktion}
+w
+• {w |M berechnet die Funktion f(x)=x+1}
+w
+51
+Kommentiertes Literaturverzeichnis
+[1] John E. Hopcroft, Jeffrey D. Ullman, Introduction to Automata Theory, Languages, and
+Computation, Addison-Wesley Publishing Company, 1979.
+Der absolute Klassiker zur Theoretischen Informatik! Enthält den gesamten Stoff der Vorle-
+sung. Nachteil: nur noch antiquarisch erhältlich.
+[2] John E. Hopcroft, Rajeev Motwani, Jeffrey D. Ullman, Einführung in Automatentheorie,
+Formale Sprachen und Berechenbarkeit, Pearson, 2011.
+Neuauflage von [1]. Viele zentrale Themen werden sehr ausführlich motiviert und erklärt.
+Nachteil: Einige für diese Vorlesung wichtige Themengebiete, die noch in [1] behandelt
+werden, fallen weg.
+[3] Uwe Schöning, Theoeretische Informatik – kurzgefasst, Spektrum Akademischer Verlag,
+2008.
+Der deutsche Klassiker zum Thema! Enthält den gesamten Stoff der Vorlesung. Die Darstel-
+lung ist aber oft sehr knapp.
+[4] Hans Hermes, Aufzählbarkeit, Entscheidbarkeit, Berechenbarkeit, Springer-Verlag, 1961.
+ÄlteredeutscheDarstellungdesGebietesderBerechenbarkeit.SehrempfehlenswerteLektüre,
+auch wenn Sie sich für Fragen interessieren, die über die Vorlesung hinausgehen.
+[5] Hartley Rogers, Jr., Theory of Recursive Functions and Effective Computability, Mc Graw-
+Hill Book Company, 1967.
+KlassischesLehrbuchderBerechenbarkeitstheorie.SehrempfehlenswerteLektüre,auchwenn
+Sie sich für Fragen interessieren, die über die Vorlesung hinausgehen. Taschenbuchausgabe
+von 1987 noch erhältlich.
+[6] Wolfgang J. Paul, Komplexitätstheorie, B. G. Teubner, 1978.
+Erstes deutsches Lehrbuch zur Komplexitätstheorie, das im ersten Teil eine ausgezeichnete
+Einführung in die Berechenbarkeitstheorie enthält.
+[7] Martin Davis, Computability and Unsolvability, Dover Publications Inc., 1958.
+Ein Werk der Unterhaltungsmathematik: Davis erklärt in lockerem Plauderton, aber doch
+mathematisch exakt Fragestellungen, Konzepte und Resultate der Berechenbarkeitstheorie.
+Doverhat1983dasWerkneuineinergünstigen,heutenocherhältlichenTaschenbuchausgabe
+aufgelegt. Sehr empfehlenswert!
