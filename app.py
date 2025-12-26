@@ -26,29 +26,16 @@ app.config['MAX_CONTENT_LENGTH'] = 128 * 1024 * 1024
 
 JOBS = {}
 
-# --- REAL-TIME CLOUD STATS (JSONBin) ---
-JSONBIN_ID = os.getenv("JSONBIN_ID")
-JSONBIN_KEY = os.getenv("JSONBIN_KEY")
+# --- PLAN B: HARDCODED KEYS ---
+# We hardcode them to bypass the Render Environment Variable issue
+JSONBIN_ID = "694ec6edd0ea881f4041c405"
+JSONBIN_KEY = "$2a$10$prBYnFrP8THHG6qkHcgE/.HBbXmtHW8l804eGpy.sbg2mvbzsZNiW"
 
-# DEBUG CHECK ON STARTUP
-print("--- APP STARTING ---")
-if JSONBIN_ID:
-    print(f"DEBUG: JSONBIN_ID found: {JSONBIN_ID[:5]}...")
-else:
-    print("DEBUG: ERROR - JSONBIN_ID is MISSING")
-
-if JSONBIN_KEY:
-    print(f"DEBUG: JSONBIN_KEY found (starts with {JSONBIN_KEY[:3]})")
-else:
-    print("DEBUG: ERROR - JSONBIN_KEY is MISSING")
-# -----------------------
+print(f"--- APP STARTING ---")
+print(f"DEBUG: Using Hardcoded ID: {JSONBIN_ID}")
 
 def get_stats():
     """Fetches the real-time count from the Cloud."""
-    if not JSONBIN_ID or not JSONBIN_KEY:
-        print("DEBUG: Keys missing, returning 12")
-        return 12 
-    
     try:
         url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}/latest"
         headers = {"X-Master-Key": JSONBIN_KEY}
@@ -56,21 +43,16 @@ def get_stats():
         
         if response.status_code == 200:
             val = response.json().get('record', {}).get('count', 150)
-            print(f"DEBUG: Read stats success: {val}")
             return val
         else:
-            print(f"DEBUG: API Error Reading: {response.status_code} - {response.text}")
+            print(f"DEBUG: Cloud Read Error: {response.status_code}")
     except Exception as e:
         print(f"DEBUG: Stats Read Exception: {e}")
     
-    return 150 # Fallback if API fails but keys exist
+    return 150 # Fallback
 
 def increment_stats():
     """Updates the count in the Cloud."""
-    if not JSONBIN_ID or not JSONBIN_KEY:
-        print("DEBUG: Cannot increment, keys missing")
-        return
-        
     def _update():
         try:
             # 1. Get current
@@ -85,8 +67,8 @@ def increment_stats():
             }
             data = {"count": new_count}
             
-            resp = requests.put(url, json=data, headers=headers)
-            print(f"DEBUG: Increment status: {resp.status_code}")
+            requests.put(url, json=data, headers=headers)
+            print(f"DEBUG: Incremented Stats to {new_count}")
         except Exception as e:
             print(f"DEBUG: Increment Error: {e}")
 
@@ -190,7 +172,7 @@ def process_pipeline(job_id, file_paths):
         
         create_cheat_sheet(data, output_path)
 
-        # Increment Stats
+        # Increment Cloud Stats
         increment_stats()
 
         JOBS[job_id]['status'] = "Complete!"
