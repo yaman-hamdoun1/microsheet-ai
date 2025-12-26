@@ -26,53 +26,73 @@ app.config['MAX_CONTENT_LENGTH'] = 128 * 1024 * 1024
 
 JOBS = {}
 
-# --- PLAN B: HARDCODED KEYS ---
-# We hardcode them to bypass the Render Environment Variable issue
+# --- KEYS ---
 JSONBIN_ID = "694ec6edd0ea881f4041c405"
 JSONBIN_KEY = "$2a$10$prBYnFrP8THHG6qkHcgE/.HBbXmtHW8l804eGpy.sbg2mvbzsZNiW"
 
 print(f"--- APP STARTING ---")
-print(f"DEBUG: Using Hardcoded ID: {JSONBIN_ID}")
 
 def get_stats():
-    """Fetches the real-time count from the Cloud."""
+    """
+    Fetches both Automations and Likes.
+    Auto-migrates old DB format to new format if needed.
+    """
+    default_stats = {'automations': 150, 'likes': 42} # Start likes at 42 to look nice
+    
     try:
         url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}/latest"
         headers = {"X-Master-Key": JSONBIN_KEY}
         response = requests.get(url, headers=headers)
         
         if response.status_code == 200:
-            val = response.json().get('record', {}).get('count', 150)
-            return val
-        else:
-            print(f"DEBUG: Cloud Read Error: {response.status_code}")
+            data = response.json().get('record', {})
+            
+            # MIGRATION LOGIC: If old 'count' exists, map it to 'automations'
+            if 'count' in data and 'automations' not in data:
+                stats = {
+                    'automations': data['count'],
+                    'likes': 42
+                }
+                # Update DB immediately to new format
+                threading.Thread(target=save_stats, args=(stats,)).start()
+                return stats
+            
+            # Return current values or defaults
+            return {
+                'automations': data.get('automations', 150),
+                'likes': data.get('likes', 42)
+            }
+            
     except Exception as e:
-        print(f"DEBUG: Stats Read Exception: {e}")
+        print(f"DEBUG: Stats Read Error: {e}")
     
-    return 150 # Fallback
+    return default_stats
 
-def increment_stats():
-    """Updates the count in the Cloud."""
+def save_stats(new_data):
+    """Helper to write to DB"""
+    try:
+        url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}"
+        headers = {
+            "Content-Type": "application/json",
+            "X-Master-Key": JSONBIN_KEY
+        }
+        requests.put(url, json=new_data, headers=headers)
+    except Exception as e:
+        print(f"DEBUG: DB Write Error: {e}")
+
+def increment_stat(stat_type):
+    """Updates the count for 'automations' or 'likes'"""
     def _update():
         try:
-            # 1. Get current
-            current_count = get_stats()
-            new_count = current_count + 1
-            
-            # 2. Write new
-            url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}"
-            headers = {
-                "Content-Type": "application/json",
-                "X-Master-Key": JSONBIN_KEY
-            }
-            data = {"count": new_count}
-            
-            requests.put(url, json=data, headers=headers)
-            print(f"DEBUG: Incremented Stats to {new_count}")
+            current = get_stats()
+            # Increment the specific field
+            if stat_type in current:
+                current[stat_type] += 1
+                save_stats(current)
+                print(f"DEBUG: Incremented {stat_type} to {current[stat_type]}")
         except Exception as e:
             print(f"DEBUG: Increment Error: {e}")
 
-    # Run in thread so user doesn't wait
     threading.Thread(target=_update).start()
 
 @app.route('/')
@@ -119,7 +139,13 @@ def get_status(job_id):
 
 @app.route('/api/stats')
 def stats():
-    return jsonify({'count': get_stats()})
+    return jsonify(get_stats())
+
+# NEW ENDPOINT FOR LIKES
+@app.route('/api/like', methods=['POST'])
+def like_action():
+    increment_stat('likes')
+    return jsonify({'success': True})
 
 @app.route('/download/<filename>')
 def download_file(filename):
@@ -172,8 +198,8 @@ def process_pipeline(job_id, file_paths):
         
         create_cheat_sheet(data, output_path)
 
-        # Increment Cloud Stats
-        increment_stats()
+        # Increment Automation Stat
+        increment_stat('automations')
 
         JOBS[job_id]['status'] = "Complete!"
         JOBS[job_id]['percent'] = 100
