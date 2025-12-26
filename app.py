@@ -37,7 +37,8 @@ def get_stats():
     Fetches both Automations and Likes.
     Auto-migrates old DB format to new format if needed.
     """
-    default_stats = {'automations': 150, 'likes': 42} # Start likes at 42 to look nice
+    # START LIKES AT 10
+    default_stats = {'automations': 150, 'likes': 10} 
     
     try:
         url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}/latest"
@@ -51,7 +52,7 @@ def get_stats():
             if 'count' in data and 'automations' not in data:
                 stats = {
                     'automations': data['count'],
-                    'likes': 42
+                    'likes': 10  # Set initial migration value to 10
                 }
                 # Update DB immediately to new format
                 threading.Thread(target=save_stats, args=(stats,)).start()
@@ -60,7 +61,7 @@ def get_stats():
             # Return current values or defaults
             return {
                 'automations': data.get('automations', 150),
-                'likes': data.get('likes', 42)
+                'likes': data.get('likes', 10)
             }
             
     except Exception as e:
