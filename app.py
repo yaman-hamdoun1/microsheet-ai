@@ -5,7 +5,7 @@ import time
 import threading
 import uuid
 import json
-import requests  # Needed for Cloud Database
+import requests
 from flask import Flask, render_template, request, send_file, after_this_request, jsonify
 from werkzeug.utils import secure_filename
 
@@ -27,14 +27,27 @@ app.config['MAX_CONTENT_LENGTH'] = 128 * 1024 * 1024
 JOBS = {}
 
 # --- REAL-TIME CLOUD STATS (JSONBin) ---
-# We use a fallback to 150 if keys are missing
 JSONBIN_ID = os.getenv("JSONBIN_ID")
 JSONBIN_KEY = os.getenv("JSONBIN_KEY")
+
+# DEBUG CHECK ON STARTUP
+print("--- APP STARTING ---")
+if JSONBIN_ID:
+    print(f"DEBUG: JSONBIN_ID found: {JSONBIN_ID[:5]}...")
+else:
+    print("DEBUG: ERROR - JSONBIN_ID is MISSING")
+
+if JSONBIN_KEY:
+    print(f"DEBUG: JSONBIN_KEY found (starts with {JSONBIN_KEY[:3]})")
+else:
+    print("DEBUG: ERROR - JSONBIN_KEY is MISSING")
+# -----------------------
 
 def get_stats():
     """Fetches the real-time count from the Cloud."""
     if not JSONBIN_ID or not JSONBIN_KEY:
-        return 12 # Fallback if not configured
+        print("DEBUG: Keys missing, returning 12")
+        return 12 
     
     try:
         url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}/latest"
@@ -42,35 +55,43 @@ def get_stats():
         response = requests.get(url, headers=headers)
         
         if response.status_code == 200:
-            return response.json().get('record', {}).get('count', 150)
+            val = response.json().get('record', {}).get('count', 150)
+            print(f"DEBUG: Read stats success: {val}")
+            return val
+        else:
+            print(f"DEBUG: API Error Reading: {response.status_code} - {response.text}")
     except Exception as e:
-        print(f"Stats Read Error: {e}")
+        print(f"DEBUG: Stats Read Exception: {e}")
     
-    return 150
+    return 150 # Fallback if API fails but keys exist
 
 def increment_stats():
     """Updates the count in the Cloud."""
     if not JSONBIN_ID or not JSONBIN_KEY:
+        print("DEBUG: Cannot increment, keys missing")
         return
         
-    try:
-        # 1. Get current
-        current_count = get_stats()
-        new_count = current_count + 1
-        
-        # 2. Write new
-        url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}"
-        headers = {
-            "Content-Type": "application/json",
-            "X-Master-Key": JSONBIN_KEY
-        }
-        data = {"count": new_count}
-        
-        # We assume success to keep it fast
-        threading.Thread(target=requests.put, args=(url,), kwargs={'json': data, 'headers': headers}).start()
-        
-    except Exception as e:
-        print(f"Stats Write Error: {e}")
+    def _update():
+        try:
+            # 1. Get current
+            current_count = get_stats()
+            new_count = current_count + 1
+            
+            # 2. Write new
+            url = f"https://api.jsonbin.io/v3/b/{JSONBIN_ID}"
+            headers = {
+                "Content-Type": "application/json",
+                "X-Master-Key": JSONBIN_KEY
+            }
+            data = {"count": new_count}
+            
+            resp = requests.put(url, json=data, headers=headers)
+            print(f"DEBUG: Increment status: {resp.status_code}")
+        except Exception as e:
+            print(f"DEBUG: Increment Error: {e}")
+
+    # Run in thread so user doesn't wait
+    threading.Thread(target=_update).start()
 
 @app.route('/')
 def index():
@@ -169,7 +190,7 @@ def process_pipeline(job_id, file_paths):
         
         create_cheat_sheet(data, output_path)
 
-        # Increment Cloud Stats
+        # Increment Stats
         increment_stats()
 
         JOBS[job_id]['status'] = "Complete!"
