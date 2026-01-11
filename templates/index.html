@@ -7,7 +7,9 @@
 
     <link rel="icon" type="image/png" href="/static/favicon.png">
     <link rel="apple-touch-icon" href="/static/favicon.png">
-    <meta name="theme-color" content="#4f46e5"> <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="theme-color" content="#4f46e5">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -160,6 +162,10 @@
                             <path d="M12 2C12 2 14.5 9.5 19 12C14.5 14.5 12 22 12 22C12 22 9.5 14.5 5 12C9.5 9.5 12 2 12 2Z"></path>
                         </svg>
                     </button>
+                    <p class="text-center text-[10px] text-indigo-400/60 mt-3 font-medium">
+                        By clicking Start, you agree to our 
+                        <button type="button" onclick="openLegalModal()" class="underline decoration-dotted hover:text-indigo-400 transition-colors">Terms & Privacy Policy</button>.
+                    </p>
                 </form>
             </div>
 
@@ -252,8 +258,9 @@
                     </a>
                 </div>
 
-                <div class="mt-2 pt-4 border-t border-white/10 text-[10px] text-indigo-400">
-                    &copy; <span id="currentYear"></span> MicroSheet AI. All Rights Reserved.
+                <div class="mt-2 pt-4 border-t border-white/10 text-[10px] text-indigo-400 flex flex-col gap-1">
+                    <span>&copy; <span id="currentYear"></span> MicroSheet AI. All Rights Reserved.</span>
+                    <button onclick="openLegalModal()" class="hover:text-white underline decoration-dotted underline-offset-2 transition-colors">Terms & Privacy</button>
                 </div>
             </div>
         </div>
@@ -280,6 +287,56 @@
         </div>
     </div>
 
+    <div id="legalModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeLegalModal()"></div>
+        <div class="relative bg-white/95 rounded-3xl shadow-2xl p-8 max-w-2xl w-full text-left modal-enter border border-indigo-100 max-h-[80vh] overflow-y-auto">
+            
+            <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-4">
+                <h3 class="text-2xl font-bold text-gray-900 font-[Outfit]">Terms & Privacy Policy</h3>
+                <button onclick="closeLegalModal()" class="text-gray-400 hover:text-red-500 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="prose prose-sm text-gray-600 space-y-4 font-sans leading-relaxed">
+                <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-2">Effective Date: <span id="legalDate"></span></p>
+
+                <p>This agreement describes the conditions and rules under which <strong>MicroSheet AI</strong> ("we", "our") offers you its services.</p>
+                
+                <p>This agreement will be governed by the laws of <strong>Germany (Lower Saxony)</strong>, without reference to conflict of laws principles. You agree that any litigation relating to this agreement may only be brought in, and shall be subject to the jurisdiction of, any Court of Hannover, Germany.</p>
+
+                <h4 class="text-indigo-900 font-bold text-lg mt-4">1. Terms of Use</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Use at Own Risk:</strong> The service is provided "as is". We bear no responsibility for errors in the generated cheat sheets. Always verify your study materials.</li>
+                    <li><strong>Data Responsibility:</strong> You bear full responsibility for any files transmitted to our servers. Do not upload confidential or illegal materials.</li>
+                    <li><strong>Academic Integrity:</strong> MicroSheet AI is a study aid. You agree not to use generated materials in violation of your university's exam regulations (e.g., if cheat sheets are not permitted).</li>
+                    <li><strong>Availability:</strong> We reserve the right to modify or cease the service at any time without notice.</li>
+                </ul>
+
+                <h4 class="text-indigo-900 font-bold text-lg mt-4">2. Privacy & Data Handling</h4>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Ephemeral Storage:</strong> Your privacy is our priority. Submitted PDF files and generated Cheat Sheets are <strong>not permanently stored</strong>. They are automatically deleted from our servers immediately after processing or within a maximum of 1 hour.</li>
+                    <li><strong>No Human Access:</strong> Your files are processed automatically by algorithms. No human (including the developer) views your content unless legally required by law enforcement.</li>
+                    <li><strong>Third-Party Processing:</strong> We use Google Gemini AI for text summarization. By using this tool, you acknowledge that text extracted from your slides is processed by Google's API solely for the purpose of summarization, subject to Google's data policies.</li>
+                    <li><strong>Analytics:</strong> We collect anonymous counters (e.g., "Total Automations") to improve the service. No personal identifiable information (PII) is tracked.</li>
+                </ul>
+
+                <h4 class="text-indigo-900 font-bold text-lg mt-4">3. Contact</h4>
+                <p>
+                    <strong>Yaman Hamdoun</strong><br>
+                    Hannover, Germany<br>
+                    Contact over LinkedIn
+                </p>
+            </div>
+            
+            <div class="mt-8 pt-4 border-t border-gray-200">
+                <button onclick="closeLegalModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg">
+                    I Understand
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.getElementById('currentYear').innerText = new Date().getFullYear();
 
@@ -298,7 +355,7 @@
             } catch(e) {
                 console.log("Stats fetch error", e);
                 document.getElementById("automationsCount").innerText = "150+";
-                document.getElementById("likeCount").innerText = "42";
+                document.getElementById("likeCount").innerText = "10";
             }
         }
 
@@ -337,6 +394,15 @@
                 }
             };
             window.requestAnimationFrame(step);
+        }
+
+        // --- LEGAL MODAL LOGIC ---
+        function openLegalModal() {
+            document.getElementById('legalDate').innerText = new Date().toLocaleDateString();
+            document.getElementById('legalModal').classList.remove('hidden');
+        }
+        function closeLegalModal() {
+            document.getElementById('legalModal').classList.add('hidden');
         }
 
         // Call on load
